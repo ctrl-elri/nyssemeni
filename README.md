@@ -26,8 +26,6 @@ You should create your own code inside your own namespace :)
 
 # You are allowed (and probably should) make changes to this file after you have started your project. :)
 
-<<<<<<< HEAD
 ellan testi
-=======
 HEIDIN TESTI
->>>>>>> 65ff93da34964feac0c0cfea20affd55caafcfa6
+
