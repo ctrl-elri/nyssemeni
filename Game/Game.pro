@@ -7,6 +7,7 @@ CONFIG += c++14
 
 SOURCES += \
     city.cpp \
+    creategame.cpp \
     gameengine.cpp \
     initgame.cpp \
     main.cc
