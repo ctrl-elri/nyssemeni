@@ -27,11 +27,6 @@ void City::startGame()
 
 }
 
-QTime City::getTime()
-{
-    return time_;
-}
-
 
 
 

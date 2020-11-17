@@ -24,8 +24,6 @@ public:
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
 
-    QTime getTime();
-
 private:
     QTime time_;
  
