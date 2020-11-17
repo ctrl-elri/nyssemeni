@@ -7,6 +7,7 @@ class gameEngine
 {
 public:
     gameEngine();
+    ~gameEngine();
 
     void initGame();
 };

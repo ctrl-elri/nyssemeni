@@ -9,7 +9,6 @@ SOURCES += \
     city.cpp \
     creategame.cpp \
     gameengine.cpp \
-    initgame.cpp \
     main.cc
 
 win32:CONFIG(release, debug|release): LIBS += \
@@ -39,4 +38,3 @@ else:unix: PRE_TARGETDEPS += \
 HEADERS += \
     city.hh \
     gameengine.hh \
-    initgame.hh
