@@ -3,6 +3,7 @@
 
 #include "interfaces/icity.hh"
 #include "graphics/simplemainwindow.hh"
+#include <QTime>
 
 class City : public Interface::ICity
 {
@@ -22,6 +23,11 @@ public:
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
+
+    QTime getTime();
+
+private:
+    QTime time_;
  
 };
 

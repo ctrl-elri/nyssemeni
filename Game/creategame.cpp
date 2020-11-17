@@ -9,6 +9,10 @@ std::shared_ptr<Interface::ICity> Interface::createGame()
 {
     Interface::ICity* iCity = new City;
     iCity->setBackground(DEFAULT_MAP_PIC, BIG_MAP_PIC);
+
+    // Käyttäjän antama kellonaika
+    QTime time = QTime(16,0);
+
     return 0;
     
 }
