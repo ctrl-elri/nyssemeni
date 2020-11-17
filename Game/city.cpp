@@ -11,4 +11,23 @@ void City::setBackground(QImage &basicbackground, QImage &bigbackground)
    ui->setPicture(basicbackground);
 }
 
+void City::setClock(QTime clock)
+{
+   if (clock.isValid() == true) {
+       time_ = clock;
+   }
+
+   else {
+       // Virhe, jos aika on virheellinen
+   }
+}
+
+void City::startGame()
+{
+
+}
+
+
+
+
 
