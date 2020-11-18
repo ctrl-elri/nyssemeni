@@ -1,6 +1,6 @@
 #include "city.hh"
 
-City::City()//:Interface::ICity()
+City::City()
 {
     
 }
@@ -10,10 +10,10 @@ City::~City()
 
 }
 
+
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
-   CourseSide::SimpleMainWindow* ui = new CourseSide::SimpleMainWindow;
-   ui->setPicture(basicbackground);
+    ui_->setPicture(basicbackground);
 }
 
 void City::setClock(QTime clock)
@@ -33,7 +33,9 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 }
 
 void City::startGame()
-{
+{    
+    ui_->show();
+
     gameIsOver_ = false;
 }
 

@@ -13,6 +13,7 @@ public:
     City();
     ~City();
     // ICity interface
+
     void setBackground(QImage &basicbackground, QImage &bigbackground);
     void setClock(QTime clock);
     void addStop(std::shared_ptr<Interface::IStop> stop);
@@ -25,11 +26,16 @@ public:
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
 
+
 private:
     QTime time_;
+    CourseSide::SimpleMainWindow* ui_(QWidget *parent = 0);
     bool gameIsOver_ = true;
     std::vector<std::shared_ptr<Interface::IActor> > actors_;
+    QImage map_;
 };
+
+
 
 
 #endif // CITY_HH
