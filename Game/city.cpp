@@ -13,8 +13,7 @@ City::~City()
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
-    ui_= new CourseSide::SimpleMainWindow();
-
+    ui_ = new CourseSide::SimpleMainWindow;
     ui_->setPicture(basicbackground);
 
 }
