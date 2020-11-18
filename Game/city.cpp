@@ -2,7 +2,7 @@
 
 City::City()
 {
-    
+
 }
 
 City::~City()
@@ -13,7 +13,10 @@ City::~City()
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
+    ui_= new CourseSide::SimpleMainWindow();
+
     ui_->setPicture(basicbackground);
+
 }
 
 void City::setClock(QTime clock)
@@ -33,7 +36,8 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 }
 
 void City::startGame()
-{    
+{
+
     ui_->show();
 
     gameIsOver_ = false;

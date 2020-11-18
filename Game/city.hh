@@ -29,7 +29,7 @@ public:
 
 private:
     QTime time_;
-    CourseSide::SimpleMainWindow* ui_(QWidget *parent = 0);
+    CourseSide::SimpleMainWindow* ui_;
     bool gameIsOver_ = true;
     std::vector<std::shared_ptr<Interface::IActor> > actors_;
     QImage map_;
