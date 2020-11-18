@@ -4,6 +4,7 @@
 #include "interfaces/icity.hh"
 #include "graphics/simplemainwindow.hh"
 #include <QTime>
+#include <vector>
 
 class City : public Interface::ICity
 {
@@ -26,7 +27,8 @@ public:
 
 private:
     QTime time_;
- 
+    bool gameIsOver_ = true;
+    std::vector<std::shared_ptr<Interface::IActor> > actors_;
 };
 
 
