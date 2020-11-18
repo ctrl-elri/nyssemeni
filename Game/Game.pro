@@ -10,7 +10,8 @@ SOURCES += \
     city.cpp \
     creategame.cpp \
     gameengine.cpp \
-    main.cc
+    main.cc \
+    vehicle.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -39,4 +40,5 @@ else:unix: PRE_TARGETDEPS += \
 HEADERS += \
     actor.hh \
     city.hh \
-    gameengine.hh \
+    gameengine.hh \ \
+    vehicle.h
