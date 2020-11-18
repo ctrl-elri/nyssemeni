@@ -10,10 +10,9 @@ QImage BIG_MAP_PIC(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
 
 std::shared_ptr<Interface::ICity> Interface::createGame()
 {
-    City* newCity = new City;
-    newCity->setBackground(DEFAULT_MAP_PIC, BIG_MAP_PIC);
 
-    std::shared_ptr<Interface::ICity> city = std::make_shared<Interface::ICity>(newCity);
+    std::shared_ptr<Interface::ICity> city (new City);
+    city->setBackground(DEFAULT_MAP_PIC, BIG_MAP_PIC);
 
     return city;
     

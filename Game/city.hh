@@ -11,7 +11,7 @@ class City : public Interface::ICity
     
 public:
     City();
-    virtual ~City();
+    ~City();
     // ICity interface
     void setBackground(QImage &basicbackground, QImage &bigbackground);
     void setClock(QTime clock);

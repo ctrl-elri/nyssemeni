@@ -5,6 +5,11 @@ City::City()//:Interface::ICity()
     
 }
 
+City::~City()
+{
+
+}
+
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
    CourseSide::SimpleMainWindow* ui = new CourseSide::SimpleMainWindow;
