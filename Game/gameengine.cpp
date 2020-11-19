@@ -18,7 +18,6 @@ void gameEngine::initGame()
    logic->takeCity(city_);
    logic->finalizeGameStart();
 
-   logic->addNewBuses();
 
    //std::shared_ptr<CourseSide::Stop> stop (new CourseSide::Stop());
    //city->addStop();

@@ -7,6 +7,7 @@ CONFIG += c++14
 
 SOURCES += \
     actor.cpp \
+    actoritem.cpp \
     city.cpp \
     creategame.cpp \
     gameengine.cpp \
@@ -39,6 +40,7 @@ else:unix: PRE_TARGETDEPS += \
 
 HEADERS += \
     actor.hh \
+    actoritem.hh \
     city.hh \
     gameengine.hh \ \
     vehicle.h

@@ -3,6 +3,9 @@
 
 #include "interfaces/icity.hh"
 #include "graphics/simplemainwindow.hh"
+#include "interfaces/istop.hh"
+#include "actors/stop.hh"
+#include "actoritem.hh"
 #include <QTime>
 #include <vector>
 
@@ -32,6 +35,8 @@ private:
     CourseSide::SimpleMainWindow *ui_;
     bool gameIsOver_ = true;
     std::vector<std::shared_ptr<Interface::IActor> > actors_;
+    std::vector< std::shared_ptr<Interface::IStop> > stops_;
+
 };
 
 

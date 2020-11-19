@@ -39,7 +39,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 
 void City::startGame()
 {
-    ui_->addActor(1,1);
+    //ui_->addActor(1,1);
     ui_->show();
 
     gameIsOver_ = false;
@@ -48,14 +48,13 @@ void City::startGame()
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     Interface::Location actorLoc = newactor->giveLocation();
-    ActorItem *ac = new ActorItem(actorLoc.giveX(), 500-actorLoc.giveY(), 2);
     ui_->addActor(actorLoc.giveX(), 500-actorLoc.giveY(), 2);
     actors_.push_back(newactor);
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-
+    ui_->
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
