@@ -9,14 +9,12 @@ gameEngine::gameEngine()
 
 void gameEngine::initGame()
 {
-   std::shared_ptr<Interface::ICity> city;
-   city = Interface::createGame();
-
+   city_ = Interface::createGame();
 
    CourseSide::Logic* logic = new CourseSide::Logic;
    logic->fileConfig();
    logic->setTime(16,0);
-   logic->takeCity(city);
+   logic->takeCity(city_);
    logic->finalizeGameStart();
 
 }

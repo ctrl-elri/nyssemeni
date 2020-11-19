@@ -10,6 +10,9 @@ public:
     ~gameEngine();
 
     void initGame();
+
+private:
+    std::shared_ptr<Interface::ICity> city_;
 };
 
 #endif // GAMEENGINE_HH

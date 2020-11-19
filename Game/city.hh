@@ -32,7 +32,6 @@ private:
     CourseSide::SimpleMainWindow *ui_;
     bool gameIsOver_ = true;
     std::vector<std::shared_ptr<Interface::IActor> > actors_;
-    QImage map_;
 };
 
 
