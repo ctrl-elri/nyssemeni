@@ -15,6 +15,7 @@ void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
     ui_ = new CourseSide::SimpleMainWindow;
     ui_->setPicture(basicbackground);
+    //connect();
 
 }
 
@@ -36,7 +37,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 
 void City::startGame()
 {
-
+    ui_->addActor(1,1);
     ui_->show();
 
     gameIsOver_ = false;
