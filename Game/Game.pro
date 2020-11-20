@@ -10,10 +10,9 @@ SOURCES += \
     city.cpp \
     creategame.cpp \
     gameengine.cpp \
-    main.cc \
     mainwindow.cpp \
     statistics.cpp \
-    vehicle.cpp
+    main.cc
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -45,7 +44,8 @@ HEADERS += \
     gameengine.hh \ \
     mainwindow.hh \
     statistics.hh \
-    vehicle.h
 
 FORMS += \
     mainwindow.ui
+    gameengine.hh \
+
