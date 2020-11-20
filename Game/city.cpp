@@ -13,9 +13,8 @@ City::~City()
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
-    ui_ = new CourseSide::SimpleMainWindow;
+    ui_ = new MainWindow;
     ui_->setPicture(basicbackground);
-    //connect();
 
 }
 
@@ -49,7 +48,9 @@ void City::startGame()
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     Interface::Location actorLoc = newactor->giveLocation();
+    ui_->getActor(newactor);
     ui_->addActor(actorLoc.giveX(), 500-actorLoc.giveY(), 400);
+    ui_->addToMap();
     actorsInGame_.push_back(newactor);
 }
 
@@ -80,8 +81,7 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
-
-    // toteustus?
+    ui_->moveActorItem(actor);
 }
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const

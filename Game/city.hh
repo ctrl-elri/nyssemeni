@@ -6,6 +6,8 @@
 #include "interfaces/istop.hh"
 #include "actors/stop.hh"
 #include "actoritem.hh"
+#include "mainwindow.hh"
+
 #include <QTime>
 #include <vector>
 
@@ -32,7 +34,7 @@ public:
 
 private:
     QTime time_;
-    CourseSide::SimpleMainWindow *ui_;
+    MainWindow *ui_;
     bool gameIsOver_ = true;
     std::vector<std::shared_ptr<Interface::IActor> > actorsInGame_;
     std::vector<std::shared_ptr<Interface::IActor> > actorsRemoved_;
