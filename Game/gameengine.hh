@@ -13,6 +13,7 @@ public:
 
 private:
     std::shared_ptr<Interface::ICity> city_;
+    CourseSide::Logic *logic_;
 };
 
 #endif // GAMEENGINE_HH
