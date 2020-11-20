@@ -7,9 +7,13 @@
 #include "actors/stop.hh"
 #include "actoritem.hh"
 #include "mainwindow.hh"
+#include "actors/nysse.hh"
+#include "actors/passenger.hh"
 
 #include <QTime>
 #include <vector>
+#include <algorithm>
+#include <typeinfo>
 
 class City : public Interface::ICity
 {
@@ -34,7 +38,7 @@ public:
 
 private:
     QTime time_;
-    MainWindow *ui_;
+    MainWindow *mainW_;
     bool gameIsOver_ = true;
     std::vector<std::shared_ptr<Interface::IActor> > actorsInGame_;
     std::vector<std::shared_ptr<Interface::IActor> > actorsRemoved_;

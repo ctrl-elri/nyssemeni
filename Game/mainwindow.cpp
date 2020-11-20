@@ -9,10 +9,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //this->setStyleSheet("background-color: black;");
     ui->graphicsView->setFixedSize(width_, height_);
     ui->centralwidget->setFixedSize(width_ + ui->startButton->width() + PADDING + 2 * XTRA_PADDING, height_ + PADDING);
 
     ui->startButton->move(width_ + PADDING + XTRA_PADDING , XTRA_PADDING);
+//    QPalette pal = ui->startButton->palette();
+//    pal.setColor(QPalette::Button, QColor(Qt::blue));
+//    ui->startButton->setAutoFillBackground(true);
+//    ui->startButton->setPalette(pal);
+//    ui->startButton->setVisible(1);
+
 
     map = new QGraphicsScene(this);
     ui->graphicsView->setScene(map);
@@ -34,7 +41,6 @@ MainWindow::~MainWindow()
 void MainWindow::addActor(int locX, int locY, int type)
 {
     CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
-    actorItems_.push_back(nActor);
     map->addItem(nActor);
     lastItem_ = nActor;
 
@@ -74,6 +80,15 @@ void MainWindow::getActor(std::shared_ptr<Interface::IActor> newac)
 void MainWindow::addToMap()
 {
     actors_.insert({lastAc_, lastItem_});
+}
+
+void MainWindow::removeActorItem(std::shared_ptr<Interface::IActor> actorToBeRemoved)
+{
+    if (actors_.find(actorToBeRemoved) == actors_.end()){
+        return;
+    } else {
+        actors_.erase(actorToBeRemoved);
+    }
 }
 
 

@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "graphics/simplemainwindow.hh"
 #include "graphics/simpleactoritem.hh"
+#include "actoritem.hh"
+
 #include <vector>
 #include <map>
 
@@ -29,12 +31,13 @@ public:
 
     void addToMap();
 
+    void removeActorItem(std::shared_ptr<Interface::IActor> actorToBeRemoved);
+
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
-    QVector<QGraphicsItem*> actorItems_;
     CourseSide::SimpleActorItem* lastItem_;
     std::shared_ptr<Interface::IActor> lastAc_;
     std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
