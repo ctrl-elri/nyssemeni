@@ -80,8 +80,8 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
-    Interface::Location loc = actor->giveLocation();
-    ui_->updateCoords(loc.giveX(), 500-loc.giveY());
+
+    // toteustus?
 }
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const

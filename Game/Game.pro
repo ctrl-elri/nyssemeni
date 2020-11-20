@@ -11,6 +11,8 @@ SOURCES += \
     creategame.cpp \
     gameengine.cpp \
     main.cc \
+    mainwindow.cpp \
+    statistics.cpp \
     vehicle.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
@@ -41,4 +43,9 @@ HEADERS += \
     actoritem.hh \
     city.hh \
     gameengine.hh \ \
+    mainwindow.hh \
+    statistics.hh \
     vehicle.h
+
+FORMS += \
+    mainwindow.ui
