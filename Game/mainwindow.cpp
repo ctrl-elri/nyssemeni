@@ -91,9 +91,11 @@ void MainWindow::removeActorItem(std::shared_ptr<Interface::IActor> actorToBeRem
     }
 }
 
-void MainWindow::addPlayer()
+void MainWindow::addPlayer(int locX, int locY, int type)
 {
-    ;
+    PlayerItem* player = new PlayerItem(locX, locY, type);
+    map->addItem(player);
+    players_.push_back(player);
 }
 
 

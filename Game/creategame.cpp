@@ -13,6 +13,7 @@ std::shared_ptr<Interface::ICity> Interface::createGame()
 
     std::shared_ptr<City> city (new City);
     city->setBackground(DEFAULT_MAP_PIC, BIG_MAP_PIC);
+    city->addPlayer();
 
 
     return city;

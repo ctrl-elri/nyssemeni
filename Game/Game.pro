@@ -10,7 +10,7 @@ SOURCES += \
     creategame.cpp \
     gameengine.cpp \
     mainwindow.cpp \
-    player.cpp \
+    playeritem.cpp \
     statistics.cpp \
     main.cc
 
@@ -42,7 +42,7 @@ HEADERS += \
     city.hh \
     gameengine.hh \ \
     mainwindow.hh \
-    player.hh \
+    playeritem.hh \
     statistics.hh \
 
 FORMS += \

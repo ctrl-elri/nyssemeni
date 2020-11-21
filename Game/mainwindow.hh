@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include "graphics/simplemainwindow.hh"
 #include "graphics/simpleactoritem.hh"
-#include "player.hh"
+#include "playeritem.hh"
 
 #include <vector>
 #include <map>
@@ -33,14 +33,14 @@ public:
 
     void removeActorItem(std::shared_ptr<Interface::IActor> actorToBeRemoved);
 
-    void addPlayer();
+    void addPlayer(int locX, int locY, int type);
 
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
-    Player *player_;
+    std::vector<PlayerItem*> players_;
     CourseSide::SimpleActorItem *lastItem_;
     std::shared_ptr<Interface::IActor> lastAc_;
     std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;

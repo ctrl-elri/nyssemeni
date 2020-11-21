@@ -4,28 +4,35 @@
 #include "graphics/simpleactoritem.hh"
 #include "core/location.hh"
 
+#include <QPointF>
+#include <QObject>
 /* *
  * Contains player's operations.
  * Player is controlled by the user in the GUI (MainWindow).
  * */
 
-class Player : public CourseSide::SimpleActorItem
+class PlayerItem : public QObject, public CourseSide::SimpleActorItem
 {
+    Q_OBJECT
+
 public:
-    Player(int x, int y, int type);
-    ~Player();
+    PlayerItem(int x, int y, int type);
+    ~PlayerItem();
     
     
     // QGraphicsItem interface
-    //void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
     void move(int x, int y);
-    void shoot();
     Interface::Location giveLocation();
+
+public slots:
+    void shoot();
 
 private:
     QColor color_;
     Interface::Location* location_;
+    QPointF target_;
     int x_;
     int y_;
     int type_;

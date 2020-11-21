@@ -106,7 +106,9 @@ bool City::isGameOver() const
 
 void City::addPlayer()
 {
-    ;
+    // Edit player coordinates:
+
+    mainW_->addPlayer(44,44,500);
 }
 
 

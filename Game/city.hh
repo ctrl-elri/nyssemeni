@@ -5,7 +5,7 @@
 #include "graphics/simplemainwindow.hh"
 #include "interfaces/istop.hh"
 #include "actors/stop.hh"
-#include "player.hh"
+#include "playeritem.hh"
 #include "mainwindow.hh"
 #include "actors/nysse.hh"
 #include "actors/passenger.hh"
@@ -41,6 +41,7 @@ public:
 
     /**
      * @brief addPlayer adds the player actor
+     * Player amount from Dialog? Player is added when pressed startButton?
      */
     void addPlayer();
 
