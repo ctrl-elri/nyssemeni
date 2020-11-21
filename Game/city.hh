@@ -5,7 +5,7 @@
 #include "graphics/simplemainwindow.hh"
 #include "interfaces/istop.hh"
 #include "actors/stop.hh"
-#include "actoritem.hh"
+#include "player.hh"
 #include "mainwindow.hh"
 #include "actors/nysse.hh"
 #include "actors/passenger.hh"
@@ -14,6 +14,10 @@
 #include <vector>
 #include <algorithm>
 #include <typeinfo>
+
+const int NYSSE_TYPE = 1000;
+const int PASSENGER_TYPE = 400;
+const int STOP_TYPE = 600;
 
 class City : public Interface::ICity
 {

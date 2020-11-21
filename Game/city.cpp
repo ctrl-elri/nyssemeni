@@ -32,7 +32,7 @@ void City::setClock(QTime clock)
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     Interface::Location stopLoc = stop->getLocation();
-    mainW_->addActor(stopLoc.giveX(), 500-stopLoc.giveY(), 600);
+    mainW_->addActor(stopLoc.giveX(), 500-stopLoc.giveY(), STOP_TYPE);
     stops_.push_back(stop);
 }
 
@@ -51,10 +51,10 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 
     if (dynamic_cast<CourseSide::Passenger*>(newactor.get()) != 0){
         mainW_->getActor(newactor);
-        mainW_->addActor(actorLoc.giveX()-5, 500-actorLoc.giveY()-5, 400);
+        mainW_->addActor(actorLoc.giveX()-5, 500-actorLoc.giveY()-5, PASSENGER_TYPE);
     } else if (dynamic_cast<CourseSide::Nysse*>(newactor.get()) != 0){
         mainW_->getActor(newactor);
-        mainW_->addActor(actorLoc.giveX()-5, 500-actorLoc.giveY()-5, 1000);
+        mainW_->addActor(actorLoc.giveX()-5, 500-actorLoc.giveY()-5, NYSSE_TYPE);
     } else {
         return;
     }

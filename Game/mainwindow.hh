@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include "graphics/simplemainwindow.hh"
 #include "graphics/simpleactoritem.hh"
-#include "actoritem.hh"
+#include "player.hh"
 
 #include <vector>
 #include <map>

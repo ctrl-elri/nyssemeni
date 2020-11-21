@@ -60,8 +60,8 @@ void MainWindow::moveActorItem(std::shared_ptr<Interface::IActor> actorToBeMoved
         return;
     } else {
         Interface::Location newLoc = actorToBeMoved->giveLocation();
-        newX = newLoc.giveX();
-        newY = newLoc.giveY();
+        newX = newLoc.giveX()-5;
+        newY = 500-newLoc.giveY()-5;
 
         for (auto a: actors_){
             if (a.first == actorToBeMoved){
