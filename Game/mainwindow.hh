@@ -33,12 +33,15 @@ public:
 
     void removeActorItem(std::shared_ptr<Interface::IActor> actorToBeRemoved);
 
+    void addPlayer();
+
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
-    CourseSide::SimpleActorItem* lastItem_;
+    Player *player_;
+    CourseSide::SimpleActorItem *lastItem_;
     std::shared_ptr<Interface::IActor> lastAc_;
     std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
 

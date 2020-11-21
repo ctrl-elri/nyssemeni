@@ -106,7 +106,7 @@ bool City::isGameOver() const
 
 void City::addPlayer()
 {
-    ;
+    mainW_->addPlayer();
 }
 
 

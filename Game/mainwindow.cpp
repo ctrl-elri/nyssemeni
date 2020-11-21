@@ -91,4 +91,9 @@ void MainWindow::removeActorItem(std::shared_ptr<Interface::IActor> actorToBeRem
     }
 }
 
+void MainWindow::addPlayer()
+{
+    ;
+}
+
 

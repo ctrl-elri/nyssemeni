@@ -41,6 +41,7 @@ public:
 
     /**
      * @brief addPlayer adds the player actor
+     * Player amount from Dialog? 
      */
     void addPlayer();
 

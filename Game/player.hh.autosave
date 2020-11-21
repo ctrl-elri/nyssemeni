@@ -1,6 +1,8 @@
 #ifndef ACTORITEM_HH
 #define ACTORITEM_HH
+
 #include "graphics/simpleactoritem.hh"
+#include "core/location.hh"
 
 /* *
  * Contains player's operations.
@@ -19,9 +21,11 @@ public:
 
     void move(int x, int y);
     void shoot();
+    Interface::Location giveLocation();
 
 private:
     QColor color_;
+    Interface::Location* location_;
     int x_;
     int y_;
     int type_;
