@@ -14,6 +14,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->centralwidget->setFixedSize(width_ + ui->startButton->width() + PADDING + 2 * XTRA_PADDING, height_ + PADDING);
 
     ui->startButton->move(width_ + PADDING + XTRA_PADDING , XTRA_PADDING);
+    ui->moveRightBtn->move(width_ + PADDING + XTRA_PADDING + ui->startButton->width()/2, XTRA_PADDING + ui->startButton->height());
+    ui->moveLeftBtn->move(width_ + PADDING + XTRA_PADDING/2, XTRA_PADDING + ui->startButton->height());
+    ui->shootButton->move(width_ + PADDING + XTRA_PADDING, XTRA_PADDING + 2 * ui->startButton->height());
+
+    QCommonStyle style;
+    ui->moveRightBtn->setIcon(style.standardIcon(QStyle::SP_ArrowForward));
+    ui->moveLeftBtn->setIcon(style.standardIcon(QStyle::SP_ArrowBack));
+
+    ui->moveRightBtn->setDisabled(true);
+    ui->moveLeftBtn->setDisabled(true);
+    ui->shootButton->setDisabled(true);
 //    QPalette pal = ui->startButton->palette();
 //    pal.setColor(QPalette::Button, QColor(Qt::blue));
 //    ui->startButton->setAutoFillBackground(true);
@@ -30,7 +41,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
-    timer->start(tick_);}
+    timer->start(tick_);
+}
 
 MainWindow::~MainWindow()
 {
@@ -99,3 +111,10 @@ void MainWindow::addPlayer(int locX, int locY, int type)
 }
 
 
+
+void MainWindow::on_startButton_clicked()
+{
+    ui->moveRightBtn->setDisabled(false);
+    ui->moveLeftBtn->setDisabled(false);
+    ui->shootButton->setDisabled(false);
+}

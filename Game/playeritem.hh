@@ -23,11 +23,11 @@ public:
     // QGraphicsItem interface
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-    void move(int x, int y);
     Interface::Location giveLocation();
 
 public slots:
     void shoot();
+    void move();
 
 private:
     QColor color_;

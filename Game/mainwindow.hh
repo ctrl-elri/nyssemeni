@@ -2,6 +2,8 @@
 #define MAINWINDOW_HH
 
 #include <QMainWindow>
+#include <QCommonStyle>
+
 #include "graphics/simplemainwindow.hh"
 #include "graphics/simpleactoritem.hh"
 #include "playeritem.hh"
@@ -35,6 +37,8 @@ public:
 
     void addPlayer(int locX, int locY, int type);
 
+private slots:
+    void on_startButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -48,7 +52,7 @@ private:
 
     int width_ = 500; //pxls
     int height_ = 500;
-    int tick_ = 500; //ms
+    int tick_ = 500; //ms    
 
 
 };
