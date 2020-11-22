@@ -27,7 +27,6 @@ public:
 
 public slots:
     void shoot();
-    void move();
 
 private:
     QColor color_;

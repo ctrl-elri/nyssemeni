@@ -38,19 +38,6 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="startButton">
-    <property name="geometry">
-     <rect>
-      <x>380</x>
-      <y>20</y>
-      <width>84</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Start</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="moveRightBtn">
     <property name="geometry">
      <rect>
@@ -61,7 +48,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Right</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="moveLeftBtn">
@@ -74,20 +61,46 @@
      </rect>
     </property>
     <property name="text">
-     <string>Left</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="shootButton">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>90</y>
+      <x>370</x>
+      <y>160</y>
       <width>84</width>
       <height>28</height>
      </rect>
     </property>
     <property name="text">
      <string>Shoot</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="moveUpBtn">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>20</y>
+      <width>84</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="moveDownBtn">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>80</y>
+      <width>84</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

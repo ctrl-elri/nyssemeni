@@ -1,7 +1,10 @@
 #ifndef GAMEENGINE_HH
 #define GAMEENGINE_HH
+
 #include "creategame.hh"
 #include "core/logic.hh"
+#include "mainwindow.hh"
+#include "city.hh"
 
 class gameEngine
 {

@@ -15,12 +15,9 @@ void gameEngine::initGame()
    logic_ = new CourseSide::Logic;
 
    logic_->fileConfig();
-   logic_->setTime(16,0);
+   //logic_->setTime(16,0);
    logic_->takeCity(city_);
    logic_->finalizeGameStart();
 
-
-   //std::shared_ptr<CourseSide::Stop> stop (new CourseSide::Stop());
-   //city->addStop();
 
 }

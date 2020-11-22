@@ -17,10 +17,6 @@ void PlayerItem::shoot()
     // Create class for fire, setPos as the middle of player item
 }
 
-void PlayerItem::move()
-{
-    ;
-}
 
 void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {

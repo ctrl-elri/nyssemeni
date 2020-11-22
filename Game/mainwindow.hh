@@ -37,8 +37,17 @@ public:
 
     void addPlayer(int locX, int locY, int type);
 
+    void checkPlayerMovement();
+
 private slots:
-    void on_startButton_clicked();
+
+    void on_moveRightBtn_clicked();
+
+    void on_moveLeftBtn_clicked();
+
+    void on_moveDownBtn_clicked();
+
+    void on_moveUpBtn_clicked();
 
 private:
     Ui::MainWindow *ui;

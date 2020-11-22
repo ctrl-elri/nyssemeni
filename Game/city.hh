@@ -43,7 +43,7 @@ public:
      * @brief addPlayer adds the player actor
      * Player amount from Dialog? Player is added when pressed startButton?
      */
-    void addPlayer();
+    void addPlayer();    
 
 private:
     QTime time_;

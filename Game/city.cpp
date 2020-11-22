@@ -41,6 +41,7 @@ void City::startGame()
     gameIsOver_ = false;
 
     //ui_->addActor(1,1);
+
     mainW_->show();
 
 }
