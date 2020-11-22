@@ -12,9 +12,12 @@ PlayerItem::~PlayerItem()
     
 }
 
-void PlayerItem::shoot()
+Beam* PlayerItem::shoot()
 {
-    // Create class for fire, setPos as the middle of player item
+    Beam* beam = new Beam;
+    beam->setPos(x()+15, y()+15);
+    return beam;
+
 }
 
 

@@ -78,6 +78,9 @@ private slots:
 
     void on_moveUpBtn_clicked();
 
+
+    void on_shootButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *map;

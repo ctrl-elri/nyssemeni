@@ -172,3 +172,10 @@ void MainWindow::on_moveUpBtn_clicked()
     checkPlayerMovement();
 
 }
+
+void MainWindow::on_shootButton_clicked()
+{
+    Beam * beam = players_.at(0)->shoot();
+
+    map->addItem(beam);
+}
