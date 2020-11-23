@@ -5,8 +5,6 @@
 #include <QCommonStyle>
 #include <QTime>
 
-#include "city.hh"
-
 namespace Ui {
 class Dialog;
 }

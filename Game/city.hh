@@ -2,12 +2,12 @@
 #define CITY_HH
 
 #include "interfaces/icity.hh"
+#include "mainwindow.hh"
 #include "interfaces/istop.hh"
 #include "actors/stop.hh"
 #include "playeritem.hh"
 #include "actors/nysse.hh"
 #include "actors/passenger.hh"
-#include "mainwindow.hh"
 
 #include <QTime>
 #include <vector>
@@ -47,8 +47,8 @@ public:
 
 private:
     QTime time_;
+    //Dialog *dialog_;
     MainWindow *mainW_;
-    // Dialog *dialog_;
 
     bool gameIsOver_ = true;
     std::vector<std::shared_ptr<Interface::IActor> > actorsInGame_;

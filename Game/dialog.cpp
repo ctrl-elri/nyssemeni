@@ -19,6 +19,7 @@ Dialog::~Dialog()
 void Dialog::on_startbutton_clicked()
 {
     emit GameTime(time_);
+    emit NumberOfPlayers(players_);
     accept();
 }
 
