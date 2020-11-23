@@ -90,6 +90,7 @@ private slots:
 
     void setNumberOfPlayers(int number);
 
+    void on_shootButton_clicked();
 
 private:
     Ui::MainWindow *ui;

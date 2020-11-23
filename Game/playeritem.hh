@@ -3,6 +3,7 @@
 
 #include "graphics/simpleactoritem.hh"
 #include "core/location.hh"
+#include "beam.hh"
 
 #include <QPointF>
 #include <QObject>
@@ -25,8 +26,7 @@ public:
 
     Interface::Location giveLocation();
 
-public slots:
-    void shoot();
+    Beam* shoot();
 
 private:
     QColor color_;

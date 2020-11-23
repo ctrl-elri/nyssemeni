@@ -6,6 +6,7 @@ QT += core gui widgets network multimedia
 CONFIG += c++14
 
 SOURCES += \
+    beam.cpp \
     city.cpp \
     creategame.cpp \
     dialog.cpp \
@@ -40,6 +41,7 @@ else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
 
 HEADERS += \
+    beam.hh \
     city.hh \
     dialog.h \
     gameengine.hh \ \
@@ -51,4 +53,7 @@ FORMS += \
     dialog.ui \
     mainwindow.ui
     gameengine.hh \
+
+DISTFILES += \
+    beam.jpg
 
