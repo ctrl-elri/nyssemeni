@@ -1,6 +1,8 @@
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
 
+#include <QtDebug>
+
 const int PADDING = 10;
 const int XTRA_PADDING = 80;
 
@@ -134,6 +136,24 @@ void MainWindow::checkPlayerMovement()
     }
 }
 
+void MainWindow::openDialog()
+{
+    Dialog *dialog = new Dialog;
+    connect(dialog, SIGNAL(GameTime(QTime)), this, SLOT(setTime(QTime)));
+    connect(dialog, SIGNAL(NumberOfPlayers(int)), this, SLOT(setNumberOfPlayers(int)));
+    dialog->exec();
+}
+
+QTime MainWindow::addNewTime()
+{
+    return time_;
+}
+
+int MainWindow::addNewPlayers()
+{
+    return numberofplayers_;
+}
+
 
 void MainWindow::on_moveRightBtn_clicked()
 {
@@ -172,3 +192,16 @@ void MainWindow::on_moveUpBtn_clicked()
     checkPlayerMovement();
 
 }
+
+void MainWindow::setTime(QTime time)
+{
+    time_ = time;
+    qDebug("Aika asetettu");
+
+}
+
+void MainWindow::setNumberOfPlayers(int number)
+{
+    numberofplayers_ = number;
+}
+

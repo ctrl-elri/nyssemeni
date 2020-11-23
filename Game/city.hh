@@ -2,18 +2,18 @@
 #define CITY_HH
 
 #include "interfaces/icity.hh"
-#include "graphics/simplemainwindow.hh"
 #include "interfaces/istop.hh"
 #include "actors/stop.hh"
 #include "playeritem.hh"
-#include "mainwindow.hh"
 #include "actors/nysse.hh"
 #include "actors/passenger.hh"
+#include "mainwindow.hh"
 
 #include <QTime>
 #include <vector>
 #include <algorithm>
 #include <typeinfo>
+#include <QObject>
 
 const int NYSSE_TYPE = 1000;
 const int PASSENGER_TYPE = 400;
@@ -43,11 +43,13 @@ public:
      * @brief addPlayer adds the player actor
      * Player amount from Dialog? Player is added when pressed startButton?
      */
-    void addPlayer();    
+    void addPlayer();
 
 private:
     QTime time_;
     MainWindow *mainW_;
+    // Dialog *dialog_;
+
     bool gameIsOver_ = true;
     std::vector<std::shared_ptr<Interface::IActor> > actorsInGame_;
     std::vector<std::shared_ptr<Interface::IActor> > actorsRemoved_;

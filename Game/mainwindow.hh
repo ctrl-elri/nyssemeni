@@ -3,10 +3,12 @@
 
 #include <QMainWindow>
 #include <QCommonStyle>
+#include <QTime>
 
 #include "graphics/simplemainwindow.hh"
 #include "graphics/simpleactoritem.hh"
 #include "playeritem.hh"
+#include "dialog.h"
 
 #include <vector>
 #include <map>
@@ -68,6 +70,12 @@ public:
      */
     void checkPlayerMovement();
 
+    void openDialog();
+    QTime addNewTime();
+    int addNewPlayers();
+
+
+
 private slots:
 
     void on_moveRightBtn_clicked();
@@ -78,6 +86,11 @@ private slots:
 
     void on_moveUpBtn_clicked();
 
+    void setTime(QTime time);
+
+    void setNumberOfPlayers(int number);
+
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *map;
@@ -86,6 +99,8 @@ private:
     CourseSide::SimpleActorItem *lastItem_;
     std::shared_ptr<Interface::IActor> lastAc_;
     std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
+    QTime time_;
+    int numberofplayers_;
 
 
     int width_ = 500; //pxls

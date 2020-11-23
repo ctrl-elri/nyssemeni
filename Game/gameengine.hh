@@ -3,8 +3,9 @@
 
 #include "creategame.hh"
 #include "core/logic.hh"
-#include "mainwindow.hh"
 #include "city.hh"
+#include "interfaces/istop.hh"
+#include "actors/stop.hh"
 
 class gameEngine
 {
@@ -17,6 +18,7 @@ public:
 private:
     std::shared_ptr<Interface::ICity> city_;
     CourseSide::Logic *logic_;
+
 };
 
 #endif // GAMEENGINE_HH

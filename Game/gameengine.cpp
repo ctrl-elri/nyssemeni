@@ -1,7 +1,4 @@
 #include "gameengine.hh"
-#include "graphics/simplemainwindow.hh"
-#include "interfaces/istop.hh"
-#include "actors/stop.hh"
 
 gameEngine::gameEngine()
 {
@@ -10,6 +7,7 @@ gameEngine::gameEngine()
 
 void gameEngine::initGame()
 {
+
    city_ = Interface::createGame();
 
    logic_ = new CourseSide::Logic;
@@ -21,3 +19,6 @@ void gameEngine::initGame()
 
 
 }
+
+
+

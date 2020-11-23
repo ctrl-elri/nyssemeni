@@ -8,6 +8,7 @@ CONFIG += c++14
 SOURCES += \
     city.cpp \
     creategame.cpp \
+    dialog.cpp \
     gameengine.cpp \
     mainwindow.cpp \
     playeritem.cpp \
@@ -40,12 +41,14 @@ else:unix: PRE_TARGETDEPS += \
 
 HEADERS += \
     city.hh \
+    dialog.h \
     gameengine.hh \ \
     mainwindow.hh \
     playeritem.hh \
     statistics.hh \
 
 FORMS += \
+    dialog.ui \
     mainwindow.ui
     gameengine.hh \
 

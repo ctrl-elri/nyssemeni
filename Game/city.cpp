@@ -1,5 +1,7 @@
 #include "city.hh"
 
+#include <QDebug>
+
 City::City()
 {
 
@@ -39,6 +41,17 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 void City::startGame()
 {
     gameIsOver_ = false;
+
+    mainW_->openDialog();
+    setClock(mainW_->addNewTime());
+    qDebug() << "Kayttajan asettama aika on: " << time_.toString();
+
+    int players = mainW_->addNewPlayers();
+
+    while (players != 0) {
+        addPlayer();
+        players = players - 1;
+    }
 
     //ui_->addActor(1,1);
 
@@ -111,6 +124,7 @@ void City::addPlayer()
 
     mainW_->addPlayer(44,44,500);
 }
+
 
 
 
