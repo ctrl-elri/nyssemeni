@@ -9,6 +9,7 @@
 #include "graphics/simpleactoritem.hh"
 #include "playeritem.hh"
 #include "dialog.h"
+#include"gameengine.hh"
 
 #include <vector>
 #include <map>
@@ -91,6 +92,10 @@ private slots:
     void setNumberOfPlayers(int number);
 
     void on_shootButton_clicked();
+
+    void on_newgameButton_clicked();
+
+    void exitGame();
 
 private:
     Ui::MainWindow *ui;

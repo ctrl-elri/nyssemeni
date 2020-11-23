@@ -3,9 +3,6 @@
 
 #include "creategame.hh"
 #include "core/logic.hh"
-#include "city.hh"
-#include "interfaces/istop.hh"
-#include "actors/stop.hh"
 
 class gameEngine
 {

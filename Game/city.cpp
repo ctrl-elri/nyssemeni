@@ -16,6 +16,7 @@ City::~City()
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
     mainW_ = new MainWindow;
+
     mainW_->setPicture(basicbackground);
 
 }

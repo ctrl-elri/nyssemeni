@@ -7,6 +7,8 @@ Dialog::Dialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // Minimi- ja maksimipelaajamäärä
+    ui->players->setRange(1,5);
 
 
 }
@@ -25,7 +27,8 @@ void Dialog::on_startbutton_clicked()
 
 void Dialog::on_exitbutton_clicked()
 {
-
+    emit Exit();
+    reject();
 }
 
 void Dialog::on_timeEdit_userTimeChanged(const QTime &time)

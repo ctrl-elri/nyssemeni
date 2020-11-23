@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->moveLeftBtn->move(width_ + PADDING + XTRA_PADDING/2, XTRA_PADDING + ui->moveUpBtn->height());
     ui->moveDownBtn->move(width_ + PADDING + XTRA_PADDING, XTRA_PADDING + 2* ui->moveUpBtn->height());
     ui->shootButton->move(width_ + PADDING + XTRA_PADDING, 400);
+    ui->newgameButton->move(width_ + PADDING + XTRA_PADDING, 450);
 
     QCommonStyle style;
     ui->moveRightBtn->setIcon(style.standardIcon(QStyle::SP_ArrowForward));
@@ -141,6 +142,7 @@ void MainWindow::openDialog()
     Dialog *dialog = new Dialog;
     connect(dialog, SIGNAL(GameTime(QTime)), this, SLOT(setTime(QTime)));
     connect(dialog, SIGNAL(NumberOfPlayers(int)), this, SLOT(setNumberOfPlayers(int)));
+    connect(dialog, SIGNAL(Exit()), this, SLOT(exitGame()));
     dialog->exec();
 }
 
@@ -210,4 +212,20 @@ void MainWindow::on_shootButton_clicked()
     Beam * beam = players_.at(0)->shoot();
 
     map->addItem(beam);
+}
+
+void MainWindow::on_newgameButton_clicked()
+{
+    this->close();
+
+    // Starting new game
+    gameEngine* engine = new gameEngine;
+    engine->initGame();
+
+}
+
+void MainWindow::exitGame()
+{
+    // ??
+
 }

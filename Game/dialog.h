@@ -20,6 +20,7 @@ public:
 signals:
     void GameTime(QTime time);
     void NumberOfPlayers(int players);
+    void Exit();
 
 
 private slots:
