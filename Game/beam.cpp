@@ -6,14 +6,14 @@ Beam::Beam(QGraphicsItem *parent): QObject(),QGraphicsPixmapItem(parent){
 
     setPixmap(QPixmap(":/beam.jpg"));
 
-    QTimer *move_timer = new QTimer(this);
-    connect(move_timer,SIGNAL(timeout()),this,SLOT(move()));
-    move_timer->start(50);
+    QTimer *moveTimer = new QTimer(this);
+    connect(moveTimer,SIGNAL(timeout()),this,SLOT(move()));
+    moveTimer->start(50);
 }
 
 void Beam::move()
 {
-    int STEP_SIZE = 30;
+    int STEP_SIZE = 15;
     double theta = rotation();
 
     double dy = STEP_SIZE * qSin(qDegreesToRadians(theta));

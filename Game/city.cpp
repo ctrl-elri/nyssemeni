@@ -4,7 +4,6 @@
 
 City::City()
 {
-
 }
 
 City::~City()
@@ -12,11 +11,14 @@ City::~City()
 
 }
 
+void City::setMainWindow(MainWindow* window)
+{
+    mainW_ = window;
+}
+
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
-    mainW_ = new MainWindow;
-
     mainW_->setPicture(basicbackground);
 
 }
@@ -47,14 +49,13 @@ void City::startGame()
     setClock(mainW_->addNewTime());
     qDebug() << "Kayttajan asettama aika on: " << time_.toString();
 
-    int players = mainW_->addNewPlayers();
+    int numbOfPlayers = mainW_->addNewPlayers();
 
-    while (players != 0) {
+    while (numbOfPlayers != 0) {
         addPlayer();
-        players = players - 1;
+        numbOfPlayers--;
     }
 
-    //ui_->addActor(1,1);
 
     mainW_->show();
 
@@ -121,10 +122,11 @@ bool City::isGameOver() const
 
 void City::addPlayer()
 {
-    // Edit player coordinates:
+    // All players' default location is the origin.
 
-    mainW_->addPlayer(44,44,500);
+    mainW_->addPlayer(0,0,0);
 }
+
 
 
 

@@ -5,7 +5,6 @@
 #include "mainwindow.hh"
 #include "interfaces/istop.hh"
 #include "actors/stop.hh"
-#include "playeritem.hh"
 #include "actors/nysse.hh"
 #include "actors/passenger.hh"
 
@@ -21,10 +20,11 @@ const int STOP_TYPE = 600;
 
 class City : public Interface::ICity
 {
-    
 public:
     City();
     ~City();
+
+    void setMainWindow(MainWindow* window);
     // ICity interface
 
     void setBackground(QImage &basicbackground, QImage &bigbackground);
@@ -45,11 +45,14 @@ public:
      */
     void addPlayer();
 
+
+public slots:
+    void shoot();
+
 private:
     QTime time_;
     //Dialog *dialog_;
     MainWindow *mainW_;
-
     bool gameIsOver_ = true;
     std::vector<std::shared_ptr<Interface::IActor> > actorsInGame_;
     std::vector<std::shared_ptr<Interface::IActor> > actorsRemoved_;

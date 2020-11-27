@@ -2,8 +2,8 @@
 #define ACTORITEM_HH
 
 #include "graphics/simpleactoritem.hh"
-#include "core/location.hh"
 #include "beam.hh"
+#include "player.hh"
 
 #include <QPointF>
 #include <QObject>
@@ -24,14 +24,19 @@ public:
     // QGraphicsItem interface
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-    Interface::Location giveLocation();
+    void setStartLoc();
 
-    Beam* shoot();
+    void setLocation(int x, int y);
+
+    Beam* createBeam();
+
+    void shoot();
 
 private:
     QColor color_;
     Interface::Location* location_;
     QPointF target_;
+    std::shared_ptr<Interface::ICity> gameArea_;
     int x_;
     int y_;
     int type_;

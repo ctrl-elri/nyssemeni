@@ -6,10 +6,11 @@
 const int PADDING = 10;
 const int XTRA_PADDING = 80;
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(std::shared_ptr<Interface::ICity> gameArea, QWidget *parent) :
     CourseSide::SimpleMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    gameArea_ = gameArea;
     ui->setupUi(this);
     //this->setStyleSheet("background-color: black;");
     ui->graphicsView->setFixedSize(width_, height_);
@@ -103,7 +104,9 @@ void MainWindow::removeActorItem(std::shared_ptr<Interface::IActor> actorToBeRem
 void MainWindow::addPlayer(int locX, int locY, int type)
 {
     PlayerItem* player = new PlayerItem(locX, locY, type);
+    player->setStartLoc();
     map->addItem(player);
+
     players_.push_back(player);
 }
 
@@ -157,10 +160,11 @@ int MainWindow::addNewPlayers()
 }
 
 
+
 void MainWindow::on_moveRightBtn_clicked()
 {
     for (auto p: players_){
-        p->moveBy(15, 0);
+        p->setLocation(15,0);
     }
     checkPlayerMovement();
 
@@ -169,7 +173,7 @@ void MainWindow::on_moveRightBtn_clicked()
 void MainWindow::on_moveLeftBtn_clicked()
 {
     for (auto p: players_){
-        p->moveBy(-15, 0);
+        p->setLocation(-15,0);
     }
     checkPlayerMovement();
 
@@ -180,7 +184,7 @@ void MainWindow::on_moveLeftBtn_clicked()
 void MainWindow::on_moveDownBtn_clicked()
 {
     for (auto p: players_){
-        p->moveBy(0, 15);
+        p->setLocation(0,15);
     }
     checkPlayerMovement();
 
@@ -189,7 +193,7 @@ void MainWindow::on_moveDownBtn_clicked()
 void MainWindow::on_moveUpBtn_clicked()
 {
     for (auto p: players_){
-        p->moveBy(0, -15);
+        p->setLocation(0,-15);
     }
     checkPlayerMovement();
 
@@ -209,9 +213,12 @@ void MainWindow::setNumberOfPlayers(int number)
 
 void MainWindow::on_shootButton_clicked()
 {
-    Beam * beam = players_.at(0)->shoot();
+    map->addItem(players_.at(0)->createBeam());
 
-    map->addItem(beam);
+    emit playerShoots();
+
+    //Interface::Location* playersLoc = players_.at(0)->giveLocation();
+
 }
 
 void MainWindow::on_newgameButton_clicked()
@@ -229,3 +236,4 @@ void MainWindow::exitGame()
     // ??
 
 }
+

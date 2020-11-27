@@ -9,7 +9,8 @@
 #include "graphics/simpleactoritem.hh"
 #include "playeritem.hh"
 #include "dialog.h"
-#include"gameengine.hh"
+#include "gameengine.hh"
+
 
 #include <vector>
 #include <map>
@@ -20,10 +21,12 @@ class MainWindow;
 
 class MainWindow : public CourseSide::SimpleMainWindow
 {
+    std::shared_ptr<Interface::ICity> gameArea_;
+
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(std::shared_ptr<Interface::ICity>, QWidget *parent = 0);
     ~MainWindow();
 
     void addActor(int locX, int locY, int type);
@@ -76,6 +79,8 @@ public:
     int addNewPlayers();
 
 
+signals:
+    void playerShoots();
 
 private slots:
 
@@ -102,6 +107,7 @@ private:
     QGraphicsScene *map;
     QTimer *timer;
     std::vector<PlayerItem*> players_;
+    std::vector<Beam*> beams_;
     CourseSide::SimpleActorItem *lastItem_;
     std::shared_ptr<Interface::IActor> lastAc_;
     std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
