@@ -3,7 +3,7 @@
 
 #include "graphics/simpleactoritem.hh"
 #include "beam.hh"
-#include "player.hh"
+#include "interfaces/icity.hh"
 
 #include <QPointF>
 #include <QObject>
@@ -28,15 +28,16 @@ public:
 
     void setLocation(int x, int y);
 
+    Interface::Location getLocation();
+
     Beam* createBeam();
 
-    void shoot();
+//    void shoot();
 
 private:
     QColor color_;
-    Interface::Location* location_;
+    Interface::Location location_;
     QPointF target_;
-    std::shared_ptr<Interface::ICity> gameArea_;
     int x_;
     int y_;
     int type_;

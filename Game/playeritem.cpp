@@ -22,10 +22,10 @@ Beam* PlayerItem::createBeam()
 
 }
 
-void PlayerItem::shoot()
-{
+//void PlayerItem::shoot()
+//{
 
-}
+//}
 
 
 void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -39,13 +39,17 @@ void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
 void PlayerItem::setStartLoc()
 {
-    location_ = new Interface::Location;
-    location_->setXY(x_, y_);
+    location_.setXY(x_, y_);
 }
 
 
 void PlayerItem::setLocation(int x, int y)
 {
     this->moveBy(x,y);
-    location_->setXY(x, y);
+    location_.setXY(x, y);
+}
+
+Interface::Location PlayerItem::getLocation()
+{
+    return location_;
 }

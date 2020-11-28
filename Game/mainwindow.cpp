@@ -82,7 +82,7 @@ void MainWindow::moveActorItem(std::shared_ptr<Interface::IActor> actorToBeMoved
     }
 }
 
-void MainWindow::getActor(std::shared_ptr<Interface::IActor> newac)
+void MainWindow::setActor(std::shared_ptr<Interface::IActor> newac)
 {
     lastAc_ = newac;
 }
@@ -136,6 +136,19 @@ void MainWindow::checkPlayerMovement()
             ui->moveDownBtn->setDisabled(true);
         } else if (p->y() <= 500+15){
             ui->moveDownBtn->setDisabled(false);
+        }
+    }
+}
+
+void MainWindow::removeNearbyActors(std::vector<std::shared_ptr<Interface::IActor> > nearbyActors)
+{
+    // Poistaa hyökkäyksen kohteena olevat actorItemit.
+    for (auto nA: nearbyActors){
+        if (actors_.find(nA) == actors_.end()){
+            continue;
+        } else {
+            removeActorItem(nA);
+            gameArea_->removeActor(nA);
         }
     }
 }
@@ -215,9 +228,10 @@ void MainWindow::on_shootButton_clicked()
 {
     map->addItem(players_.at(0)->createBeam());
 
-    emit playerShoots();
+    Interface::Location playersLoc = players_.at(0)->getLocation();
+    std::vector<std::shared_ptr<Interface::IActor> > actorsInRange = gameArea_->getNearbyActors(playersLoc);
 
-    //Interface::Location* playersLoc = players_.at(0)->giveLocation();
+    removeNearbyActors(actorsInRange);
 
 }
 

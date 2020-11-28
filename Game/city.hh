@@ -25,6 +25,12 @@ public:
     ~City();
 
     void setMainWindow(MainWindow* window);
+    /**
+     * @brief addPlayer adds the player actor
+     * Player amount from Dialog? Player is added when pressed startButton?
+     */
+    void addPlayer();
+
     // ICity interface
 
     void setBackground(QImage &basicbackground, QImage &bigbackground);
@@ -38,12 +44,6 @@ public:
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
-
-    /**
-     * @brief addPlayer adds the player actor
-     * Player amount from Dialog? Player is added when pressed startButton?
-     */
-    void addPlayer();
 
 
 public slots:

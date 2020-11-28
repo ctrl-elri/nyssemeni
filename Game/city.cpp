@@ -66,10 +66,10 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
     Interface::Location actorLoc = newactor->giveLocation();
 
     if (dynamic_cast<CourseSide::Passenger*>(newactor.get()) != 0){
-        mainW_->getActor(newactor);
+        mainW_->setActor(newactor);
         mainW_->addActor(actorLoc.giveX()-5, 500-actorLoc.giveY()-5, PASSENGER_TYPE);
     } else if (dynamic_cast<CourseSide::Nysse*>(newactor.get()) != 0){
-        mainW_->getActor(newactor);
+        mainW_->setActor(newactor);
         mainW_->addActor(actorLoc.giveX()-5, 500-actorLoc.giveY()-5, NYSSE_TYPE);
     } else {
         return;
@@ -112,7 +112,15 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {
+    std::vector<std::shared_ptr<Interface::IActor>> nearbyActors;
 
+    for (auto a: actorsInGame_){
+        if (a->giveLocation().isClose(loc) == true){
+            nearbyActors.push_back(a);
+        }
+    }
+
+    return  nearbyActors;
 }
 
 bool City::isGameOver() const

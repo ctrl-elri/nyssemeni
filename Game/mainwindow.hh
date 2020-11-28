@@ -44,10 +44,10 @@ public:
     void moveActorItem(std::shared_ptr<Interface::IActor> actorToBeMoved);
 
     /**
-     * @brief getActor sets latest added actor as lastAc_.
+     * @brief setActor sets latest added actor as lastAc_.
      * @param newac latest added actor, from City.
      */
-    void getActor(std::shared_ptr<Interface::IActor> newac);
+    void setActor(std::shared_ptr<Interface::IActor> newac);
 
     /**
      * @brief addToMap adds a pair to map, actors_, the pair consisting of
@@ -74,13 +74,12 @@ public:
      */
     void checkPlayerMovement();
 
+    void removeNearbyActors(std::vector<std::shared_ptr<Interface::IActor> > nearbyActors);
+
     void openDialog();
     QTime addNewTime();
     int addNewPlayers();
 
-
-signals:
-    void playerShoots();
 
 private slots:
 

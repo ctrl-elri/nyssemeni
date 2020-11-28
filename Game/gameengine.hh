@@ -3,7 +3,6 @@
 
 #include "creategame.hh"
 #include "core/logic.hh"
-#include "player.hh"
 
 class gameEngine
 {
@@ -13,13 +12,10 @@ public:
 
     void initGame();
 
-    void createPlayer();
-
 
 private:
     std::shared_ptr<Interface::ICity> city_;
     CourseSide::Logic *logic_;
-    Player* player_;
 
 
 };

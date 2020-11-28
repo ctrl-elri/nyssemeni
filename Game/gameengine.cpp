@@ -20,10 +20,5 @@ void gameEngine::initGame()
 
 }
 
-void gameEngine::createPlayer()
-{
-   player_ = new Player(city_);
-}
-
 
 
