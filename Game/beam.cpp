@@ -2,17 +2,24 @@
 
 
 
-Beam::Beam(QGraphicsItem *parent): QObject(),QGraphicsPixmapItem(parent){
+Beam::Beam(qreal xCoordinate, qreal yCoordinate, QGraphicsItem *parent): QObject(), x_(xCoordinate), y_(yCoordinate), QGraphicsPixmapItem(parent){
 
-    setPixmap(QPixmap(":/beam.jpg"));
+    //setPixmap(QPixmap(":/beam.jpg"));
 
-    QTimer *moveTimer = new QTimer(this);
-    connect(moveTimer,SIGNAL(timeout()),this,SLOT(move()));
-    moveTimer->start(50);
+    moveTimer_ = new QTimer(this);
+    connect(moveTimer_,SIGNAL(timeout()),this,SLOT(move()));
+    moveTimer_->start(50);
+}
+
+Beam::~Beam()
+{
+
 }
 
 void Beam::move()
 {
+    //Koordinaatit joihin beam liikkuu. Liikkumisen jälkeen tuhoutuu.
+
     int STEP_SIZE = 15;
     double theta = rotation();
 
@@ -20,6 +27,11 @@ void Beam::move()
     double dx = STEP_SIZE * qCos(qDegreesToRadians(theta));
 
     setPos(x()+dx, y()+dy);
+
+    if (x() == x_){
+        moveTimer_->stop();
+        return;
+    }
 
 }
 

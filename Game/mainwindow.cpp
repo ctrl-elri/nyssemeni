@@ -142,15 +142,21 @@ void MainWindow::checkPlayerMovement()
 
 void MainWindow::removeNearbyActors(std::vector<std::shared_ptr<Interface::IActor> > nearbyActors)
 {
-    // Poistaa hyökkäyksen kohteena olevat actorItemit.
-    for (auto nA: nearbyActors){
-        if (actors_.find(nA) == actors_.end()){
-            continue;
-        } else {
-            removeActorItem(nA);
-            gameArea_->removeActor(nA);
+    if (nearbyActors.size() == 0){
+        return;
+    } else {
+        // Poistaa hyökkäyksen kohteena olevat actorItemit.
+        for (auto nA: nearbyActors){
+            if (actors_.find(nA) == actors_.end()){
+                continue;
+            } else {
+                // Ei välttämättä poisteta?
+                removeActorItem(nA);
+                gameArea_->removeActor(nA);
+            }
         }
     }
+
 }
 
 void MainWindow::openDialog()
@@ -226,12 +232,23 @@ void MainWindow::setNumberOfPlayers(int number)
 
 void MainWindow::on_shootButton_clicked()
 {
-    map->addItem(players_.at(0)->createBeam());
 
     Interface::Location playersLoc = players_.at(0)->getLocation();
-    std::vector<std::shared_ptr<Interface::IActor> > actorsInRange = gameArea_->getNearbyActors(playersLoc);
 
-    removeNearbyActors(actorsInRange);
+    qDebug() << "playerin lokaatio" << playersLoc.giveX() << "," << playersLoc.giveY();
+    std::vector<std::shared_ptr<Interface::IActor> > actorsInRange = gameArea_->getNearbyActors(playersLoc);
+//   map->addItem(players_.at(0)->attackTarget());
+
+    // actorsInRange on aina jostain syystä nolla, selvitä miksi. Luultavasti johtuu locationin arvosta
+    if (actorsInRange.size() == 0){
+        return;
+    } else {
+        for (auto nA: actorsInRange){
+            map->addItem( players_.at(0)->attackTarget(nA->giveLocation()));
+        }
+
+        removeNearbyActors(actorsInRange);
+    }
 
 }
 

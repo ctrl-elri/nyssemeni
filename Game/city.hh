@@ -57,6 +57,7 @@ private:
     std::vector<std::shared_ptr<Interface::IActor> > actorsInGame_;
     std::vector<std::shared_ptr<Interface::IActor> > actorsRemoved_;
     std::vector< std::shared_ptr<Interface::IStop> > stops_;
+    std::vector<std::shared_ptr<Interface::IActor>> nysses_;
 
 };
 

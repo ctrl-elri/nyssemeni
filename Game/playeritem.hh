@@ -5,6 +5,7 @@
 #include "beam.hh"
 #include "interfaces/icity.hh"
 
+#include <QDebug>
 #include <QPointF>
 #include <QObject>
 /* *
@@ -30,17 +31,21 @@ public:
 
     Interface::Location getLocation();
 
-    Beam* createBeam();
 
-//    void shoot();
+    Beam* attackTarget(Interface::Location attackLoc);
 
 private:
+
+    Beam* createBeam(int xCoordinate, int yCoordinate);
+
+
     QColor color_;
     Interface::Location location_;
     QPointF target_;
     int x_;
     int y_;
     int type_;
+    int locHeight_;
 };
 
 #endif // ACTORITEM_HH

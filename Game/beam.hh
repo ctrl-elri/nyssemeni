@@ -8,11 +8,14 @@
 #include <QPainter>
 #include <qmath.h>
 
+#include "core/location.hh"
+
 class Beam: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Beam(QGraphicsItem *parent = 0);
+    Beam(qreal, qreal, QGraphicsItem *parent = 0);
+    ~Beam();
 
     // QGraphicsItem interface
     QRectF boundingRect() const;
@@ -20,7 +23,10 @@ public:
 
 public slots:
     void move();
-
+private:
+    int x_;
+    int y_;
+    QTimer *moveTimer_;
 
 };
 

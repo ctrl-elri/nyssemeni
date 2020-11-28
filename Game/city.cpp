@@ -71,12 +71,14 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
     } else if (dynamic_cast<CourseSide::Nysse*>(newactor.get()) != 0){
         mainW_->setActor(newactor);
         mainW_->addActor(actorLoc.giveX()-5, 500-actorLoc.giveY()-5, NYSSE_TYPE);
+        nysses_.push_back(newactor);
     } else {
         return;
     }
 
     mainW_->addToMap();
     actorsInGame_.push_back(newactor);
+
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
@@ -114,12 +116,13 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 {
     std::vector<std::shared_ptr<Interface::IActor>> nearbyActors;
 
-    for (auto a: actorsInGame_){
-        if (a->giveLocation().isClose(loc) == true){
-            nearbyActors.push_back(a);
+    for (auto b: nysses_){
+        if (b->giveLocation().isClose(loc) == true){
+            nearbyActors.push_back(b);
         }
     }
 
+    qDebug() << "lähellä olevat nysset" << nearbyActors.size();
     return  nearbyActors;
 }
 
