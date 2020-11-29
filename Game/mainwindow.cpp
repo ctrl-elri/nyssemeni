@@ -114,32 +114,30 @@ void MainWindow::addPlayer(int locX, int locY, int type)
 
 void MainWindow::checkPlayerMovement()
 {
-    for (auto p: players_){
-
-        if (p->x() > 500-15){
-            ui->moveRightBtn->setDisabled(true);
-        } else if (p->x() <= 500+15){
+     if (currentPlayer_->x() > 500-15){
+        ui->moveRightBtn->setDisabled(true);
+     } else if (currentPlayer_->x() <= 500+15){
             ui->moveRightBtn->setDisabled(false);
         }
 
-        if (p->x() <= 0){
-            ui->moveLeftBtn->setDisabled(true);
-        } else if (p->x() > 0){
+     if (currentPlayer_->x() <= 0){
+        ui->moveLeftBtn->setDisabled(true);
+     } else if (currentPlayer_->x() > 0){
             ui->moveLeftBtn->setDisabled(false);
         }
 
-        if (p->y() <= 0){
-            ui->moveUpBtn->setDisabled(true);
-        } else if (p->y() > 0) {
+     if (currentPlayer_->y() <= 0){
+        ui->moveUpBtn->setDisabled(true);
+     } else if (currentPlayer_->y() > 0) {
             ui->moveUpBtn->setDisabled(false);
         }
 
-        if (p->y() > 500-15){
-            ui->moveDownBtn->setDisabled(true);
-        } else if (p->y() <= 500+15){
+     if (currentPlayer_->y() > 500-15){
+        ui->moveDownBtn->setDisabled(true);
+     } else if (currentPlayer_->y() <= 500+15){
             ui->moveDownBtn->setDisabled(false);
         }
-    }
+
 }
 
 void MainWindow::removeNearbyActors(std::vector<std::shared_ptr<Interface::IActor> > nearbyActors)
