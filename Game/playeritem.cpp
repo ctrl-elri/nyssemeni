@@ -13,16 +13,6 @@ PlayerItem::~PlayerItem()
     
 }
 
-Beam* PlayerItem::createBeam(int xCoordinate, int yCoordinate)
-{
-    Beam* beam = new Beam(xCoordinate, yCoordinate);
-    beam->setPos(x()+15, y()+15);
-
-    return beam;
-
-}
-
-
 void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QRectF bounds = CourseSide::SimpleActorItem::boundingRect();
@@ -41,10 +31,10 @@ void PlayerItem::setStartLoc()
 void PlayerItem::setLocation(int x, int y)
 {
     if (x == 0){
-        location_.setXY(location_.giveX(), locHeight_-y);
+        location_.setXY(location_.giveX(), locHeight_-y+15);
         locHeight_ = locHeight_-y;
     } else if (y == 0){
-        location_.setXY(x_+x, location_.giveY());
+        location_.setXY(x_+x+15, location_.giveY());
         x_ = x_ +x;
     }
 
@@ -56,10 +46,15 @@ Interface::Location PlayerItem::getLocation()
     return location_;
 }
 
-Beam* PlayerItem::attackTarget(Interface::Location attackLoc)
+Beam* PlayerItem::setBeam(QPointF targetPosition)
 {
-    int x = attackLoc.giveX();
-    int y = attackLoc.giveY();
+    Beam* beam = new Beam(targetPosition);
 
-    return createBeam(x,y);
+    QLineF ln(QPointF(x()+15, y()+15), targetPosition);
+    int rotationAngle = -1 * ln.angle();
+
+    beam->setPos(x()+15, y()+15);
+    beam->setRotation(rotationAngle);
+
+    return beam;
 }

@@ -97,7 +97,6 @@ private:
     QGraphicsScene *map;
     QTimer *timer;
     std::vector<PlayerItem*> players_;
-    std::vector<Beam*> beams_;
     CourseSide::SimpleActorItem *lastItem_;
     std::shared_ptr<Interface::IActor> lastAc_;
     std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;

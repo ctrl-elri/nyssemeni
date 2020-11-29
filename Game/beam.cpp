@@ -2,7 +2,7 @@
 
 
 
-Beam::Beam(qreal xCoordinate, qreal yCoordinate, QGraphicsItem *parent): QObject(), x_(xCoordinate), y_(yCoordinate), QGraphicsPixmapItem(parent){
+Beam::Beam(QPointF targetPos, QGraphicsItem *parent): QObject(), targetPos_(targetPos), QGraphicsPixmapItem(parent){
 
     //setPixmap(QPixmap(":/beam.jpg"));
 
@@ -20,18 +20,13 @@ void Beam::move()
 {
     //Koordinaatit joihin beam liikkuu. Liikkumisen jälkeen tuhoutuu.
 
-    int STEP_SIZE = 15;
+    int STEP_SIZE = 5;
     double theta = rotation();
 
     double dy = STEP_SIZE * qSin(qDegreesToRadians(theta));
     double dx = STEP_SIZE * qCos(qDegreesToRadians(theta));
 
     setPos(x()+dx, y()+dy);
-
-    if (x() == x_){
-        moveTimer_->stop();
-        return;
-    }
 
 }
 
