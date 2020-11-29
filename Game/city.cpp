@@ -45,6 +45,12 @@ void City::startGame()
 {
     gameIsOver_ = false;
 
+    int players = amountOfPlayers_;
+    while (players != 0) {
+        addPlayer();
+        players = players - 1;
+    }
+
     mainW_->show();
 
 }
@@ -119,11 +125,6 @@ bool City::isGameOver() const
     return gameIsOver_;
 }
 
-void City::setGameTime(QTime time)
-{
-    time_ = time;
-}
-
 void City::setPlayers(int players)
 {
     amountOfPlayers_ = players;
@@ -143,9 +144,8 @@ void City::addPlayer()
 
 void City::setDialog(Dialog* dialog)
 {
-    connect(dialog, SIGNAL(GameTime(QTime)), this, SLOT(setGameTime(QTime)));
-    connect(dialog, SIGNAL(NumberOfPlayers(int)), this, SLOT(setPlayers(int)));
-    connect(dialog, SIGNAL(Exit()), this, SLOT(exitGame()));
+    connect(dialog, SIGNAL(numberOfPlayers(int)), this, SLOT(setPlayers(int)));
+    connect(dialog, SIGNAL(exit()), this, SLOT(exitGame()));
     dialog->exec();
 
 }

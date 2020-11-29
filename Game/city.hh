@@ -51,7 +51,6 @@ public:
 
 public slots:
     //void shoot();
-    void setGameTime(QTime time);
     void setPlayers(int players);
     void exitGame();
 

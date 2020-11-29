@@ -18,9 +18,8 @@ public:
     ~Dialog();
 
 signals:
-    void GameTime(QTime time);
-    void NumberOfPlayers(int players);
-    void Exit();
+    void numberOfPlayers(int players);
+    void exit();
 
 
 private slots:
@@ -29,13 +28,10 @@ private slots:
 
     void on_exitbutton_clicked();
 
-    void on_timeEdit_userTimeChanged(const QTime &time);
-
     void on_players_valueChanged(int arg1);
 
 private:
     Ui::Dialog *ui;
-    QTime time_ = QTime(0,0);
     int players_ = 1;
 
 
