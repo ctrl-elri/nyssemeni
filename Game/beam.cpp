@@ -19,6 +19,7 @@ Beam::~Beam()
 void Beam::move()
 {
 
+
     int STEP_SIZE = 5;
     double theta = rotation();
 
@@ -26,6 +27,13 @@ void Beam::move()
     double dx = STEP_SIZE * qCos(qDegreesToRadians(theta));
 
     setPos(x()+dx, y()+dy);
+
+    ++timesMoved_;
+
+    if (timesMoved_ == 3){
+        moveTimer_->stop();
+        delete this;
+    }
 
 }
 

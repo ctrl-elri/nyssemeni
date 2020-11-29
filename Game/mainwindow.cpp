@@ -54,9 +54,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::addActor(int locX, int locY, int type)
 {
-    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
-    map->addItem(nActor);
-    lastItem_ = nActor;
+    if (type == NYSSE){
+        NysseItem* nActor = new NysseItem(locX, locY, type);
+        map->addItem(nActor);
+        nysses_.push_back(nActor);
+        lastItem_ = nActor;
+    } else {
+        CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
+        map->addItem(nActor);
+        lastItem_ = nActor;
+    }
 
 }
 
@@ -70,6 +77,8 @@ void MainWindow::moveActorItem(std::shared_ptr<Interface::IActor> actorToBeMoved
     int newX = 0;
     int newY = 0;
 
+    qDebug() << nysses_.size();
+
     if (actors_.find(actorToBeMoved) == actors_.end()){
         return;
     } else {
@@ -79,10 +88,11 @@ void MainWindow::moveActorItem(std::shared_ptr<Interface::IActor> actorToBeMoved
 
         for (auto a: actors_){
             if (a.first == actorToBeMoved){
-              a.second->setPos(newX, newY);
+                a.second->setPos(newX, newY);
             }
         }
     }
+
 }
 
 void MainWindow::setActor(std::shared_ptr<Interface::IActor> newac)
@@ -144,28 +154,6 @@ void MainWindow::checkPlayerMovement()
     }
 }
 
-void MainWindow::removeNearbyActors(std::vector<std::shared_ptr<Interface::IActor> > nearbyActors)
-{
-    if (nearbyActors.size() == 0){
-        return;
-    } else {
-        // Poistaa hyökkäyksen kohteena olevat actorItemit.
-        for (auto nA: nearbyActors){
-            if (actors_.find(nA) == actors_.end()){
-                continue;
-            } else {
-                if (beam_->collidesWithItem(actors_.find(nA)->second)){
-                    gameArea_->removeActor(nA);
-                    ui->hitLabel->setVisible(true);
-                    ui->hitLabel->adjustSize();
-                    ui->hitLabel->setText("Target hit!");
-                    delete beam_;
-                }
-            }
-        }
-    }
-
-}
 
 void MainWindow::openDialog()
 {
@@ -187,7 +175,6 @@ int MainWindow::addNewPlayers()
 }
 
 
-
 void MainWindow::on_moveRightBtn_clicked()
 {
     for (auto p: players_){
@@ -205,7 +192,6 @@ void MainWindow::on_moveLeftBtn_clicked()
     checkPlayerMovement();
 
 }
-
 
 
 void MainWindow::on_moveDownBtn_clicked()
@@ -250,13 +236,27 @@ void MainWindow::on_shootButton_clicked()
             if (actors_.find(nA) == actors_.end()){
                 continue;
             } else {
-                QPointF targetLoc = actors_.find(nA)->second->pos();
+                QPointF targetLoc = actors_.at(nA)->pos();
+                qDebug() << actors_.at(nA);
                 beam_ = players_.at(0)->setBeam(targetLoc);
                 map->addItem( beam_);
+
+                NysseItem* moveNysse = dynamic_cast<NysseItem*>(actors_.at(nA));
+                moveNysse->isShotAt_ = true;
+                moveNysse->changeColor(); //??????
+
+                if (beam_->pos() == targetLoc){
+                    gameArea_->removeActor(nA);
+                    ui->hitLabel->setVisible(true);
+                    ui->hitLabel->adjustSize();
+                    ui->hitLabel->setText("Target hit!");
+                    map->removeItem(beam_);
+                    delete beam_;
+                    moveNysse->isShotAt_ = false;
+                }
+
             }
         }
-
-        removeNearbyActors(actorsInRange);
 
     } else {
         return;
@@ -287,6 +287,22 @@ bool MainWindow::isAnyActorNear(int size)
         ui->hitLabel->adjustSize();
         ui->hitLabel->setText("Target isn't near enough!");
         return false;
+    }
+
+    return true;
+}
+
+bool MainWindow::isNysseAllowedToMove(NysseItem* nysse)
+{
+    std::vector<NysseItem*>::iterator it;
+    it = std::find(nysses_.begin(), nysses_.end(), nysse);
+
+    if (it != nysses_.end()){
+
+        if (nysse->isShotAt_){
+            return false;
+        }
+
     }
 
     return true;

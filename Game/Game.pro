@@ -12,6 +12,7 @@ SOURCES += \
     dialog.cpp \
     gameengine.cpp \
     mainwindow.cpp \
+    nysseitem.cpp \
     playeritem.cpp \
     statistics.cpp \
     main.cc
@@ -46,6 +47,7 @@ HEADERS += \
     dialog.h \
     gameengine.hh \ \
     mainwindow.hh \
+    nysseitem.hh \
     playeritem.hh \
     statistics.hh \
 

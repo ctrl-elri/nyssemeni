@@ -16,8 +16,8 @@ PlayerItem::~PlayerItem()
 void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QRectF bounds = CourseSide::SimpleActorItem::boundingRect();
-    QColor color(Qt::red); //Adjust color
-    QBrush brush(color_);
+    QColor color(Qt::blue); //Adjust color
+    QBrush brush(color);
     painter->setBrush(brush);
     painter->drawEllipse(bounds);
 }

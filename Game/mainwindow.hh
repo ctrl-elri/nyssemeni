@@ -11,10 +11,14 @@
 #include "dialog.h"
 #include "beam.hh"
 #include "gameengine.hh"
+#include "nysseitem.hh"
 
 
 #include <vector>
 #include <map>
+#include <algorithm>
+
+const int NYSSE = 1000;
 
 namespace Ui {
 class MainWindow;
@@ -105,7 +109,9 @@ private slots:
 private:
 
     bool isAnyActorNear(int size);
+    bool isNysseAllowedToMove(NysseItem* nysse);
 
+    bool isActorShotAt_;
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
@@ -113,9 +119,13 @@ private:
     CourseSide::SimpleActorItem *lastItem_;
     std::shared_ptr<Interface::IActor> lastAc_;
     std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
+
+    std::vector<NysseItem*> nysses_;
+
     QTime time_;
     int numberofplayers_;
     Beam* beam_;
+
 
 
     int width_ = 500; //pxls

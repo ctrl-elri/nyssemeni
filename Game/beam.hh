@@ -7,6 +7,7 @@
 #include <QGraphicsPixmapItem>
 #include <QPainter>
 #include <qmath.h>
+#include <QDebug>
 
 #include "core/location.hh"
 
@@ -26,6 +27,7 @@ public slots:
 private:
     int x_;
     int y_;
+    int timesMoved_ = 0;
     QTimer *moveTimer_;
     QPointF targetPos_;
 
