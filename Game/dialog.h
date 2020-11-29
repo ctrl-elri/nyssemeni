@@ -20,7 +20,7 @@ public:
 signals:
     void numberOfPlayers(int players);
     void playerNames(QString player1, QString player2, QString player3, QString player4);
-    void exit();
+    void exitFromDialog();
 
 
 private slots:

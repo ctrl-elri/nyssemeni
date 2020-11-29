@@ -78,6 +78,8 @@ public:
 
     void setStartingPlayer();
 
+signals:
+    void exitFromMainwindow();
 
 public slots:
     void setPlayerNames(QString name1, QString name2, QString name3, QString name4);
@@ -97,6 +99,7 @@ private slots:
 
     void on_newgameButton_clicked();
 
+    void on_exitButton_clicked();
 
 private:
     Ui::MainWindow *ui;

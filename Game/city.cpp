@@ -14,6 +14,7 @@ City::~City()
 void City::setMainWindow(MainWindow* window)
 {
     mainW_ = window;
+    connect(mainW_, SIGNAL(exitFromMainwindow()), this, SLOT(exitGame()));
 }
 
 
@@ -150,7 +151,7 @@ void City::setDialog(Dialog* dialog)
     connect(dialog, SIGNAL(numberOfPlayers(int)), this, SLOT(setPlayers(int)));
     connect(dialog, SIGNAL(playerNames(QString, QString, QString, QString)),
             mainW_, SLOT(setPlayerNames(QString, QString, QString, QString)));
-    connect(dialog, SIGNAL(exit()), this, SLOT(exitGame()));
+    connect(dialog, SIGNAL(exitFromDialog()), this, SLOT(exitGame()));
 
     dialog->exec();
 

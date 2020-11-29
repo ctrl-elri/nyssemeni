@@ -36,7 +36,7 @@ void Dialog::on_startbutton_clicked()
 
 void Dialog::on_exitbutton_clicked()
 {
-    emit exit();
+    emit exitFromDialog();
     reject();
 }
 
