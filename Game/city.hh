@@ -7,6 +7,7 @@
 #include "actors/stop.hh"
 #include "actors/nysse.hh"
 #include "actors/passenger.hh"
+#include "gamestatistics.h"
 
 #include <QTime>
 #include <vector>
@@ -35,6 +36,8 @@ public:
 
     void setDialog(Dialog* dialog);
 
+    void setStatistics();
+
     // ICity interface
 
     void setBackground(QImage &basicbackground, QImage &bigbackground);
@@ -49,15 +52,15 @@ public:
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
 
+
 public slots:
-    //void shoot();
     void setPlayers(int players);
     void exitGame();
 
 private:
     QTime time_;
-    //Dialog *dialog_;
     MainWindow *mainW_;
+    GameStatistics *statistics_;
     bool gameIsOver_ = true;
     std::vector<std::shared_ptr<Interface::IActor> > actorsInGame_;
     std::vector<std::shared_ptr<Interface::IActor> > actorsRemoved_;

@@ -11,9 +11,9 @@ SOURCES += \
     creategame.cpp \
     dialog.cpp \
     gameengine.cpp \
+    gamestatistics.cpp \
     mainwindow.cpp \
     playeritem.cpp \
-    statistics.cpp \
     main.cc
 
 win32:CONFIG(release, debug|release): LIBS += \
@@ -45,9 +45,9 @@ HEADERS += \
     city.hh \
     dialog.h \
     gameengine.hh \ \
+    gamestatistics.h \
     mainwindow.hh \
     playeritem.hh \
-    statistics.hh \
 
 FORMS += \
     dialog.ui \

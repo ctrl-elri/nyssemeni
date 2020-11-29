@@ -218,13 +218,17 @@ void MainWindow::on_shootButton_clicked()
 
     qDebug() << "actorlkm" << actorsInRange.size();
 
+//    int x = playersLoc.giveX();
+//    int y = playersLoc.giveY();
+
+//    map->addItem(players_.at(turn_)->setBeam(QPointF(x,y)));
 
     if (actorsInRange.size() == 0){
        return;
       } else {
        for (auto nA: actorsInRange){
            if (actors_.find(nA) == actors_.end()){
-               continue;
+                continue;
           } else {
                QPointF targetLoc = actors_.find(nA)->second->pos();
                map->addItem( players_.at(turn_)->setBeam(targetLoc));
@@ -235,19 +239,15 @@ void MainWindow::on_shootButton_clicked()
    }
 
 
-    // Vaihdetaan seuraavan pelaajan vuoro
-
-    qDebug() << turn_;
+    // Määritetään seuraava pelaaja ja vaihdetaan vuoro
 
     if ( turn_ + 1 == players_.size() ) {
         turn_ = 0;
     }
     else {
         turn_ = turn_ + 1;
-
     }
 
-    // Määritetään seuraava pelaaja
     ui->currentPlayer->setText(("Player's turn: ") + playerNames_.at(turn_));
     currentPlayer_ = players_.at(turn_);
 

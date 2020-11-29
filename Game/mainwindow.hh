@@ -10,6 +10,7 @@
 #include "playeritem.hh"
 #include "dialog.h"
 #include "gameengine.hh"
+#include "gamestatistics.h"
 
 
 #include <vector>

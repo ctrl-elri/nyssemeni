@@ -157,6 +157,12 @@ void City::setDialog(Dialog* dialog)
 
 }
 
+void City::setStatistics()
+{
+    statistics_ = new GameStatistics;
+    //
+}
+
 
 
 

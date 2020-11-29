@@ -7,7 +7,7 @@ Dialog::Dialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // Minimi- ja maksimipelaajamäärä
+    // Määritetään minimi- ja maksimipelaajamäärä
     ui->players->setRange(1,4);
 
     ui->player1Name->setText("Player1");
