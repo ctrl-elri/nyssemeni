@@ -18,8 +18,10 @@ const int NYSSE_TYPE = 1000;
 const int PASSENGER_TYPE = 400;
 const int STOP_TYPE = 600;
 
-class City : public Interface::ICity
+class City : public QObject, public Interface::ICity
 {
+    Q_OBJECT
+
 public:
     City();
     ~City();
@@ -30,6 +32,8 @@ public:
      * Player amount from Dialog? Player is added when pressed startButton?
      */
     void addPlayer();
+
+    void setDialog(Dialog* dialog);
 
     // ICity interface
 
@@ -45,9 +49,11 @@ public:
     std::vector<std::shared_ptr<Interface::IActor> > getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
 
-
 public slots:
-    void shoot();
+    //void shoot();
+    void setGameTime(QTime time);
+    void setPlayers(int players);
+    void exitGame();
 
 private:
     QTime time_;
@@ -58,6 +64,7 @@ private:
     std::vector<std::shared_ptr<Interface::IActor> > actorsRemoved_;
     std::vector< std::shared_ptr<Interface::IStop> > stops_;
     std::vector<std::shared_ptr<Interface::IActor>> nysses_;
+    int amountOfPlayers_ = 1;
 
 };
 

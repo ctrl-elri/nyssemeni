@@ -159,26 +159,6 @@ void MainWindow::removeNearbyActors(std::vector<std::shared_ptr<Interface::IActo
 
 }
 
-void MainWindow::openDialog()
-{
-    Dialog *dialog = new Dialog;
-    connect(dialog, SIGNAL(GameTime(QTime)), this, SLOT(setTime(QTime)));
-    connect(dialog, SIGNAL(NumberOfPlayers(int)), this, SLOT(setNumberOfPlayers(int)));
-    connect(dialog, SIGNAL(Exit()), this, SLOT(exitGame()));
-    dialog->exec();
-}
-
-QTime MainWindow::addNewTime()
-{
-    return time_;
-}
-
-int MainWindow::addNewPlayers()
-{
-    return numberofplayers_;
-}
-
-
 
 void MainWindow::on_moveRightBtn_clicked()
 {
@@ -218,17 +198,6 @@ void MainWindow::on_moveUpBtn_clicked()
 
 }
 
-void MainWindow::setTime(QTime time)
-{
-    time_ = time;
-    qDebug("Aika asetettu");
-
-}
-
-void MainWindow::setNumberOfPlayers(int number)
-{
-    numberofplayers_ = number;
-}
 
 void MainWindow::on_shootButton_clicked()
 {
@@ -262,9 +231,4 @@ void MainWindow::on_newgameButton_clicked()
 
 }
 
-void MainWindow::exitGame()
-{
-    // ??
-
-}
 

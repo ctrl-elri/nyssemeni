@@ -45,18 +45,6 @@ void City::startGame()
 {
     gameIsOver_ = false;
 
-    mainW_->openDialog();
-    setClock(mainW_->addNewTime());
-    qDebug() << "Kayttajan asettama aika on: " << time_.toString();
-
-    int numbOfPlayers = mainW_->addNewPlayers();
-
-    while (numbOfPlayers != 0) {
-        addPlayer();
-        numbOfPlayers--;
-    }
-
-
     mainW_->show();
 
 }
@@ -131,11 +119,35 @@ bool City::isGameOver() const
     return gameIsOver_;
 }
 
+void City::setGameTime(QTime time)
+{
+    time_ = time;
+}
+
+void City::setPlayers(int players)
+{
+    amountOfPlayers_ = players;
+}
+
+void City::exitGame()
+{
+    exit(0);
+}
+
 void City::addPlayer()
 {
     // All players' default location is the origin.
 
     mainW_->addPlayer(0,0,0);
+}
+
+void City::setDialog(Dialog* dialog)
+{
+    connect(dialog, SIGNAL(GameTime(QTime)), this, SLOT(setGameTime(QTime)));
+    connect(dialog, SIGNAL(NumberOfPlayers(int)), this, SLOT(setPlayers(int)));
+    connect(dialog, SIGNAL(Exit()), this, SLOT(exitGame()));
+    dialog->exec();
+
 }
 
 

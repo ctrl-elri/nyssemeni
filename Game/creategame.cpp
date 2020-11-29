@@ -14,6 +14,9 @@ std::shared_ptr<Interface::ICity> Interface::createGame()
 
     std::shared_ptr<City> city (new City);
     city->setMainWindow(new MainWindow(city));
+
+    Dialog* dialog = new Dialog;
+    city->setDialog(dialog);
     city->setBackground(DEFAULT_MAP_PIC, BIG_MAP_PIC);
 
     return city;

@@ -76,10 +76,6 @@ public:
 
     void removeNearbyActors(std::vector<std::shared_ptr<Interface::IActor> > nearbyActors);
 
-    void openDialog();
-    QTime addNewTime();
-    int addNewPlayers();
-
 
 private slots:
 
@@ -91,15 +87,10 @@ private slots:
 
     void on_moveUpBtn_clicked();
 
-    void setTime(QTime time);
-
-    void setNumberOfPlayers(int number);
-
     void on_shootButton_clicked();
 
     void on_newgameButton_clicked();
 
-    void exitGame();
 
 private:
     Ui::MainWindow *ui;
@@ -110,8 +101,6 @@ private:
     CourseSide::SimpleActorItem *lastItem_;
     std::shared_ptr<Interface::IActor> lastAc_;
     std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
-    QTime time_;
-    int numberofplayers_;
 
 
     int width_ = 500; //pxls
