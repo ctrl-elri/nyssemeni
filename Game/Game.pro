@@ -59,3 +59,4 @@ FORMS += \
 
 RESOURCES += \
     beam.png\
+    background.jpg\

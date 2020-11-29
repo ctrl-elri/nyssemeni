@@ -21,9 +21,10 @@ public:
     PlayerItem(int x, int y, int type);
     ~PlayerItem();
     
-    
-    // QGraphicsItem interface
+    //Muokkaa pelaajan muoto.
+
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+//    QRectF boundingRect() const;
 
     void setStartLoc();
 
@@ -40,6 +41,7 @@ public:
     int y_;
     int type_;
     int locHeight_ ;
+
 };
 
 #endif // ACTORITEM_HH

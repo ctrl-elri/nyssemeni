@@ -12,7 +12,15 @@ MainWindow::MainWindow(std::shared_ptr<Interface::ICity> gameArea, QWidget *pare
 {
     gameArea_ = gameArea;
     ui->setupUi(this);
-    //this->setStyleSheet("background-color: black;");
+
+    QPixmap bkgnd(":/background.jpg");
+    bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Background, bkgnd);
+    this->setPalette(palette);
+    /*
+    // Jos on ideoita paremmalle taustavärille niin saa vaihtaa :D
+    this->setStyleSheet("background-color: darkMagenta;");*/
     ui->graphicsView->setFixedSize(width_, height_);
     ui->centralwidget->setFixedSize(width_ + ui->moveUpBtn->width() + PADDING + 2 * XTRA_PADDING, height_ + PADDING);
 
@@ -20,7 +28,7 @@ MainWindow::MainWindow(std::shared_ptr<Interface::ICity> gameArea, QWidget *pare
     ui->moveRightBtn->move(width_ + PADDING + XTRA_PADDING + ui->moveUpBtn->width()/2, XTRA_PADDING + ui->moveUpBtn->height());
     ui->moveLeftBtn->move(width_ + PADDING + XTRA_PADDING/2, XTRA_PADDING + ui->moveUpBtn->height());
     ui->moveDownBtn->move(width_ + PADDING + XTRA_PADDING, XTRA_PADDING + 2* ui->moveUpBtn->height());
-    ui->shootButton->move(width_ + PADDING + XTRA_PADDING, 400);
+    ui->shootButton->move(width_ + PADDING + XTRA_PADDING, 390);
     ui->newgameButton->move(width_ + PADDING + 65, 430);
     ui->exitButton->move(width_ + PADDING + 75, 470);
     ui->currentPlayer->move(540,50);
@@ -36,7 +44,7 @@ MainWindow::MainWindow(std::shared_ptr<Interface::ICity> gameArea, QWidget *pare
     ui->player3Label->setText("");
     ui->player4Label->setText("");
 
-    ui->hitLabel->move(width_ + 4*PADDING, 340);
+    ui->hitLabel->move(width_ + 4*PADDING, 360);
     ui->hitLabel->setText("");
 
     QCommonStyle style;

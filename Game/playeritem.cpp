@@ -13,10 +13,15 @@ PlayerItem::~PlayerItem()
     
 }
 
+//QRectF PlayerItem::boundingRect() const
+//{
+//    return QRectF(0,0,0,0);
+//}
+
 void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
+{    
     QRectF bounds = CourseSide::SimpleActorItem::boundingRect();
-    QColor color(Qt::blue); //Adjust color
+    QColor color(Qt::blue);
     QBrush brush(color);
     painter->setBrush(brush);
     painter->drawEllipse(bounds);
@@ -57,3 +62,5 @@ Beam* PlayerItem::setBeam(QPointF targetPosition)
 
     return beam;
 }
+
+

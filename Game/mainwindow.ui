@@ -216,6 +216,11 @@
       <height>21</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Monospace</family>
+     </font>
+    </property>
     <property name="text">
      <string>hitLabel</string>
     </property>
