@@ -41,8 +41,8 @@
    <widget class="QPushButton" name="moveRightBtn">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>50</y>
+      <x>410</x>
+      <y>80</y>
       <width>84</width>
       <height>28</height>
      </rect>
@@ -54,8 +54,8 @@
    <widget class="QPushButton" name="moveLeftBtn">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>50</y>
+      <x>320</x>
+      <y>80</y>
       <width>84</width>
       <height>28</height>
      </rect>
@@ -80,8 +80,8 @@
    <widget class="QPushButton" name="moveUpBtn">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>20</y>
+      <x>370</x>
+      <y>50</y>
       <width>84</width>
       <height>28</height>
      </rect>
@@ -94,7 +94,7 @@
     <property name="geometry">
      <rect>
       <x>370</x>
-      <y>80</y>
+      <y>110</y>
       <width>84</width>
       <height>28</height>
      </rect>
@@ -114,6 +114,19 @@
     </property>
     <property name="text">
      <string>Start new game</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="currentPlayer">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>20</y>
+      <width>261</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

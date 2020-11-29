@@ -22,6 +22,7 @@ MainWindow::MainWindow(std::shared_ptr<Interface::ICity> gameArea, QWidget *pare
     ui->moveDownBtn->move(width_ + PADDING + XTRA_PADDING, XTRA_PADDING + 2* ui->moveUpBtn->height());
     ui->shootButton->move(width_ + PADDING + XTRA_PADDING, 400);
     ui->newgameButton->move(width_ + PADDING + XTRA_PADDING, 450);
+    ui->currentPlayer->move(540,50);
 
     QCommonStyle style;
     ui->moveRightBtn->setIcon(style.standardIcon(QStyle::SP_ArrowForward));
@@ -164,6 +165,8 @@ void MainWindow::setStartingPlayer()
 {
     turn_ = 0;
     currentPlayer_ = players_.at(turn_);
+    ui->currentPlayer->setText(("Player's turn: ") + playerNames_.at(turn_));
+
 }
 
 void MainWindow::setPlayerNames(QString name1, QString name2, QString name3, QString name4)
@@ -244,7 +247,7 @@ void MainWindow::on_shootButton_clicked()
 
     }
 
-    qDebug() << turn_ << "vuoro vaihtunut";
+    ui->currentPlayer->setText(("Player's turn: ") + playerNames_.at(turn_));
 
 }
 
