@@ -132,6 +132,20 @@ void City::setPlayers(int players)
     amountOfPlayers_ = players;
 }
 
+void City::setPlayerNames(QString name1, QString name2, QString name3, QString name4)
+{
+    playerNames_.push_back(name1);
+    playerNames_.push_back(name2);
+    playerNames_.push_back(name3);
+    playerNames_.push_back(name4);
+
+    for (int i=0; i<playerNames_.size();i++){
+        qDebug() << playerNames_.at(i) << " ";
+    }
+
+
+}
+
 void City::exitGame()
 {
     exit(0);
@@ -147,6 +161,8 @@ void City::addPlayer()
 void City::setDialog(Dialog* dialog)
 {
     connect(dialog, SIGNAL(numberOfPlayers(int)), this, SLOT(setPlayers(int)));
+    connect(dialog, SIGNAL(playerNames(QString, QString, QString, QString)),
+            this, SLOT(setPlayerNames(QString, QString, QString, QString)));
     connect(dialog, SIGNAL(exit()), this, SLOT(exitGame()));
     dialog->exec();
 

@@ -52,6 +52,7 @@ public:
 public slots:
     //void shoot();
     void setPlayers(int players);
+    void setPlayerNames(QString name1, QString name2, QString name3, QString name4);
     void exitGame();
 
 private:
@@ -63,6 +64,7 @@ private:
     std::vector<std::shared_ptr<Interface::IActor> > actorsRemoved_;
     std::vector< std::shared_ptr<Interface::IStop> > stops_;
     std::vector<std::shared_ptr<Interface::IActor>> nysses_;
+    std::vector<QString> playerNames_;
     int amountOfPlayers_ = 1;
 
 };

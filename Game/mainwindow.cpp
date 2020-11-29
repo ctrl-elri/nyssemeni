@@ -160,6 +160,11 @@ void MainWindow::removeNearbyActors(std::vector<std::shared_ptr<Interface::IActo
 
 }
 
+void MainWindow::addPlayerNames()
+{
+
+}
+
 
 void MainWindow::on_moveRightBtn_clicked()
 {

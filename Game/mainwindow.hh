@@ -76,6 +76,8 @@ public:
 
     void removeNearbyActors(std::vector<std::shared_ptr<Interface::IActor> > nearbyActors);
 
+    void addPlayerNames();
+
 
 private slots:
 
