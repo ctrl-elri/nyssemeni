@@ -79,6 +79,10 @@ public:
 
     void setStartingPlayer();
 
+    void setScoreTable();
+
+    void updateScoreTable();
+
 signals:
     void exitFromMainwindow();
 
@@ -113,6 +117,7 @@ private:
     std::vector<QString> playerNames_;
     PlayerItem* currentPlayer_;
     int turn_;
+    GameStatistics *statistics_;
 
     int width_ = 500; //pxls
     int height_ = 500;

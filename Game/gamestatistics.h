@@ -1,22 +1,22 @@
 #ifndef GAMESTATISTICS_H
 #define GAMESTATISTICS_H
 
+#include <vector>
 
 class GameStatistics
 {
 public:
     GameStatistics();
 
+    void initGameStatics(int players);
     void addPoints();
     void checkPoints();
+    int checkPlayerPoints(int playerNumber);
 
 private:
     int point = 1;
     int max_points = 5;
-    int player1_points_ = 0;
-    int player2_points_ = 0;
-    int player3_points_ = 0;
-    int player4_points_ = 0;
+    std::vector<int> playerPoints_;
 };
 
 #endif // GAMESTATISTICS_H

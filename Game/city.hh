@@ -36,8 +36,6 @@ public:
 
     void setDialog(Dialog* dialog);
 
-    void setStatistics();
-
     // ICity interface
 
     void setBackground(QImage &basicbackground, QImage &bigbackground);
@@ -60,7 +58,6 @@ public slots:
 private:
     QTime time_;
     MainWindow *mainW_;
-    GameStatistics *statistics_;
     bool gameIsOver_ = true;
     std::vector<std::shared_ptr<Interface::IActor> > actorsInGame_;
     std::vector<std::shared_ptr<Interface::IActor> > actorsRemoved_;

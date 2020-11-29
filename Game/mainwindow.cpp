@@ -20,10 +20,21 @@ MainWindow::MainWindow(std::shared_ptr<Interface::ICity> gameArea, QWidget *pare
     ui->moveRightBtn->move(width_ + PADDING + XTRA_PADDING + ui->moveUpBtn->width()/2, XTRA_PADDING + ui->moveUpBtn->height());
     ui->moveLeftBtn->move(width_ + PADDING + XTRA_PADDING/2, XTRA_PADDING + ui->moveUpBtn->height());
     ui->moveDownBtn->move(width_ + PADDING + XTRA_PADDING, XTRA_PADDING + 2* ui->moveUpBtn->height());
-    ui->shootButton->move(width_ + PADDING + XTRA_PADDING, 300);
-    ui->newgameButton->move(width_ + PADDING + 65, 350);
-    ui->exitButton->move(width_ + PADDING + 75, 400);
+    ui->shootButton->move(width_ + PADDING + XTRA_PADDING, 400);
+    ui->newgameButton->move(width_ + PADDING + 65, 430);
+    ui->exitButton->move(width_ + PADDING + 75, 470);
     ui->currentPlayer->move(540,50);
+
+    ui->scoreLabel->move(width_ + PADDING + XTRA_PADDING + 20, 200);
+    ui->player1Label->move(width_ + PADDING + 60, 230);
+    ui->player2Label->move(width_ + PADDING + 60, 260);
+    ui->player3Label->move(width_ + PADDING + 60, 290);
+    ui->player4Label->move(width_ + PADDING + 60, 320);
+
+    ui->player1Label->setText("");
+    ui->player2Label->setText("");
+    ui->player3Label->setText("");
+    ui->player4Label->setText("");
 
     QCommonStyle style;
     ui->moveRightBtn->setIcon(style.standardIcon(QStyle::SP_ArrowForward));
@@ -166,6 +177,50 @@ void MainWindow::setStartingPlayer()
     currentPlayer_ = players_.at(turn_);
     ui->currentPlayer->setText(("Player's turn: ") + playerNames_.at(turn_));
 
+}
+
+void MainWindow::updateScoreTable()
+{
+    int players = players_.size();
+    qDebug() << players << "Pelaajien lkm";
+
+    if (players == 1) {
+        ui->player1Label->setText(playerNames_.at(0) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(0)) + " points");
+    }
+    else if (players == 2) {
+        ui->player1Label->setText(playerNames_.at(0) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(0)) + " points");
+        ui->player2Label->setText(playerNames_.at(1) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(1)) + " points");
+    }
+    else if (players == 3) {
+        ui->player1Label->setText(playerNames_.at(0) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(0)) + " points");
+        ui->player2Label->setText(playerNames_.at(1) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(1)) + " points");
+        ui->player2Label->setText(playerNames_.at(2) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(2)) + " points");
+    }
+    else if (players == 4) {
+        ui->player1Label->setText(playerNames_.at(0) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(0)) + " points");
+        ui->player2Label->setText(playerNames_.at(1) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(1)) + " points");
+        ui->player3Label->setText(playerNames_.at(2) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(2)) + " points");
+        ui->player4Label->setText(playerNames_.at(3) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(3)) + " points");
+
+    }
+
+}
+
+void MainWindow::setScoreTable()
+{
+    statistics_ = new GameStatistics;
+    statistics_->initGameStatics(players_.size());
+    updateScoreTable();
 }
 
 void MainWindow::setPlayerNames(QString name1, QString name2, QString name3, QString name4)

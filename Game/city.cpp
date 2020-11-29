@@ -53,6 +53,7 @@ void City::startGame()
         players = players - 1;
     }
 
+    mainW_->setScoreTable();
     mainW_->setStartingPlayer();
     mainW_->show();
 
@@ -155,12 +156,6 @@ void City::setDialog(Dialog* dialog)
 
     dialog->exec();
 
-}
-
-void City::setStatistics()
-{
-    statistics_ = new GameStatistics;
-    //
 }
 
 
