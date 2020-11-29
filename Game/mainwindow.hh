@@ -88,6 +88,8 @@ public:
 
     void updateScoreTable();
 
+    void shootTarget();
+
 signals:
     void exitFromMainwindow();
 
@@ -134,6 +136,8 @@ private:
     PlayerItem* currentPlayer_;
     int turn_;
     GameStatistics *statistics_;
+
+    QPalette hitLabelPal_;
 
     int width_ = 500; //pxls
     int height_ = 500;

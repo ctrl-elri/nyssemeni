@@ -36,6 +36,9 @@ MainWindow::MainWindow(std::shared_ptr<Interface::ICity> gameArea, QWidget *pare
     ui->player3Label->setText("");
     ui->player4Label->setText("");
 
+    ui->hitLabel->move(width_ + 4*PADDING, 340);
+    ui->hitLabel->setText("");
+
     QCommonStyle style;
     ui->moveRightBtn->setIcon(style.standardIcon(QStyle::SP_ArrowForward));
     ui->moveLeftBtn->setIcon(style.standardIcon(QStyle::SP_ArrowBack));
@@ -48,7 +51,6 @@ MainWindow::MainWindow(std::shared_ptr<Interface::ICity> gameArea, QWidget *pare
     map->setSceneRect(0,0,width_,height_);
 
     resize(minimumSizeHint());
-    //ui->gameView->fitInView(0,0, MAPWIDTH, MAPHEIGHT, Qt::KeepAspectRatio);
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
@@ -206,6 +208,37 @@ void MainWindow::updateScoreTable()
 
 }
 
+void MainWindow::shootTarget()
+{
+    Interface::Location playersLoc = players_.at(turn_)->getLocation();
+    std::vector<std::shared_ptr<Interface::IActor> > actorsInRange = gameArea_->getNearbyActors(playersLoc);
+
+    if(isAnyActorNear(actorsInRange.size())){
+
+        for (auto nA: actorsInRange){
+
+            if (actors_.find(nA) == actors_.end()){
+                continue;
+
+            } else {
+
+                QPointF targetLoc = actors_.at(nA)->pos();
+                beam_ = players_.at(turn_)->setBeam(targetLoc);
+                map->addItem(beam_);
+
+                NysseItem* moveNysse = dynamic_cast<NysseItem*>(actors_.at(nA));
+                moveNysse->changeColor();
+
+                hitLabelPal_.setColor(QPalette::WindowText, Qt::green);
+                ui->hitLabel->setPalette(hitLabelPal_);
+                ui->hitLabel->setText("Target hit!");
+            }
+
+        }
+
+    }
+}
+
 void MainWindow::setScoreTable()
 {
     statistics_ = new GameStatistics;
@@ -261,44 +294,21 @@ void MainWindow::on_shootButton_clicked()
     beam_->setRotation(-2 * 500);
     map->addItem(beam_);
 
-
-    Interface::Location playersLoc = players_.at(turn_)->getLocation();
-    std::vector<std::shared_ptr<Interface::IActor> > actorsInRange = gameArea_->getNearbyActors(playersLoc);
-
-    if(isAnyActorNear(actorsInRange.size())){
-
-        for (auto nA: actorsInRange){
-
-            if (actors_.find(nA) == actors_.end()){
-                continue;
-
-            } else {
-
-                QPointF targetLoc = actors_.at(nA)->pos();
-                beam_ = players_.at(turn_)->setBeam(targetLoc);
-                map->addItem(beam_);
-
-                NysseItem* moveNysse = dynamic_cast<NysseItem*>(actors_.at(nA));
-                moveNysse->changeColor();
-            }
-
-        }
-
-    } else {
-        return;
-    }
+    shootTarget();
 
     // Pelaajan vuoro vaihtuu aina kun pelaaja on ampunut.
     // Mainwindowin turn_ määrittää, kenen vuoro on pelata.
 
     // Määritetään seuraava pelaaja ja vaihdetaan vuoro
 
-    if ( turn_ + 1 == players_.size() ) {
+    if ( turn_ + 1 == static_cast<int>(players_.size())  ) {
         turn_ = 0;
     }
     else {
         turn_ = turn_ + 1;
     }
+    qDebug() << turn_;
+
 
     ui->currentPlayer->setText(("Player's turn: ") + playerNames_.at(turn_));
     currentPlayer_ = players_.at(turn_);
@@ -320,9 +330,10 @@ void MainWindow::on_newgameButton_clicked()
 bool MainWindow::isAnyActorNear(int size)
 {
     if (size == 0){
-//        ui->hitLabel->setVisible(true);
-//        ui->hitLabel->adjustSize();
-//        ui->hitLabel->setText("Target isn't near enough!");
+        hitLabelPal_.setColor(QPalette::WindowText, Qt::red);
+        ui->hitLabel->setPalette(hitLabelPal_);
+        ui->hitLabel->setText("Target isn't near enough!");
+        ui->hitLabel->adjustSize();
         return false;
     }
 

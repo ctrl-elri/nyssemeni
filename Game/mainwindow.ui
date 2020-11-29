@@ -207,17 +207,17 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="hitlabel">
+   <widget class="QLabel" name="hitLabel">
     <property name="geometry">
      <rect>
       <x>510</x>
       <y>140</y>
-      <width>63</width>
-      <height>20</height>
+      <width>81</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string>hitLabel</string>
     </property>
    </widget>
   </widget>
