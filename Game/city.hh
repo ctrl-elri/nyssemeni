@@ -7,6 +7,7 @@
 #include "actors/stop.hh"
 #include "actors/nysse.hh"
 #include "actors/passenger.hh"
+#include "gamestatistics.h"
 
 #include <QTime>
 #include <vector>
@@ -18,8 +19,10 @@ const int NYSSE_TYPE = 1000;
 const int PASSENGER_TYPE = 400;
 const int STOP_TYPE = 600;
 
-class City : public Interface::ICity
+class City : public QObject, public Interface::ICity
 {
+    Q_OBJECT
+
 public:
     City();
     ~City();
@@ -30,6 +33,8 @@ public:
      * Player amount from Dialog? Player is added when pressed startButton?
      */
     void addPlayer();
+
+    void setDialog(Dialog* dialog);
 
     // ICity interface
 
@@ -47,17 +52,18 @@ public:
 
 
 public slots:
-    void shoot();
+    void setPlayers(int players);
+    void exitGame();
 
 private:
     QTime time_;
-    //Dialog *dialog_;
     MainWindow *mainW_;
     bool gameIsOver_ = true;
     std::vector<std::shared_ptr<Interface::IActor> > actorsInGame_;
     std::vector<std::shared_ptr<Interface::IActor> > actorsRemoved_;
     std::vector< std::shared_ptr<Interface::IStop> > stops_;
     std::vector<std::shared_ptr<Interface::IActor>> nysses_;
+    int amountOfPlayers_ = 1;
 
 };
 

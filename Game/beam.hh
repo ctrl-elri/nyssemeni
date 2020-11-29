@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QGraphicsItem>
 #include <QGraphicsPixmapItem>
+#include <QPixmap>
 #include <QPainter>
 #include <qmath.h>
 #include <QDebug>
@@ -15,12 +16,10 @@ class Beam: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Beam(QPointF, QGraphicsItem *parent = 0);
+    Beam(QGraphicsItem *parent = 0);
     ~Beam();
 
-    // QGraphicsItem interface
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    int getTimesMove();
 
 public slots:
     void move();
@@ -29,7 +28,6 @@ private:
     int y_;
     int timesMoved_ = 0;
     QTimer *moveTimer_;
-    QPointF targetPos_;
 
 };
 

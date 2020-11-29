@@ -48,7 +48,7 @@ Interface::Location PlayerItem::getLocation()
 
 Beam* PlayerItem::setBeam(QPointF targetPosition)
 {
-    Beam* beam = new Beam(targetPosition);
+    Beam* beam = new Beam();
     beam->setPos(x()+15, y()+15);
 
     QLineF ln(QPointF(x()+15, y()+15), targetPosition);

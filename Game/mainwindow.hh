@@ -12,6 +12,7 @@
 #include "beam.hh"
 #include "gameengine.hh"
 #include "nysseitem.hh"
+#include "gamestatistics.h"
 
 
 #include <vector>
@@ -81,9 +82,17 @@ public:
 
     void removeNearbyActors(std::vector<std::shared_ptr<Interface::IActor> > nearbyActors);
 
-    void openDialog();
-    QTime addNewTime();
-    int addNewPlayers();
+    void setStartingPlayer();
+
+    void setScoreTable();
+
+    void updateScoreTable();
+
+signals:
+    void exitFromMainwindow();
+
+public slots:
+    void setPlayerNames(QString name1, QString name2, QString name3, QString name4);
 
 
 private slots:
@@ -96,20 +105,15 @@ private slots:
 
     void on_moveUpBtn_clicked();
 
-    void setTime(QTime time);
-
-    void setNumberOfPlayers(int number);
-
     void on_shootButton_clicked();
 
     void on_newgameButton_clicked();
 
-    void exitGame();
+    void on_exitButton_clicked();
 
 private:
 
     bool isAnyActorNear(int size);
-    bool isNysseAllowedToMove(NysseItem* nysse);
 
     bool isActorShotAt_;
     Ui::MainWindow *ui;
@@ -119,7 +123,6 @@ private:
     CourseSide::SimpleActorItem *lastItem_;
     std::shared_ptr<Interface::IActor> lastAc_;
     std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
-
     std::vector<NysseItem*> nysses_;
 
     QTime time_;
@@ -127,6 +130,10 @@ private:
     Beam* beam_;
 
 
+    std::vector<QString> playerNames_;
+    PlayerItem* currentPlayer_;
+    int turn_;
+    GameStatistics *statistics_;
 
     int width_ = 500; //pxls
     int height_ = 500;

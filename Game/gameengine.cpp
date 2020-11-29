@@ -14,11 +14,7 @@ void gameEngine::initGame()
 
    logic_->fileConfig();
    logic_->takeCity(city_);
-
    logic_->finalizeGameStart();
 
 
 }
-
-
-

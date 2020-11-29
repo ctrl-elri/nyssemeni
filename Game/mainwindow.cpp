@@ -20,9 +20,21 @@ MainWindow::MainWindow(std::shared_ptr<Interface::ICity> gameArea, QWidget *pare
     ui->moveRightBtn->move(width_ + PADDING + XTRA_PADDING + ui->moveUpBtn->width()/2, XTRA_PADDING + ui->moveUpBtn->height());
     ui->moveLeftBtn->move(width_ + PADDING + XTRA_PADDING/2, XTRA_PADDING + ui->moveUpBtn->height());
     ui->moveDownBtn->move(width_ + PADDING + XTRA_PADDING, XTRA_PADDING + 2* ui->moveUpBtn->height());
-    ui->hitLabel->move(width_ + PADDING + XTRA_PADDING, 350);
     ui->shootButton->move(width_ + PADDING + XTRA_PADDING, 400);
-    ui->newgameButton->move(width_ + PADDING + XTRA_PADDING, 450);
+    ui->newgameButton->move(width_ + PADDING + 65, 430);
+    ui->exitButton->move(width_ + PADDING + 75, 470);
+    ui->currentPlayer->move(540,50);
+
+    ui->scoreLabel->move(width_ + PADDING + XTRA_PADDING + 20, 200);
+    ui->player1Label->move(width_ + PADDING + 60, 230);
+    ui->player2Label->move(width_ + PADDING + 60, 260);
+    ui->player3Label->move(width_ + PADDING + 60, 290);
+    ui->player4Label->move(width_ + PADDING + 60, 320);
+
+    ui->player1Label->setText("");
+    ui->player2Label->setText("");
+    ui->player3Label->setText("");
+    ui->player4Label->setText("");
 
     QCommonStyle style;
     ui->moveRightBtn->setIcon(style.standardIcon(QStyle::SP_ArrowForward));
@@ -41,8 +53,6 @@ MainWindow::MainWindow(std::shared_ptr<Interface::ICity> gameArea, QWidget *pare
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
     timer->start(tick_);
-
-    QTimer::singleShot(300, ui->hitLabel, &QLabel::hide);
 
 }
 
@@ -76,8 +86,6 @@ void MainWindow::moveActorItem(std::shared_ptr<Interface::IActor> actorToBeMoved
 {
     int newX = 0;
     int newY = 0;
-
-    qDebug() << nysses_.size();
 
     if (actors_.find(actorToBeMoved) == actors_.end()){
         return;
@@ -126,69 +134,104 @@ void MainWindow::addPlayer(int locX, int locY, int type)
 
 void MainWindow::checkPlayerMovement()
 {
-    for (auto p: players_){
-
-        if (p->x() > 500-15){
-            ui->moveRightBtn->setDisabled(true);
-        } else if (p->x() <= 500+15){
+     if (currentPlayer_->x() > 500-15){
+        ui->moveRightBtn->setDisabled(true);
+     } else if (currentPlayer_->x() <= 500+15){
             ui->moveRightBtn->setDisabled(false);
         }
 
-        if (p->x() <= 0){
-            ui->moveLeftBtn->setDisabled(true);
-        } else if (p->x() > 0){
+     if (currentPlayer_->x() <= 0){
+        ui->moveLeftBtn->setDisabled(true);
+     } else if (currentPlayer_->x() > 0){
             ui->moveLeftBtn->setDisabled(false);
         }
 
-        if (p->y() <= 0){
-            ui->moveUpBtn->setDisabled(true);
-        } else if (p->y() > 0) {
+     if (currentPlayer_->y() <= 0){
+        ui->moveUpBtn->setDisabled(true);
+     } else if (currentPlayer_->y() > 0) {
             ui->moveUpBtn->setDisabled(false);
         }
 
-        if (p->y() > 500-15){
-            ui->moveDownBtn->setDisabled(true);
-        } else if (p->y() <= 500+15){
+     if (currentPlayer_->y() > 500-15){
+        ui->moveDownBtn->setDisabled(true);
+     } else if (currentPlayer_->y() <= 500+15){
             ui->moveDownBtn->setDisabled(false);
         }
+
+}
+
+
+void MainWindow::setStartingPlayer()
+{
+    turn_ = 0;
+    currentPlayer_ = players_.at(turn_);
+    ui->currentPlayer->setText(("Player's turn: ") + playerNames_.at(turn_));
+
+}
+
+void MainWindow::updateScoreTable()
+{
+    int players = players_.size();
+    qDebug() << players << "Pelaajien lkm";
+
+    if (players == 1) {
+        ui->player1Label->setText(playerNames_.at(0) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(0)) + " points");
     }
+    else if (players == 2) {
+        ui->player1Label->setText(playerNames_.at(0) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(0)) + " points");
+        ui->player2Label->setText(playerNames_.at(1) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(1)) + " points");
+    }
+    else if (players == 3) {
+        ui->player1Label->setText(playerNames_.at(0) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(0)) + " points");
+        ui->player2Label->setText(playerNames_.at(1) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(1)) + " points");
+        ui->player2Label->setText(playerNames_.at(2) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(2)) + " points");
+    }
+    else if (players == 4) {
+        ui->player1Label->setText(playerNames_.at(0) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(0)) + " points");
+        ui->player2Label->setText(playerNames_.at(1) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(1)) + " points");
+        ui->player3Label->setText(playerNames_.at(2) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(2)) + " points");
+        ui->player4Label->setText(playerNames_.at(3) + ": "
+                                  + QString::number(statistics_->checkPlayerPoints(3)) + " points");
+
+    }
+
 }
 
-
-void MainWindow::openDialog()
+void MainWindow::setScoreTable()
 {
-    Dialog *dialog = new Dialog;
-    connect(dialog, SIGNAL(GameTime(QTime)), this, SLOT(setTime(QTime)));
-    connect(dialog, SIGNAL(NumberOfPlayers(int)), this, SLOT(setNumberOfPlayers(int)));
-    connect(dialog, SIGNAL(Exit()), this, SLOT(exitGame()));
-    dialog->exec();
+    statistics_ = new GameStatistics;
+    statistics_->initGameStatics(players_.size());
+    updateScoreTable();
 }
 
-QTime MainWindow::addNewTime()
+void MainWindow::setPlayerNames(QString name1, QString name2, QString name3, QString name4)
 {
-    return time_;
-}
+    playerNames_.push_back(name1);
+    playerNames_.push_back(name2);
+    playerNames_.push_back(name3);
+    playerNames_.push_back(name4);
 
-int MainWindow::addNewPlayers()
-{
-    return numberofplayers_;
 }
-
 
 void MainWindow::on_moveRightBtn_clicked()
 {
-    for (auto p: players_){
-        p->setLocation(15,0);
-    }
+    currentPlayer_->setLocation(15,0);
     checkPlayerMovement();
 
 }
 
 void MainWindow::on_moveLeftBtn_clicked()
 {
-    for (auto p: players_){
-        p->setLocation(-15,0);
-    }
+    currentPlayer_->setLocation(-15,0);
     checkPlayerMovement();
 
 }
@@ -196,71 +239,69 @@ void MainWindow::on_moveLeftBtn_clicked()
 
 void MainWindow::on_moveDownBtn_clicked()
 {
-    for (auto p: players_){
-        p->setLocation(0,15);
-    }
+    currentPlayer_->setLocation(0,15);
     checkPlayerMovement();
 
 }
 
 void MainWindow::on_moveUpBtn_clicked()
 {
-    for (auto p: players_){
-        p->setLocation(0,-15);
-    }
+    currentPlayer_->setLocation(0,-15);
     checkPlayerMovement();
 
 }
 
-void MainWindow::setTime(QTime time)
-{
-    time_ = time;
-    qDebug("Aika asetettu");
-
-}
-
-void MainWindow::setNumberOfPlayers(int number)
-{
-    numberofplayers_ = number;
-}
 
 void MainWindow::on_shootButton_clicked()
 {
+    //beam_:n toiminnallisuutta muokataan vielä.
 
-    Interface::Location playersLoc = players_.at(0)->getLocation();
+    beam_= new Beam;
+    beam_->setPos(players_.at(turn_)->pos().x()+15, players_.at(turn_)->pos().y()+15);
+    beam_->setRotation(-2 * 500);
+    map->addItem(beam_);
+
+
+    Interface::Location playersLoc = players_.at(turn_)->getLocation();
     std::vector<std::shared_ptr<Interface::IActor> > actorsInRange = gameArea_->getNearbyActors(playersLoc);
 
     if(isAnyActorNear(actorsInRange.size())){
 
         for (auto nA: actorsInRange){
+
             if (actors_.find(nA) == actors_.end()){
                 continue;
+
             } else {
+
                 QPointF targetLoc = actors_.at(nA)->pos();
-                qDebug() << actors_.at(nA);
-                beam_ = players_.at(0)->setBeam(targetLoc);
-                map->addItem( beam_);
+                beam_ = players_.at(turn_)->setBeam(targetLoc);
+                map->addItem(beam_);
 
                 NysseItem* moveNysse = dynamic_cast<NysseItem*>(actors_.at(nA));
-                moveNysse->isShotAt_ = true;
-                moveNysse->changeColor(); //??????
-
-                if (beam_->pos() == targetLoc){
-                    gameArea_->removeActor(nA);
-                    ui->hitLabel->setVisible(true);
-                    ui->hitLabel->adjustSize();
-                    ui->hitLabel->setText("Target hit!");
-                    map->removeItem(beam_);
-                    delete beam_;
-                    moveNysse->isShotAt_ = false;
-                }
-
+                moveNysse->changeColor();
             }
+
         }
 
     } else {
         return;
     }
+
+    // Pelaajan vuoro vaihtuu aina kun pelaaja on ampunut.
+    // Mainwindowin turn_ määrittää, kenen vuoro on pelata.
+
+    // Määritetään seuraava pelaaja ja vaihdetaan vuoro
+
+    if ( turn_ + 1 == players_.size() ) {
+        turn_ = 0;
+    }
+    else {
+        turn_ = turn_ + 1;
+    }
+
+    ui->currentPlayer->setText(("Player's turn: ") + playerNames_.at(turn_));
+    currentPlayer_ = players_.at(turn_);
 
 }
 
@@ -274,37 +315,21 @@ void MainWindow::on_newgameButton_clicked()
 
 }
 
-void MainWindow::exitGame()
-{
-    // ??
 
-}
 
 bool MainWindow::isAnyActorNear(int size)
 {
     if (size == 0){
-        ui->hitLabel->setVisible(true);
-        ui->hitLabel->adjustSize();
-        ui->hitLabel->setText("Target isn't near enough!");
+//        ui->hitLabel->setVisible(true);
+//        ui->hitLabel->adjustSize();
+//        ui->hitLabel->setText("Target isn't near enough!");
         return false;
     }
 
     return true;
 }
 
-bool MainWindow::isNysseAllowedToMove(NysseItem* nysse)
+void MainWindow::on_exitButton_clicked()
 {
-    std::vector<NysseItem*>::iterator it;
-    it = std::find(nysses_.begin(), nysses_.end(), nysse);
-
-    if (it != nysses_.end()){
-
-        if (nysse->isShotAt_){
-            return false;
-        }
-
-    }
-
-    return true;
+    emit exitFromMainwindow();
 }
-

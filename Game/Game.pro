@@ -11,11 +11,12 @@ SOURCES += \
     creategame.cpp \
     dialog.cpp \
     gameengine.cpp \
+    gamestatistics.cpp \
     mainwindow.cpp \
     nysseitem.cpp \
     playeritem.cpp \
-    statistics.cpp \
-    main.cc
+    main.cc\
+
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -46,16 +47,15 @@ HEADERS += \
     city.hh \
     dialog.h \
     gameengine.hh \ \
+    gamestatistics.h \
     mainwindow.hh \
     nysseitem.hh \
     playeritem.hh \
-    statistics.hh \
 
 FORMS += \
     dialog.ui \
     mainwindow.ui
     gameengine.hh \
 
-DISTFILES += \
-    beam.jpg
-
+RESOURCES += \
+    beam.png\

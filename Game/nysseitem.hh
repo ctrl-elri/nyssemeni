@@ -16,8 +16,6 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void changeColor();
 
-    bool isShotAt_;
-
 private:
     int x_;
     int y_;

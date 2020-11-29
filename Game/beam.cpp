@@ -2,9 +2,10 @@
 
 
 
-Beam::Beam(QPointF targetPos, QGraphicsItem *parent): QObject(), targetPos_(targetPos), QGraphicsPixmapItem(parent){
+Beam::Beam(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
 
-    //setPixmap(QPixmap(":/beam.jpg"));
+    setPixmap(QPixmap(":/beam.png").scaled(10,10));
+
 
     moveTimer_ = new QTimer(this);
     connect(moveTimer_,SIGNAL(timeout()),this,SLOT(move()));
@@ -37,18 +38,7 @@ void Beam::move()
 
 }
 
-
-QRectF Beam::boundingRect() const
+int Beam::getTimesMove()
 {
-    return QRectF(0,0,5,5);
-
-}
-
-void Beam::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    QColor color(Qt::black);
-    QRectF bounds = boundingRect();
-    QBrush brush(color);
-    painter->setBrush(brush);
-    painter->drawEllipse(bounds);
+    return timesMoved_;
 }
