@@ -20,6 +20,7 @@ MainWindow::MainWindow(std::shared_ptr<Interface::ICity> gameArea, QWidget *pare
     ui->moveRightBtn->move(width_ + PADDING + XTRA_PADDING + ui->moveUpBtn->width()/2, XTRA_PADDING + ui->moveUpBtn->height());
     ui->moveLeftBtn->move(width_ + PADDING + XTRA_PADDING/2, XTRA_PADDING + ui->moveUpBtn->height());
     ui->moveDownBtn->move(width_ + PADDING + XTRA_PADDING, XTRA_PADDING + 2* ui->moveUpBtn->height());
+    ui->hitLabel->move(width_ + PADDING + XTRA_PADDING, 350);
     ui->shootButton->move(width_ + PADDING + XTRA_PADDING, 400);
     ui->newgameButton->move(width_ + PADDING + XTRA_PADDING, 450);
 
@@ -40,6 +41,8 @@ MainWindow::MainWindow(std::shared_ptr<Interface::ICity> gameArea, QWidget *pare
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
     timer->start(tick_);
+
+    QTimer::singleShot(300, ui->hitLabel, &QLabel::hide);
 
 }
 
@@ -151,9 +154,13 @@ void MainWindow::removeNearbyActors(std::vector<std::shared_ptr<Interface::IActo
             if (actors_.find(nA) == actors_.end()){
                 continue;
             } else {
-                // Ei välttämättä poisteta?
-                removeActorItem(nA);
-                gameArea_->removeActor(nA);
+                if (beam_->collidesWithItem(actors_.find(nA)->second)){
+                    gameArea_->removeActor(nA);
+                    ui->hitLabel->setVisible(true);
+                    ui->hitLabel->adjustSize();
+                    ui->hitLabel->setText("Target hit!");
+                    delete beam_;
+                }
             }
         }
     }
@@ -237,21 +244,22 @@ void MainWindow::on_shootButton_clicked()
     Interface::Location playersLoc = players_.at(0)->getLocation();
     std::vector<std::shared_ptr<Interface::IActor> > actorsInRange = gameArea_->getNearbyActors(playersLoc);
 
-    qDebug() << "actorlkm" << actorsInRange.size();
+    if(isAnyActorNear(actorsInRange.size())){
 
-    if (actorsInRange.size() == 0){
-        return;
-    } else {
         for (auto nA: actorsInRange){
             if (actors_.find(nA) == actors_.end()){
                 continue;
             } else {
                 QPointF targetLoc = actors_.find(nA)->second->pos();
-                map->addItem( players_.at(0)->setBeam(targetLoc));
+                beam_ = players_.at(0)->setBeam(targetLoc);
+                map->addItem( beam_);
             }
         }
 
         removeNearbyActors(actorsInRange);
+
+    } else {
+        return;
     }
 
 }
@@ -270,5 +278,17 @@ void MainWindow::exitGame()
 {
     // ??
 
+}
+
+bool MainWindow::isAnyActorNear(int size)
+{
+    if (size == 0){
+        ui->hitLabel->setVisible(true);
+        ui->hitLabel->adjustSize();
+        ui->hitLabel->setText("Target isn't near enough!");
+        return false;
+    }
+
+    return true;
 }
 

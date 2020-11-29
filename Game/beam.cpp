@@ -18,7 +18,6 @@ Beam::~Beam()
 
 void Beam::move()
 {
-    //Koordinaatit joihin beam liikkuu. Liikkumisen jälkeen tuhoutuu.
 
     int STEP_SIZE = 5;
     double theta = rotation();

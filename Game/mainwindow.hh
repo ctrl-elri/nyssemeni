@@ -9,6 +9,7 @@
 #include "graphics/simpleactoritem.hh"
 #include "playeritem.hh"
 #include "dialog.h"
+#include "beam.hh"
 #include "gameengine.hh"
 
 
@@ -102,6 +103,9 @@ private slots:
     void exitGame();
 
 private:
+
+    bool isAnyActorNear(int size);
+
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
@@ -111,6 +115,7 @@ private:
     std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
     QTime time_;
     int numberofplayers_;
+    Beam* beam_;
 
 
     int width_ = 500; //pxls

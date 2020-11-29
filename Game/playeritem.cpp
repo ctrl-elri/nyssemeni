@@ -49,11 +49,10 @@ Interface::Location PlayerItem::getLocation()
 Beam* PlayerItem::setBeam(QPointF targetPosition)
 {
     Beam* beam = new Beam(targetPosition);
+    beam->setPos(x()+15, y()+15);
 
     QLineF ln(QPointF(x()+15, y()+15), targetPosition);
     int rotationAngle = -1 * ln.angle();
-
-    beam->setPos(x()+15, y()+15);
     beam->setRotation(rotationAngle);
 
     return beam;

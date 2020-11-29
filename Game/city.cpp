@@ -83,6 +83,8 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
+    // Tarkastele onko actor vektorissa.
+
     for (auto a: actorsInGame_){
         if (a == actor){
             actorsInGame_.erase((std::remove(actorsInGame_.begin(), actorsInGame_.end(), actor), actorsInGame_.end()));
