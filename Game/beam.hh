@@ -14,7 +14,7 @@ class Beam: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Beam(qreal, qreal, QGraphicsItem *parent = 0);
+    Beam(QPointF, QGraphicsItem *parent = 0);
     ~Beam();
 
     // QGraphicsItem interface
@@ -27,6 +27,7 @@ private:
     int x_;
     int y_;
     QTimer *moveTimer_;
+    QPointF targetPos_;
 
 };
 

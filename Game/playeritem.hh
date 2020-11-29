@@ -31,21 +31,15 @@ public:
 
     Interface::Location getLocation();
 
-
-    Beam* attackTarget(Interface::Location attackLoc);
-
-private:
-
-    Beam* createBeam(int xCoordinate, int yCoordinate);
+    Beam* setBeam(QPointF targetPosition);
 
 
     QColor color_;
     Interface::Location location_;
-    QPointF target_;
     int x_;
     int y_;
     int type_;
-    int locHeight_;
+    int locHeight_ ;
 };
 
 #endif // ACTORITEM_HH

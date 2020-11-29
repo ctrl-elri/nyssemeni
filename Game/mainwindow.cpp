@@ -97,6 +97,7 @@ void MainWindow::removeActorItem(std::shared_ptr<Interface::IActor> actorToBeRem
     if (actors_.find(actorToBeRemoved) == actors_.end()){
         return;
     } else {
+        map->removeItem(actors_.find(actorToBeRemoved)->second);
         actors_.erase(actorToBeRemoved);
     }
 }
@@ -234,17 +235,20 @@ void MainWindow::on_shootButton_clicked()
 {
 
     Interface::Location playersLoc = players_.at(0)->getLocation();
-
-    qDebug() << "playerin lokaatio" << playersLoc.giveX() << "," << playersLoc.giveY();
     std::vector<std::shared_ptr<Interface::IActor> > actorsInRange = gameArea_->getNearbyActors(playersLoc);
-//   map->addItem(players_.at(0)->attackTarget());
 
-    // actorsInRange on aina jostain syystä nolla, selvitä miksi. Luultavasti johtuu locationin arvosta
+    qDebug() << "actorlkm" << actorsInRange.size();
+
     if (actorsInRange.size() == 0){
         return;
     } else {
         for (auto nA: actorsInRange){
-            map->addItem( players_.at(0)->attackTarget(nA->giveLocation()));
+            if (actors_.find(nA) == actors_.end()){
+                continue;
+            } else {
+                QPointF targetLoc = actors_.find(nA)->second->pos();
+                map->addItem( players_.at(0)->setBeam(targetLoc));
+            }
         }
 
         removeNearbyActors(actorsInRange);
