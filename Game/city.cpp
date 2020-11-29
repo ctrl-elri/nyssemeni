@@ -88,6 +88,7 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
             actorsInGame_.erase((std::remove(actorsInGame_.begin(), actorsInGame_.end(), actor), actorsInGame_.end()));
             actorsRemoved_.push_back(actor);
             mainW_->removeActorItem(actor);
+           actor->remove();
         }
     }
 }
