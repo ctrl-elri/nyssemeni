@@ -45,6 +45,7 @@ void City::startGame()
 {
     gameIsOver_ = false;
 
+    // Adds players to the game
     int players = amountOfPlayers_;
     while (players != 0) {
         addPlayer();
