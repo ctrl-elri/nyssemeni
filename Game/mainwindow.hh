@@ -78,6 +78,9 @@ public:
 
     void addPlayerNames();
 
+public slots:
+    void setPlayerNames(QString name1, QString name2, QString name3, QString name4);
+
 
 private slots:
 
@@ -102,7 +105,7 @@ private:
     CourseSide::SimpleActorItem *lastItem_;
     std::shared_ptr<Interface::IActor> lastAc_;
     std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
-
+    std::vector<QString> playerNames_;
 
     int width_ = 500; //pxls
     int height_ = 500;

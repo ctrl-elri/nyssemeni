@@ -13,11 +13,11 @@ std::shared_ptr<Interface::ICity> Interface::createGame()
     QImage BIG_MAP_PIC(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
 
     std::shared_ptr<City> city (new City);
+    city->setMainWindow(new MainWindow(city));
 
     Dialog* dialog = new Dialog;
     city->setDialog(dialog);
 
-    city->setMainWindow(new MainWindow(city));
     city->setBackground(DEFAULT_MAP_PIC, BIG_MAP_PIC);
 
     return city;

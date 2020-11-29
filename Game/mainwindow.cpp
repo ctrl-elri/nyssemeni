@@ -160,9 +160,16 @@ void MainWindow::removeNearbyActors(std::vector<std::shared_ptr<Interface::IActo
 
 }
 
-void MainWindow::addPlayerNames()
+void MainWindow::setPlayerNames(QString name1, QString name2, QString name3, QString name4)
 {
+    playerNames_.push_back(name1);
+    playerNames_.push_back(name2);
+    playerNames_.push_back(name3);
+    playerNames_.push_back(name4);
 
+    for (int i=0; i<playerNames_.size();i++){
+        qDebug() << playerNames_.at(i) << " ";
+    }
 }
 
 
