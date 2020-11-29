@@ -160,6 +160,12 @@ void MainWindow::removeNearbyActors(std::vector<std::shared_ptr<Interface::IActo
 
 }
 
+void MainWindow::setStartingPlayer()
+{
+    turn_ = 0;
+    currentPlayer_ = players_.at(turn_);
+}
+
 void MainWindow::setPlayerNames(QString name1, QString name2, QString name3, QString name4)
 {
     playerNames_.push_back(name1);
@@ -167,46 +173,34 @@ void MainWindow::setPlayerNames(QString name1, QString name2, QString name3, QSt
     playerNames_.push_back(name3);
     playerNames_.push_back(name4);
 
-    for (int i=0; i<playerNames_.size();i++){
-        qDebug() << playerNames_.at(i) << " ";
-    }
 }
 
 
 void MainWindow::on_moveRightBtn_clicked()
 {
-    for (auto p: players_){
-        p->setLocation(15,0);
-    }
+    currentPlayer_->setLocation(15,0);
     checkPlayerMovement();
 
 }
 
 void MainWindow::on_moveLeftBtn_clicked()
 {
-    for (auto p: players_){
-        p->setLocation(-15,0);
-    }
+    currentPlayer_->setLocation(-15,0);
     checkPlayerMovement();
 
 }
 
 
-
 void MainWindow::on_moveDownBtn_clicked()
 {
-    for (auto p: players_){
-        p->setLocation(0,15);
-    }
+    currentPlayer_->setLocation(0,15);
     checkPlayerMovement();
 
 }
 
 void MainWindow::on_moveUpBtn_clicked()
 {
-    for (auto p: players_){
-        p->setLocation(0,-15);
-    }
+    currentPlayer_->setLocation(0,-15);
     checkPlayerMovement();
 
 }
@@ -214,8 +208,10 @@ void MainWindow::on_moveUpBtn_clicked()
 
 void MainWindow::on_shootButton_clicked()
 {
+    // Pelaajan vuoro vaihtuu aina kun on ammuttu
+    // Mainwindowissa turn_ määrittää, kenen vuoro on pelata
 
-    Interface::Location playersLoc = players_.at(0)->getLocation();
+    Interface::Location playersLoc = players_.at(turn_)->getLocation();
     std::vector<std::shared_ptr<Interface::IActor> > actorsInRange = gameArea_->getNearbyActors(playersLoc);
 
     qDebug() << "actorlkm" << actorsInRange.size();
@@ -228,12 +224,27 @@ void MainWindow::on_shootButton_clicked()
                 continue;
             } else {
                 QPointF targetLoc = actors_.find(nA)->second->pos();
-                map->addItem( players_.at(0)->setBeam(targetLoc));
+                map->addItem( players_.at(turn_)->setBeam(targetLoc));
             }
         }
 
         removeNearbyActors(actorsInRange);
     }
+
+    // Vaihdetaan seuraavan pelaajan vuoro
+
+    qDebug() << turn_;
+
+    if ( turn_ + 1 == players_.size() ) {
+        turn_ = 0;
+    }
+
+    else {
+        turn_ = turn_ + 1;
+
+    }
+
+    qDebug() << turn_ << "vuoro vaihtunut";
 
 }
 

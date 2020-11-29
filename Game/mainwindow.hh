@@ -76,7 +76,8 @@ public:
 
     void removeNearbyActors(std::vector<std::shared_ptr<Interface::IActor> > nearbyActors);
 
-    void addPlayerNames();
+    void setStartingPlayer();
+
 
 public slots:
     void setPlayerNames(QString name1, QString name2, QString name3, QString name4);
@@ -106,6 +107,8 @@ private:
     std::shared_ptr<Interface::IActor> lastAc_;
     std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
     std::vector<QString> playerNames_;
+    PlayerItem* currentPlayer_;
+    int turn_;
 
     int width_ = 500; //pxls
     int height_ = 500;

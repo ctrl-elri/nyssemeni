@@ -52,6 +52,7 @@ void City::startGame()
         players = players - 1;
     }
 
+    mainW_->setStartingPlayer();
     mainW_->show();
 
 }
