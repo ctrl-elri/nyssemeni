@@ -25,6 +25,8 @@ void NysseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
     QRectF bounds = boundingRect();
 
+    //Piirretään Nysse
+
     if (colorChanged_){
         QColor color(Qt::red);
         QBrush brush(color);

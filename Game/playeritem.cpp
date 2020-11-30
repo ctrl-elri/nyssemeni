@@ -15,7 +15,7 @@ PlayerItem::~PlayerItem()
 
 QRectF PlayerItem::boundingRect() const
 {
-    return QRectF(0, 0, 70, 70);
+    return QRectF(0, 0, 50, 30);
 }
 
 void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -23,7 +23,7 @@ void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
-    // Asetettaa pelaajan grafiikat.
+    // Asetetaan pelaajan grafiikat.
     QRectF bounds = boundingRect();
     QImage playerPic(":/player_pic.png");
     painter->drawImage(bounds, playerPic);
@@ -59,6 +59,7 @@ Beam* PlayerItem::setBeam(QPointF targetPosition)
     Beam* beam = new Beam();
     beam->setPos(x()+50, y()+50);
 
+    // Asetetaan ammuksen liikkelle linja, jota se seuraa.
     QLineF ln(QPointF(x()+15, y()+15), targetPosition);
     int rotationAngle = -1 * ln.angle();
     beam->setRotation(rotationAngle);
