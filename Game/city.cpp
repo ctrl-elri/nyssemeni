@@ -39,7 +39,6 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     Interface::Location stopLoc = stop->getLocation();
     mainW_->addActor(stopLoc.giveX(), 500-stopLoc.giveY(), STOP_TYPE);
-    stops_.push_back(stop);
 }
 
 void City::startGame()
@@ -86,7 +85,6 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
     for (auto a: actorsInGame_){
         if (a == actor){
             actorsInGame_.erase((std::remove(actorsInGame_.begin(), actorsInGame_.end(), actor), actorsInGame_.end()));
-            actorsRemoved_.push_back(actor);
             mainW_->removeActorItem(actor);
            actor->remove();
         }
