@@ -34,6 +34,11 @@ public:
 
     Beam* setBeam(QPointF targetPosition);
 
+    void addPoints(int pts);
+
+    int getPoints();
+
+private:
 
     QColor color_;
     Interface::Location location_;
@@ -41,6 +46,7 @@ public:
     int y_;
     int type_;
     int locHeight_ ;
+    int points_;
 
 };
 

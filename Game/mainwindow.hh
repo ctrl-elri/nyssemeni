@@ -85,12 +85,16 @@ public:
 
     void setScoreTable();
 
+    /**
+     * @brief updateScoreTable päivittää pisteiden laskun.
+     */
     void updateScoreTable();
 
     /**
      * @brief shootTarget Suorittaa ampumisen seuraukset.
      */
-    void shootTarget();
+    void shootTarget(std::vector<std::shared_ptr<Interface::IActor> > actorsInRange);
+
 
 signals:
     void exitFromMainwindow();
@@ -118,11 +122,26 @@ private slots:
 private:
 
     /**
+     * @brief removePassengersfromNysse poistaa Passengerit osuman saaneesta Nyssestä.
+     * @param nysse Nysse, josta Passengeri poistetaan.
+     * @return poistettujen Passengereiden lukumäärä.
+     */
+    int removePassengersfromNysse(std::shared_ptr<Interface::IActor> nysse);
+
+    /**
+     * @brief addPlayerPoints lisää pelaajalle pisteitä.
+     * @param points pelaajalle lisättävät pisteet.
+     */
+    void addPlayerPoints(int points);
+
+    /**
      * @brief isAnyActorNear Tarkistaa, onko playerItemin lähellä ammuttavia kohteita.
      * @param size vektorin, jossa ammuttavat kohteet on, koko.
      * @return true, jos vektori ei ole tyhjä, muulloin false.
      */
     bool isAnyActorNear(int size);
+
+    // Attribuutit
 
     Ui::MainWindow *ui;
     QGraphicsScene *map;

@@ -214,37 +214,59 @@ void MainWindow::updateScoreTable()
 
 }
 
-void MainWindow::shootTarget()
+void MainWindow::shootTarget(std::vector<std::shared_ptr<Interface::IActor> > actorsInRange)
 {
-    Interface::Location playersLoc = players_.at(turn_)->getLocation();
-    std::vector<std::shared_ptr<Interface::IActor> > actorsInRange = gameArea_->getNearbyActors(playersLoc);
 
-    if(isAnyActorNear(actorsInRange.size())){
+    for (auto nA: actorsInRange){
 
-        for (auto nA: actorsInRange){
+        if (actors_.find(nA) == actors_.end()){
+            continue;
 
-            if (actors_.find(nA) == actors_.end()){
-                continue;
+        } else {
 
-            } else {
+            QPointF targetLoc = actors_.at(nA)->pos();
+            beam_ = players_.at(turn_)->setBeam(targetLoc);
+            map->addItem(beam_);
 
-                QPointF targetLoc = actors_.at(nA)->pos();
-                beam_ = players_.at(turn_)->setBeam(targetLoc);
-                map->addItem(beam_);
+            NysseItem* moveNysse = dynamic_cast<NysseItem*>(actors_.at(nA));
+            moveNysse->changeColor();
 
-                NysseItem* moveNysse = dynamic_cast<NysseItem*>(actors_.at(nA));
-                moveNysse->changeColor();
+            hitLabelPal_.setColor(QPalette::WindowText, Qt::green);
+            ui->hitLabel->setPalette(hitLabelPal_);
+            ui->hitLabel->setText("Target hit!");
 
-                hitLabelPal_.setColor(QPalette::WindowText, Qt::green);
-                ui->hitLabel->setPalette(hitLabelPal_);
-                ui->hitLabel->setText("Target hit!");
+            //Metodi pisteiden laskua ja matkustajien poistamista varten
+            int playersPoints;
+            playersPoints = removePassengersfromNysse(nA);
 
-                //Metodi pisteiden laskua ja matkustajien poistamista varten
-            }
-
+            addPlayerPoints(playersPoints);
         }
 
     }
+
+}
+
+int MainWindow::removePassengersfromNysse(std::shared_ptr<Interface::IActor> nysse)
+{
+    int removedPassengers;
+    removedPassengers = 0;
+    CourseSide::Nysse* bus = dynamic_cast<CourseSide::Nysse*>(nysse.get());
+    if  (bus != 0  ) {
+        std::vector<std::shared_ptr<Interface::IPassenger> > passengersToBeRemoved = bus->getPassengers();
+
+        for (auto p: passengersToBeRemoved){
+            bus->removePassenger(p);
+            ++removedPassengers;
+        }
+    }
+
+    return removedPassengers;
+}
+
+void MainWindow::addPlayerPoints(int points)
+{
+    // Miten pelin laskenta toteutetaan?
+    // Jokaisesta Nyssestä poistetusta pelaajasta 1p, ja Nyssestä 0,5 p?;
 }
 
 void MainWindow::setScoreTable()
@@ -295,14 +317,19 @@ void MainWindow::on_moveUpBtn_clicked()
 
 void MainWindow::on_shootButton_clicked()
 {
-    //beam_:n toiminnallisuutta muokataan vielä.
 
-    beam_= new Beam;
-    beam_->setPos(players_.at(turn_)->pos().x()+15, players_.at(turn_)->pos().y()+15);
-    beam_->setRotation(-2 * 500);
-    map->addItem(beam_);
+    Interface::Location playersLoc = players_.at(turn_)->getLocation();
+    std::vector<std::shared_ptr<Interface::IActor> > actorsInRange = gameArea_->getNearbyActors(playersLoc);
 
-    shootTarget();
+    if(isAnyActorNear(actorsInRange.size())){
+        shootTarget(actorsInRange);
+    } else {
+        beam_= new Beam;
+        beam_->setPos(players_.at(turn_)->pos().x()+15, players_.at(turn_)->pos().y()+15);
+        beam_->setRotation(-2 * 500);
+        map->addItem(beam_);
+    }
+
 
     // Pelaajan vuoro vaihtuu aina kun pelaaja on ampunut.
     // Mainwindowin turn_ määrittää, kenen vuoro on pelata.

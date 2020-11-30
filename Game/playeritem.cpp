@@ -63,4 +63,14 @@ Beam* PlayerItem::setBeam(QPointF targetPosition)
     return beam;
 }
 
+void PlayerItem::addPoints(int pts)
+{
+    points_ += pts;
+}
+
+int PlayerItem::getPoints()
+{
+    return  points_;
+}
+
 
