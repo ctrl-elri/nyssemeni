@@ -268,6 +268,9 @@ void MainWindow::gameIsWon()
 
 float MainWindow::removePassengersfromNysse(std::shared_ptr<Interface::IActor> nysse)
 {
+    // Jos ammutussa Nyssessä on matkustajia, ne poistetaan.
+    // Poistetut matkustajat kerryttävät pelaajan pistesaldoa.
+
     float removedPassengers;
     removedPassengers = 0;
     CourseSide::Nysse* bus = dynamic_cast<CourseSide::Nysse*>(nysse.get());
@@ -335,6 +338,9 @@ void MainWindow::on_shootButton_clicked()
     Interface::Location playersLoc = players_.at(turn_)->getLocation();
     std::vector<std::shared_ptr<Interface::IActor> > actorsInRange = gameArea_->getNearbyActors(playersLoc);
 
+    // Jos tarpeeksi lähellä pelaajaa on Actoreita, ne joutuvat hyökkäyksen kohteeksi.
+    // Muussa tapauksessa ammus ilmestyy kartalle, mutta ei osu Actoriin.
+
     if(isAnyActorNear(actorsInRange.size())){
         shootTarget(actorsInRange);
     } else {
@@ -385,6 +391,9 @@ void MainWindow::on_newgameButton_clicked()
 bool MainWindow::isAnyActorNear(int size)
 {
     if (size == 0){
+
+        // Pelaaja saa ilmoituksen, että yhtään toimijaa ei ole tarpeeksi lähellä.
+
         ui->hitLabel->move(width_ + 4*PADDING, 360);
         hitLabelPal_.setColor(QPalette::WindowText, Qt::red);
         ui->hitLabel->setPalette(hitLabelPal_);
