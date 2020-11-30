@@ -6,7 +6,14 @@ WinnerDialog::WinnerDialog(QString winnerName, QWidget *parent) :
     ui(new Ui::WinnerDialog)
 {
     ui->setupUi(this);
-    ui->winnerLabel->setText("Winner is " + winnerName);
+
+    QPixmap background(":/winner_background.jpg");
+    background =background.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Background, background);
+    this->setPalette(palette);
+
+    ui->winnerLabel->setText("Winner is " + winnerName + "!");
 
 }
 

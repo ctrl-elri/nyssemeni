@@ -64,3 +64,4 @@ RESOURCES += \
     beam.png\
     background.jpg\
     player_pic.png\
+    winner_background.jpg\
