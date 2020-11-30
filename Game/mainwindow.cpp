@@ -231,9 +231,11 @@ void MainWindow::shootTarget(std::vector<std::shared_ptr<Interface::IActor> > ac
             moveNysse->changeColor();
             double points = nyssePoint_;
 
+            ui->hitLabel->move(width_ + 8*PADDING, 350);
             hitLabelPal_.setColor(QPalette::WindowText, Qt::green);
             ui->hitLabel->setPalette(hitLabelPal_);
             ui->hitLabel->setText("Target hit!");
+            ui->hitLabel->adjustSize();
 
             double playersPoints = removePassengersfromNysse(nA);
             qDebug() << playersPoints << "Pelaajapisteet";
@@ -327,7 +329,7 @@ void MainWindow::on_shootButton_clicked()
         shootTarget(actorsInRange);
     } else {
         beam_= new Beam;
-        beam_->setPos(players_.at(turn_)->pos().x()+15, players_.at(turn_)->pos().y()+15);
+        beam_->setPos(players_.at(turn_)->pos().x()+50, players_.at(turn_)->pos().y()+50);
         beam_->setRotation(-2 * 500);
         map->addItem(beam_);
     }
@@ -373,6 +375,7 @@ void MainWindow::on_newgameButton_clicked()
 bool MainWindow::isAnyActorNear(int size)
 {
     if (size == 0){
+        ui->hitLabel->move(width_ + 4*PADDING, 360);
         hitLabelPal_.setColor(QPalette::WindowText, Qt::red);
         ui->hitLabel->setPalette(hitLabelPal_);
         ui->hitLabel->setText("Target isn't near enough!");

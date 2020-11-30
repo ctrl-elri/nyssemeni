@@ -20,6 +20,8 @@ void City::setMainWindow(MainWindow* window)
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
+    Q_UNUSED(bigbackground);
+
     mainW_->setPicture(basicbackground);
 
 }
@@ -39,7 +41,6 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     Interface::Location stopLoc = stop->getLocation();
     mainW_->addActor(stopLoc.giveX(), 500-stopLoc.giveY(), STOP_TYPE);
-    stops_.push_back(stop);
 }
 
 void City::startGame()
@@ -86,7 +87,6 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
     for (auto a: actorsInGame_){
         if (a == actor){
             actorsInGame_.erase((std::remove(actorsInGame_.begin(), actorsInGame_.end(), actor), actorsInGame_.end()));
-            actorsRemoved_.push_back(actor);
             mainW_->removeActorItem(actor);
            actor->remove();
         }
@@ -95,6 +95,7 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
+    Q_UNUSED(actor);
 }
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
@@ -116,7 +117,7 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {
     std::vector<std::shared_ptr<Interface::IActor>> nearbyActors;
-    int limit = 45;
+    int limit = 67;
 
     for (auto b: nysses_){
         if (b->giveLocation().isClose(loc, limit) == true){

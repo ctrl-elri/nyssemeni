@@ -4,12 +4,19 @@
 #include "creategame.hh"
 #include "core/logic.hh"
 
+/**
+ * @brief The gameEngine class Pelin alulle panija, alustaa pelin.
+ */
+
 class gameEngine
 {
 public:
     gameEngine();
     ~gameEngine();
 
+    /**
+     * @brief initGame Alustaa pelin: luo Logic-olion ja pointterin Cityyn.
+     */
     void initGame();
 
 

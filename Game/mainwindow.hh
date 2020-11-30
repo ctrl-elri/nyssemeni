@@ -26,6 +26,10 @@ namespace Ui {
 class MainWindow;
 }
 
+/**
+ * @brief The MainWindow class Pelin käyttöliitymä.
+ */
+
 class MainWindow : public CourseSide::SimpleMainWindow
 {
     std::shared_ptr<Interface::ICity> gameArea_;
@@ -143,10 +147,10 @@ private:
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
-    QPalette hitLabelPal_;
+    QPalette hitLabelPal_;  // Ilmoittaa, osuiko pelaaja kohteeseen.
     QTime time_;
 
-    Beam* beam_;
+    Beam* beam_; // Pelaajan "ammus".
 
     GameStatistics *statistics_;
 
@@ -154,11 +158,11 @@ private:
     std::vector<PlayerItem*> players_;
     std::vector<QString> playerNames_;
 
-    CourseSide::SimpleActorItem *lastItem_;
-    std::shared_ptr<Interface::IActor> lastAc_;
+    CourseSide::SimpleActorItem *lastItem_;  // Viimeisimmäksi lisätty ActorItem.
+    std::shared_ptr<Interface::IActor> lastAc_;  // Viimeisimmäksi lisätty Actor.
 
     std::vector<NysseItem*> nysses_;
-    std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
+    std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;  // Sisältää Actorin ja sitä vastaavan ActorItemin.
 
     int turn_;
     int numberofplayers_;

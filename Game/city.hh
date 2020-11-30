@@ -14,10 +14,15 @@
 #include <algorithm>
 #include <typeinfo>
 #include <QObject>
+#include <QtGlobal>
 
 const int NYSSE_TYPE = 1000;
 const int PASSENGER_TYPE = 400;
 const int STOP_TYPE = 600;
+
+/**
+ * @brief The City class Pelin kaupunki, suorittaa pelin tapahtumat.
+ */
 
 class City : public QObject, public Interface::ICity
 {
@@ -26,11 +31,14 @@ class City : public QObject, public Interface::ICity
 public:
     City();
     ~City();
-
-    void setMainWindow(MainWindow* window);
     /**
-     * @brief addPlayer adds the player actor
-     * Player amount from Dialog? Player is added when pressed startButton?
+     * @brief setMainWindow Asettaa käyttöliittymän pääikkunan.
+     * @param window pääikkuna, luodaan tiedostossa creategame.cpp.
+     */
+    void setMainWindow(MainWindow* window);
+
+    /**
+     * @brief addPlayer Lisää pelaajahahmon.
      */
     void addPlayer();
 
@@ -56,14 +64,15 @@ public slots:
     void exitGame();
 
 private:
+
     QTime time_;
     MainWindow *mainW_;
-    bool gameIsOver_ = true;
-    std::vector<std::shared_ptr<Interface::IActor> > actorsInGame_;
-    std::vector<std::shared_ptr<Interface::IActor> > actorsRemoved_;
-    std::vector< std::shared_ptr<Interface::IStop> > stops_;
-    std::vector<std::shared_ptr<Interface::IActor>> nysses_;
-    int amountOfPlayers_ = 1;
+
+    bool gameIsOver_ = true;  // Onko peli loppunut
+    int amountOfPlayers_ = 1;  // Pelaajien määrä
+
+    std::vector<std::shared_ptr<Interface::IActor> > actorsInGame_; // Pelissä olevat Actorit
+    std::vector<std::shared_ptr<Interface::IActor>> nysses_;  // Pelin Nysset
 
 };
 

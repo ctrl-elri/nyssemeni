@@ -4,9 +4,10 @@
 
 Beam::Beam(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
 
+    // Asetetaan ammuksen grafiikat.
     setPixmap(QPixmap(":/beam.png").scaled(10,10));
 
-
+    // Ammus liikkuu tahdistetusti.
     moveTimer_ = new QTimer(this);
     connect(moveTimer_,SIGNAL(timeout()),this,SLOT(move()));
     moveTimer_->start(50);
@@ -19,8 +20,7 @@ Beam::~Beam()
 
 void Beam::move()
 {
-
-
+    // Asetetaan ammuksen liike.
     int STEP_SIZE = 5;
     double theta = rotation();
 
@@ -31,14 +31,11 @@ void Beam::move()
 
     ++timesMoved_;
 
-    if (timesMoved_ == 3){
+    // Kun ammus on liikkunut tarpeeksi monta kertaa, se poistetaan.
+    if (timesMoved_ == MAX_TIMES_MOVED){
         moveTimer_->stop();
         delete this;
     }
 
 }
 
-int Beam::getTimesMove()
-{
-    return timesMoved_;
-}

@@ -13,18 +13,21 @@ PlayerItem::~PlayerItem()
     
 }
 
-//QRectF PlayerItem::boundingRect() const
-//{
-//    return QRectF(0,0,0,0);
-//}
+QRectF PlayerItem::boundingRect() const
+{
+    return QRectF(0, 0, 70, 70);
+}
 
 void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {    
-    QRectF bounds = CourseSide::SimpleActorItem::boundingRect();
-    QColor color(Qt::blue);
-    QBrush brush(color);
-    painter->setBrush(brush);
-    painter->drawEllipse(bounds);
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+
+    // Asetettaa pelaajan grafiikat.
+    QRectF bounds = boundingRect();
+    QImage playerPic(":/player_pic.png");
+    painter->drawImage(bounds, playerPic);
+
 }
 
 void PlayerItem::setStartLoc()
@@ -54,7 +57,7 @@ Interface::Location PlayerItem::getLocation()
 Beam* PlayerItem::setBeam(QPointF targetPosition)
 {
     Beam* beam = new Beam();
-    beam->setPos(x()+15, y()+15);
+    beam->setPos(x()+50, y()+50);
 
     QLineF ln(QPointF(x()+15, y()+15), targetPosition);
     int rotationAngle = -1 * ln.angle();
