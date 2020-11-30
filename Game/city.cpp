@@ -116,7 +116,7 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {
     std::vector<std::shared_ptr<Interface::IActor>> nearbyActors;
-    int limit = 70;
+    int limit = 67;
 
     for (auto b: nysses_){
         if (b->giveLocation().isClose(loc, limit) == true){

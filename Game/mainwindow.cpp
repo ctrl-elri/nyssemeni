@@ -231,9 +231,11 @@ void MainWindow::shootTarget(std::vector<std::shared_ptr<Interface::IActor> > ac
             NysseItem* moveNysse = dynamic_cast<NysseItem*>(actors_.at(nA));
             moveNysse->changeColor();
 
+            ui->hitLabel->move(width_ + 8*PADDING, 350);
             hitLabelPal_.setColor(QPalette::WindowText, Qt::green);
             ui->hitLabel->setPalette(hitLabelPal_);
             ui->hitLabel->setText("Target hit!");
+            ui->hitLabel->adjustSize();
 
             //Metodi pisteiden laskua ja matkustajien poistamista varten
             int playersPoints;
@@ -365,6 +367,7 @@ void MainWindow::on_newgameButton_clicked()
 bool MainWindow::isAnyActorNear(int size)
 {
     if (size == 0){
+        ui->hitLabel->move(width_ + 4*PADDING, 360);
         hitLabelPal_.setColor(QPalette::WindowText, Qt::red);
         ui->hitLabel->setPalette(hitLabelPal_);
         ui->hitLabel->setText("Target isn't near enough!");
