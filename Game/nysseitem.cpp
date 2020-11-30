@@ -28,7 +28,7 @@ void NysseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         painter->setBrush(brush);
         painter->drawRect(bounds);
     } else {
-         QColor color(type_%256, type_%256, type_%256);
+         QColor color(Qt::blue);
          QBrush brush(color);
          painter->setBrush(brush);
          painter->drawRect(bounds);

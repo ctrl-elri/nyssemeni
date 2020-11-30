@@ -325,7 +325,7 @@ void MainWindow::on_shootButton_clicked()
         shootTarget(actorsInRange);
     } else {
         beam_= new Beam;
-        beam_->setPos(players_.at(turn_)->pos().x()+15, players_.at(turn_)->pos().y()+15);
+        beam_->setPos(players_.at(turn_)->pos().x()+50, players_.at(turn_)->pos().y()+50);
         beam_->setRotation(-2 * 500);
         map->addItem(beam_);
     }

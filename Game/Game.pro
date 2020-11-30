@@ -60,3 +60,4 @@ FORMS += \
 RESOURCES += \
     beam.png\
     background.jpg\
+    player_pic.png\
