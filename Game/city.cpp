@@ -39,6 +39,7 @@ void City::setClock(QTime clock)
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
+    // Pysäkki lisätään käyttöliittymään.
     Interface::Location stopLoc = stop->getLocation();
     mainW_->addActor(stopLoc.giveX(), 500-stopLoc.giveY(), STOP_TYPE);
 }
@@ -64,6 +65,9 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     Interface::Location actorLoc = newactor->giveLocation();
 
+    // Uuden Actorin tyyppi määritellään, ja lisätään käyttöliittymään.
+    // Tyyppejä on kaksi: matkustaja (Passenger-olio), ja nysse (Nysse-olio).
+
     if (dynamic_cast<CourseSide::Passenger*>(newactor.get()) != 0){
         mainW_->setActor(newactor);
         mainW_->addActor(actorLoc.giveX()-5, 500-actorLoc.giveY()-5, PASSENGER_TYPE);
@@ -76,21 +80,29 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
     }
 
     mainW_->addToMap();
-    actorsInGame_.push_back(newactor);
+    actorsInGame_.push_back(newactor);  // Uusi Actor lisätään vektoriin, joka sisältää aktiiviset Actorit.
 
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-    // Tarkastele onko actor vektorissa.
+    // Tarkastetaan, onko Actor pelissä.
+    std::vector<std::shared_ptr<Interface::IActor>>::iterator it;
+    it = std::find(actorsInGame_.begin(), actorsInGame_.end(), actor);
 
-    for (auto a: actorsInGame_){
-        if (a == actor){
-            actorsInGame_.erase((std::remove(actorsInGame_.begin(), actorsInGame_.end(), actor), actorsInGame_.end()));
-            mainW_->removeActorItem(actor);
-           actor->remove();
+    if (it != actorsInGame_.end()){
+        // Actor poistetaan pelistä.
+        for (auto a: actorsInGame_){
+            if (a == actor){
+                actorsInGame_.erase((std::remove(actorsInGame_.begin(), actorsInGame_.end(), actor), actorsInGame_.end()));
+                mainW_->removeActorItem(actor);
+                actor->remove();
+            }
         }
+    } else {
+        qDebug("Actor ei ole pelissä.");
     }
+
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
@@ -111,13 +123,14 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
+    // Liikuttaa Actoria pääikkunassa.
     mainW_->moveActorItem(actor);
 }
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {
-    std::vector<std::shared_ptr<Interface::IActor>> nearbyActors;
-    int limit = 67;
+    std::vector<std::shared_ptr<Interface::IActor>> nearbyActors; // Hyökkäyksen kohteet.
+    int limit = 67; // Kuinka lähellä pelaajan on oltava, jotta hyökkäys on onnistunut.
 
     for (auto b: nysses_){
         if (b->giveLocation().isClose(loc, limit) == true){
@@ -145,8 +158,7 @@ void City::exitGame()
 
 void City::addPlayer()
 {
-    // All players' default location is the origin.
-
+    // Kaikkien pelaajien lähtöasema on origo.
     mainW_->addPlayer(0,0,0);
 }
 
