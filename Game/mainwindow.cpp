@@ -13,6 +13,8 @@ MainWindow::MainWindow(std::shared_ptr<Interface::ICity> gameArea, QWidget *pare
     gameArea_ = gameArea;
     ui->setupUi(this);
 
+    // Asetetaan käyttöliittymän grafiikat ja komponentit.
+
     QPixmap bkgnd(":/background.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
@@ -72,6 +74,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::addActor(int locX, int locY, int type)
 {
+    // Lisätään ActorItem Actorin tyypin perusteella.
+
     if (type == NYSSE){
         NysseItem* nActor = new NysseItem(locX, locY, type);
         map->addItem(nActor);
@@ -219,29 +223,35 @@ void MainWindow::shootTarget(std::vector<std::shared_ptr<Interface::IActor> > ac
     for (auto nA: actorsInRange){
 
         if (actors_.find(nA) == actors_.end()){
-            continue;
+            qDebug("Kohde ei ole pelissä.");
+            return;
 
         } else {
 
             QPointF targetLoc = actors_.at(nA)->pos();
+
+            // Luodaan ammus ja asetetaan kohde-Actorin sijainti ammuksen kohteeksi.
             beam_ = players_.at(turn_)->setBeam(targetLoc);
             map->addItem(beam_);
 
             NysseItem* moveNysse = dynamic_cast<NysseItem*>(actors_.at(nA));
-            moveNysse->changeColor();
-            double points = nyssePoint_;
+            if (moveNysse != 0){
+                moveNysse->changeColor();  // Ammutun Nyssen väri vaihtuu punaiseksi.
+                double points = nyssePoint_;
 
-            ui->hitLabel->move(width_ + 8*PADDING, 350);
-            hitLabelPal_.setColor(QPalette::WindowText, Qt::green);
-            ui->hitLabel->setPalette(hitLabelPal_);
-            ui->hitLabel->setText("Target hit!");
-            ui->hitLabel->adjustSize();
+                // Pelaaja saa ilmoituksen onnistuneesta osumasta.
+                ui->hitLabel->move(width_ + 8*PADDING, 350);
+                hitLabelPal_.setColor(QPalette::WindowText, Qt::green);
+                ui->hitLabel->setPalette(hitLabelPal_);
+                ui->hitLabel->setText("Target hit!");
+                ui->hitLabel->adjustSize();
 
-            double playersPoints = removePassengersfromNysse(nA);
-            qDebug() << playersPoints << "Pelaajapisteet";
-            points = points + playersPoints;
+                double playersPoints = removePassengersfromNysse(nA);
+                qDebug() << playersPoints << "Pelaajapisteet";
+                points = points + playersPoints;
 
-            statistics_->addPoints(turn_, points);
+                statistics_->addPoints(turn_, points);
+            }
         }
 
     }

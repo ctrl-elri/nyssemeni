@@ -7,7 +7,7 @@ Beam::Beam(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
     // Asetetaan ammuksen grafiikat.
     setPixmap(QPixmap(":/beam.png").scaled(10,10));
 
-    // Ammus liikkuu tahdistetusti.
+    // Ammus liikkuu tahditetusti.
     moveTimer_ = new QTimer(this);
     connect(moveTimer_,SIGNAL(timeout()),this,SLOT(move()));
     moveTimer_->start(50);
