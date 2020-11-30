@@ -14,7 +14,7 @@ public:
     float checkPlayerPoints(int playerNumber);
 
 private:
-    float max_points_ = 10;
+    float max_points_ = 20;
     std::vector<float> playerPoints_;
 };
 

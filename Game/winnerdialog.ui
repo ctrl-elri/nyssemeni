@@ -21,7 +21,7 @@
     <rect>
      <x>140</x>
      <y>10</y>
-     <width>131</width>
+     <width>141</width>
      <height>21</height>
     </rect>
    </property>
@@ -29,7 +29,7 @@
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 12pt &quot;Open Sans&quot;; color: rgb(255, 255, 255)</string>
+    <string notr="true">font: bold 12pt &quot;Open Sans&quot;; color: rgb(255, 255, 255)</string>
    </property>
    <property name="text">
     <string>Congratulations,</string>
