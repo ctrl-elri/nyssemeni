@@ -261,6 +261,8 @@ void MainWindow::shootTarget(std::vector<std::shared_ptr<Interface::IActor> > ac
 
 void MainWindow::gameIsWon()
 {
+    // Joku pelaaja on voittanut pelin ja käynnistetään loppudialogi.
+
     WinnerDialog *winnerdialog = new WinnerDialog(playerNames_.at(turn_));
     connect(winnerdialog, SIGNAL(newGame()), this, SLOT(on_newgameButton_clicked()));
     connect(winnerdialog, SIGNAL(exitFromWinnerDialog()), this, SLOT(on_exitButton_clicked()));
@@ -272,8 +274,7 @@ float MainWindow::removePassengersfromNysse(std::shared_ptr<Interface::IActor> n
     // Jos ammutussa Nyssessä on matkustajia, ne poistetaan.
     // Poistetut matkustajat kerryttävät pelaajan pistesaldoa.
 
-    float removedPassengers;
-    removedPassengers = 0;
+    float removedPassengers = 0;
     CourseSide::Nysse* bus = dynamic_cast<CourseSide::Nysse*>(nysse.get());
     if  (bus != 0  ) {
         std::vector<std::shared_ptr<Interface::IPassenger> > passengersToBeRemoved = bus->getPassengers();
@@ -289,6 +290,7 @@ float MainWindow::removePassengersfromNysse(std::shared_ptr<Interface::IActor> n
 
 void MainWindow::setScoreTable()
 {
+    // Luodaan GameStatistics-olio ja alustetaan aloituspisteet pelaajille.
     statistics_ = new GameStatistics;
     statistics_->initGameStatictics(players_.size());
     updateScoreTable();
@@ -359,9 +361,8 @@ void MainWindow::on_shootButton_clicked()
     }
     else {
         // Pelaajan vuoro vaihtuu aina kun pelaaja on ampunut.
-        // Mainwindowin turn_ määrittää, kenen vuoro on pelata.
 
-        // Määritetään seuraava pelaaja ja vaihdetaan vuoro
+        // Määritetään seuraava pelaaja ja vaihdetaan vuoro.
 
         if ( turn_ + 1 == static_cast<int>(players_.size())  ) {
             turn_ = 0;
@@ -381,7 +382,7 @@ void MainWindow::on_newgameButton_clicked()
 {
     this->close();
 
-    // Aloitetaan uusi peli
+    // Aloitetaan uusi peli.
     gameEngine* engine = new gameEngine;
     engine->initGame();
 
@@ -408,5 +409,6 @@ bool MainWindow::isAnyActorNear(int size)
 
 void MainWindow::on_exitButton_clicked()
 {
+    // Lopetetaan peli.
     emit exitFromMainwindow();
 }

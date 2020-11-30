@@ -31,6 +31,7 @@ class City : public QObject, public Interface::ICity
 public:
     City();
     ~City();
+
     /**
      * @brief setMainWindow Asettaa käyttöliittymän pääikkunan.
      * @param window pääikkuna, luodaan tiedostossa creategame.cpp.
@@ -42,6 +43,10 @@ public:
      */
     void addPlayer();
 
+    /**
+     * @brief setDialog asettaa aloitusdialogin ja käynnistää sen.
+     * @param aloitusdialogi, joka luodaan tiedostossa creategame.cpp.
+     */
     void setDialog(Dialog* dialog);
 
     // ICity interface

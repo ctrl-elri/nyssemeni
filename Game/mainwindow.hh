@@ -85,21 +85,31 @@ public:
      */
     void checkPlayerMovement();
 
-
+    /**
+     * @brief setStartingPlayer asettaa pelin alussa aloituspelaajan.
+     */
     void setStartingPlayer();
 
+    /**
+     * @brief setScoreTable luo pelin alussa GameStatistics olion, johon pelaajien pisteet kerätään.
+     * Päivittää Mainwindowiin pelaajalukumäärän mukaisesti pelaajien pisteet.
+     */
     void setScoreTable();
 
     /**
-     * @brief updateScoreTable päivittää pisteiden laskun.
+     * @brief updateScoreTable päivittää Mainwindowiin pelaajien pisteet näkyville.
      */
     void updateScoreTable();
 
     /**
-     * @brief shootTarget Suorittaa ampumisen seuraukset.
+     * @brief shootTarget suorittaa ampumisen seuraukset.
      */
     void shootTarget(std::vector<std::shared_ptr<Interface::IActor> > actorsInRange);
 
+    /**
+     * @brief gameIsWon kutsutaan, kun joku pelaajista on voittanut pelin.
+     * gameIsWon luo loppudialogin WinnerDialog ja käynnistää sen.
+     */
     void gameIsWon();
 
 
@@ -107,6 +117,7 @@ signals:
     void exitFromMainwindow();
 
 public slots:
+
     void setPlayerNames(QString name1, QString name2, QString name3, QString name4);
 
 
@@ -154,9 +165,9 @@ private:
 
     GameStatistics *statistics_;
 
-    PlayerItem* currentPlayer_;
-    std::vector<PlayerItem*> players_;
-    std::vector<QString> playerNames_;
+    PlayerItem* currentPlayer_; // Vuorossa oleva pelaaja (PlayerItem).
+    std::vector<PlayerItem*> players_; // Pelissä olevat pelaajat (PlayerItem).
+    std::vector<QString> playerNames_; // Pelaajien nimet.
 
     CourseSide::SimpleActorItem *lastItem_;  // Viimeisimmäksi lisätty ActorItem.
     std::shared_ptr<Interface::IActor> lastAc_;  // Viimeisimmäksi lisätty Actor.
@@ -164,10 +175,10 @@ private:
     std::vector<NysseItem*> nysses_;
     std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;  // Sisältää Actorin ja sitä vastaavan ActorItemin.
 
-    int turn_;
-    int numberofplayers_;
+    int turn_; // Vuorossa olevan pelaajan numero, pelaaja1 = 0, pelaaja2 = 1,...
+    int numberofplayers_; // Pelaajien kokonaislukumäärä.
 
-    float nyssePoint_ = 0.5;
+    float nyssePoint_ = 0.5; // Bussin ampumisesta saavata pistemäärä.
     float passengerPoint_ = 1;
 
     int width_ = 500; //pxls

@@ -48,7 +48,7 @@ void City::startGame()
 {
     gameIsOver_ = false;
 
-    // Lisätään käyttäjän päättämän määrän verran pelaajia peliin.
+    // Lisätään käyttäjän aloitusdialogissa määritettävän lukumäärän verran pelaajia peliin.
     int players = amountOfPlayers_;
     while (players != 0) {
         addPlayer();

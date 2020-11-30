@@ -7,9 +7,10 @@ Dialog::Dialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // Määritetään minimi- ja maksimipelaajamäärä
+    // Määritetään minimi- ja maksimipelaajamäärä.
     ui->players->setRange(1,4);
 
+    // Määritetään pelaajien oletusnimet. Käyttäjä voi muuttaa näitä aloitusdialogissa.
     ui->player1Name->setText("Player1");
     ui->player2Name->setText("Player2");
     ui->player3Name->setText("Player3");
@@ -30,6 +31,7 @@ Dialog::~Dialog()
 
 void Dialog::on_startbutton_clicked()
 {
+    // Lähetetään käyttäjän määrittämät pelaajalukumäärä ja pelaajien nimet signaaleina.
     emit numberOfPlayers(players_);
     emit playerNames(player1_name_, player2_name_, player3_name_, player4_name_);
     accept();
@@ -37,6 +39,7 @@ void Dialog::on_startbutton_clicked()
 
 void Dialog::on_exitbutton_clicked()
 {
+    // Lopetetaan peli. Lähetetään lopetussignaali.
     emit exitFromDialog();
     reject();
 }

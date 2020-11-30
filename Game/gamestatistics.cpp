@@ -17,6 +17,7 @@ void GameStatistics::addPoints(int playerNumber, float points)
 {
     float currentPoints = playerPoints_.at(playerNumber);
 
+    // Lisätään pelaajan nykyiseen pistemäärään uudet pisteet.
     float newPoints = currentPoints + points;
     playerPoints_.at(playerNumber) = newPoints;
 
@@ -24,6 +25,8 @@ void GameStatistics::addPoints(int playerNumber, float points)
 
 bool GameStatistics::checkIfWon(int playerNumber)
 {
+    // Tarkastetaan, onko pelaaja saavuttanut tai ylittänyt maksimipistemäärän.
+
     if ( playerPoints_.at(playerNumber) >= max_points_ ) {
         return true;
     }

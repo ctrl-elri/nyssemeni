@@ -50,17 +50,6 @@ public:
      */
     Beam* setBeam(QPointF targetPosition);
 
-    /**
-     * @brief addPoints Lisää pelaajalle pisteitä.
-     * @param pts lisättävät pisteet.
-     */
-    void addPoints(int pts);
-
-    /**
-     * @brief getPoints Antaa pelaajan pisteet kutsuntahetkellä.
-     * @return pelaajan pisteet.
-     */
-    int getPoints();
 
 private:
 
@@ -70,7 +59,6 @@ private:
     int y_;
     int type_;
     int locHeight_ ;
-    int points_;
 
 };
 

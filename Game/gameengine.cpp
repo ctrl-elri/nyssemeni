@@ -10,6 +10,7 @@ void gameEngine::initGame()
 
    city_ = Interface::createGame();
 
+   // Luodaan Logic-olio ja kutsutaan pelin alustamiseen tarvittavia funktioita.
    logic_ = new CourseSide::Logic;
 
    logic_->fileConfig();

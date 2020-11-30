@@ -6,6 +6,7 @@
 
 /**
  * @brief The gameEngine class Pelin alulle panija, alustaa pelin.
+ * GameEnginessä käsitellään pelin logiikkaa.
  */
 
 class gameEngine
@@ -16,6 +17,7 @@ public:
 
     /**
      * @brief initGame Alustaa pelin: luo Logic-olion ja pointterin Cityyn.
+     * Kutsuu Logic-olion funktioita, joita tarvitaan pelin alustamiseen.
      */
     void initGame();
 

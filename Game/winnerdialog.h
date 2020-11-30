@@ -4,6 +4,11 @@
 #include <QDialog>
 #include <QString>
 
+/**
+ * @brief The WinnerDialog class Pelin loppudialogi. Peli on loppunut ja pelin voittaja näytetään.
+ * Käyttäjä voi halutessaan aloittaa loppudialogissa uuden pelin.
+ */
+
 namespace Ui {
 class WinnerDialog;
 }

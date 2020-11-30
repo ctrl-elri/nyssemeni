@@ -5,6 +5,11 @@
 #include <QCommonStyle>
 #include <QTime>
 
+/**
+ * @brief The Dialog class Pelin alkudialogi. Pelaaja määrittää alkudialogissa
+ * pelaajamäärän ja pelaajien nimet.
+ */
+
 namespace Ui {
 class Dialog;
 }
@@ -40,8 +45,11 @@ private slots:
     void on_player4Name_textChanged(const QString &arg1);
 
 private:
+
+    // Attribuutit
+
     Ui::Dialog *ui;
-    int players_ = 1;
+    int players_ = 1; // Pelaajien lukumäärä. Alustetaan sen olevan yksi, ellei käyttäjä muuta sitä aloitusdialogissa.
     QString player1_name_ = "Player1";
     QString player2_name_ = "Player2";
     QString player3_name_ = "Player3";
