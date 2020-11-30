@@ -14,7 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background: rgb(231, 211, 182)</string>
+   <string notr="true"/>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -29,10 +29,10 @@
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 12pt &quot;Open Sans&quot;;</string>
+    <string notr="true">font: 12pt &quot;Open Sans&quot;; color: rgb(255, 255, 255)</string>
    </property>
    <property name="text">
-    <string>Congratulations!</string>
+    <string>Congratulations,</string>
    </property>
    <property name="textFormat">
     <enum>Qt::PlainText</enum>
@@ -92,7 +92,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(204, 0, 0); font: 81 bold 14pt &quot;Open Sans&quot;;</string>
+    <string notr="true">color: rgb(252, 233, 79); font: 81 bold 14pt &quot;Open Sans&quot;;</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::NoFrame</enum>
