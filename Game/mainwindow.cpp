@@ -180,35 +180,34 @@ void MainWindow::setStartingPlayer()
 void MainWindow::updateScoreTable()
 {
     int players = players_.size();
-    qDebug() << players << "Pelaajien lkm";
 
     if (players == 1) {
         ui->player1Label->setText(playerNames_.at(0) + ": "
-                                  + QString::number(statistics_->checkPlayerPoints(0)) + " points");
+                                  + QString::number(statistics_->checkPlayerPoints(0), 'f', 1) + " points");
     }
     else if (players == 2) {
         ui->player1Label->setText(playerNames_.at(0) + ": "
-                                  + QString::number(statistics_->checkPlayerPoints(0)) + " points");
+                                  + QString::number(statistics_->checkPlayerPoints(0), 'f', 1) + " points");
         ui->player2Label->setText(playerNames_.at(1) + ": "
-                                  + QString::number(statistics_->checkPlayerPoints(1)) + " points");
+                                  + QString::number(statistics_->checkPlayerPoints(1), 'f', 1) + " points");
     }
     else if (players == 3) {
         ui->player1Label->setText(playerNames_.at(0) + ": "
-                                  + QString::number(statistics_->checkPlayerPoints(0)) + " points");
+                                  + QString::number(statistics_->checkPlayerPoints(0), 'f', 1) + " points");
         ui->player2Label->setText(playerNames_.at(1) + ": "
-                                  + QString::number(statistics_->checkPlayerPoints(1)) + " points");
+                                  + QString::number(statistics_->checkPlayerPoints(1), 'f', 1) + " points");
         ui->player2Label->setText(playerNames_.at(2) + ": "
-                                  + QString::number(statistics_->checkPlayerPoints(2)) + " points");
+                                  + QString::number(statistics_->checkPlayerPoints(2), 'f', 1) + " points");
     }
     else if (players == 4) {
         ui->player1Label->setText(playerNames_.at(0) + ": "
-                                  + QString::number(statistics_->checkPlayerPoints(0)) + " points");
+                                  + QString::number(statistics_->checkPlayerPoints(0), 'f', 1) + " points");
         ui->player2Label->setText(playerNames_.at(1) + ": "
-                                  + QString::number(statistics_->checkPlayerPoints(1)) + " points");
+                                  + QString::number(statistics_->checkPlayerPoints(1), 'f', 1) + " points");
         ui->player3Label->setText(playerNames_.at(2) + ": "
-                                  + QString::number(statistics_->checkPlayerPoints(2)) + " points");
+                                  + QString::number(statistics_->checkPlayerPoints(2), 'f', 1) + " points");
         ui->player4Label->setText(playerNames_.at(3) + ": "
-                                  + QString::number(statistics_->checkPlayerPoints(3)) + " points");
+                                  + QString::number(statistics_->checkPlayerPoints(3), 'f', 1) + " points");
 
     }
 
@@ -230,25 +229,34 @@ void MainWindow::shootTarget(std::vector<std::shared_ptr<Interface::IActor> > ac
 
             NysseItem* moveNysse = dynamic_cast<NysseItem*>(actors_.at(nA));
             moveNysse->changeColor();
+            double points = nyssePoint_;
 
             hitLabelPal_.setColor(QPalette::WindowText, Qt::green);
             ui->hitLabel->setPalette(hitLabelPal_);
             ui->hitLabel->setText("Target hit!");
 
-            //Metodi pisteiden laskua ja matkustajien poistamista varten
-            int playersPoints;
-            playersPoints = removePassengersfromNysse(nA);
+            double playersPoints = removePassengersfromNysse(nA);
+            qDebug() << playersPoints << "Pelaajapisteet";
+            points = points + playersPoints;
 
-            addPlayerPoints(playersPoints);
+            statistics_->addPoints(turn_, points);
         }
 
     }
 
 }
 
-int MainWindow::removePassengersfromNysse(std::shared_ptr<Interface::IActor> nysse)
+void MainWindow::gameIsWon()
 {
-    int removedPassengers;
+    WinnerDialog *winnerdialog = new WinnerDialog(playerNames_.at(turn_));
+    connect(winnerdialog, SIGNAL(newGame()), this, SLOT(on_newgameButton_clicked()));
+    connect(winnerdialog, SIGNAL(exitFromWinnerDialog()), this, SLOT(on_exitButton_clicked()));
+    winnerdialog->exec();
+}
+
+float MainWindow::removePassengersfromNysse(std::shared_ptr<Interface::IActor> nysse)
+{
+    float removedPassengers;
     removedPassengers = 0;
     CourseSide::Nysse* bus = dynamic_cast<CourseSide::Nysse*>(nysse.get());
     if  (bus != 0  ) {
@@ -261,12 +269,6 @@ int MainWindow::removePassengersfromNysse(std::shared_ptr<Interface::IActor> nys
     }
 
     return removedPassengers;
-}
-
-void MainWindow::addPlayerPoints(int points)
-{
-    // Miten pelin laskenta toteutetaan?
-    // Jokaisesta Nyssestä poistetusta pelaajasta 1p, ja Nyssestä 0,5 p?;
 }
 
 void MainWindow::setScoreTable()
@@ -330,23 +332,29 @@ void MainWindow::on_shootButton_clicked()
         map->addItem(beam_);
     }
 
+    // Päivitetään scoret ja tarkistetaan, onko peli voitettu
+    updateScoreTable();
 
-    // Pelaajan vuoro vaihtuu aina kun pelaaja on ampunut.
-    // Mainwindowin turn_ määrittää, kenen vuoro on pelata.
-
-    // Määritetään seuraava pelaaja ja vaihdetaan vuoro
-
-    if ( turn_ + 1 == static_cast<int>(players_.size())  ) {
-        turn_ = 0;
+    if (statistics_->checkIfWon(turn_)) {
+        gameIsWon();
     }
     else {
-        turn_ = turn_ + 1;
+        // Pelaajan vuoro vaihtuu aina kun pelaaja on ampunut.
+        // Mainwindowin turn_ määrittää, kenen vuoro on pelata.
+
+        // Määritetään seuraava pelaaja ja vaihdetaan vuoro
+
+        if ( turn_ + 1 == static_cast<int>(players_.size())  ) {
+            turn_ = 0;
+        }
+        else {
+            turn_ = turn_ + 1;
+        }
+        qDebug() << turn_;
+
+        ui->currentPlayer->setText(("Player's turn: ") + playerNames_.at(turn_));
+        currentPlayer_ = players_.at(turn_);
     }
-    qDebug() << turn_;
-
-
-    ui->currentPlayer->setText(("Player's turn: ") + playerNames_.at(turn_));
-    currentPlayer_ = players_.at(turn_);
 
 }
 

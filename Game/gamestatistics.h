@@ -9,14 +9,13 @@ public:
     GameStatistics();
 
     void initGameStatics(int players);
-    void addPoints();
-    void checkPoints();
-    int checkPlayerPoints(int playerNumber);
+    void addPoints(int playerNumber, float points);
+    bool checkIfWon(int playerNumber);
+    float checkPlayerPoints(int playerNumber);
 
 private:
-    int point = 1;
-    int max_points = 5;
-    std::vector<int> playerPoints_;
+    float max_points_ = 10;
+    std::vector<float> playerPoints_;
 };
 
 #endif // GAMESTATISTICS_H
