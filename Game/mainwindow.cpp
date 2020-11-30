@@ -18,9 +18,7 @@ MainWindow::MainWindow(std::shared_ptr<Interface::ICity> gameArea, QWidget *pare
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);
     this->setPalette(palette);
-    /*
-    // Jos on ideoita paremmalle taustavärille niin saa vaihtaa :D
-    this->setStyleSheet("background-color: darkMagenta;");*/
+
     ui->graphicsView->setFixedSize(width_, height_);
     ui->centralwidget->setFixedSize(width_ + ui->moveUpBtn->width() + PADDING + 2 * XTRA_PADDING, height_ + PADDING);
 
@@ -240,6 +238,8 @@ void MainWindow::shootTarget()
                 hitLabelPal_.setColor(QPalette::WindowText, Qt::green);
                 ui->hitLabel->setPalette(hitLabelPal_);
                 ui->hitLabel->setText("Target hit!");
+
+                //Metodi pisteiden laskua ja matkustajien poistamista varten
             }
 
         }

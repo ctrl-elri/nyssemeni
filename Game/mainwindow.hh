@@ -38,49 +38,48 @@ public:
     void addActor(int locX, int locY, int type);
 
     /**
-     * @brief setPicture sets the background picture.
-     * @param img background picture, from City.
+     * @brief Asettaa taustakuvan
+     * @param img taustakuva, saadaan Citystä.
      */
     void setPicture(QImage &img);
 
     /**
-     * @brief moveActorItem moves actor's actoritem in window.
-     * @param actorToBeMoved actor whose actoritem is to be moved, from City.
+     * @brief moveActorItem liikuttaa actorItemeitä peli-ikkunassa.
+     * @param actorToBeMoved actor, jota vastaavaa actorItemiä liikutetaan.
      */
     void moveActorItem(std::shared_ptr<Interface::IActor> actorToBeMoved);
 
     /**
-     * @brief setActor sets latest added actor as lastAc_.
-     * @param newac latest added actor, from City.
+     * @brief setActor Asettaa attribuutin lastAc_ arvoksi viimeisimmän lisätyn actorin.
+     * @param newac viimeisin lisätty actor, saadaan Citystä.
      */
     void setActor(std::shared_ptr<Interface::IActor> newac);
 
     /**
-     * @brief addToMap adds a pair to map, actors_, the pair consisting of
-     * key; lastAc_, and value; *lastItem_.
+     * @brief addToMap Lisää parin actors_-mappiin, pari arvot ovat
+     * key; lastAc_, ja value; *lastItem_.
      */
     void addToMap();
 
     /**
-     * @brief removeActorItem removes an element from map, actors_.
-     * @param actorToBeRemoved key to the element which is to be removed, from City.
+     * @brief removeActorItem Poistaa alkion actors_-mapista.
+     * @param actorToBeRemoved elementin key-arvo, saadaan Citystä.
      */
     void removeActorItem(std::shared_ptr<Interface::IActor> actorToBeRemoved);
 
     /**
-     * @brief addPlayer adds a playeritem to the window and to the vector players_.
-     * @param locX starting position's x-coordinate.
-     * @param locY starting position's y-coordinate.
-     * @param type item's type.
+     * @brief addPlayer Lisää playerItemin peli-ikkunaan ja players_-vektoriin.
+     * @param locX Aloitusaseman x-koordinaatti.
+     * @param locY Aloitusaseman y-koordinaatti.
+     * @param type itemin tyyppi.
      */
     void addPlayer(int locX, int locY, int type);
 
     /**
-     * @brief checkPlayerMovement checks that the player moves within window.
+     * @brief checkPlayerMovement tarkistaa, että pelaaja liikkuu peli-ikkunan sisällä.
      */
     void checkPlayerMovement();
 
-    void removeNearbyActors(std::vector<std::shared_ptr<Interface::IActor> > nearbyActors);
 
     void setStartingPlayer();
 
@@ -88,6 +87,9 @@ public:
 
     void updateScoreTable();
 
+    /**
+     * @brief shootTarget Suorittaa ampumisen seuraukset.
+     */
     void shootTarget();
 
 signals:
@@ -115,30 +117,35 @@ private slots:
 
 private:
 
+    /**
+     * @brief isAnyActorNear Tarkistaa, onko playerItemin lähellä ammuttavia kohteita.
+     * @param size vektorin, jossa ammuttavat kohteet on, koko.
+     * @return true, jos vektori ei ole tyhjä, muulloin false.
+     */
     bool isAnyActorNear(int size);
 
-    bool isActorShotAt_;
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
-    std::vector<PlayerItem*> players_;
-    CourseSide::SimpleActorItem *lastItem_;
-    std::shared_ptr<Interface::IActor> lastAc_;
-    std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
-    std::vector<NysseItem*> nysses_;
-
+    QPalette hitLabelPal_;
     QTime time_;
-    int numberofplayers_;
+
     Beam* beam_;
 
-
-    std::vector<QString> playerNames_;
-    PlayerItem* currentPlayer_;
-    int turn_;
     GameStatistics *statistics_;
 
-    QPalette hitLabelPal_;
+    PlayerItem* currentPlayer_;
+    std::vector<PlayerItem*> players_;
+    std::vector<QString> playerNames_;
 
+    CourseSide::SimpleActorItem *lastItem_;
+    std::shared_ptr<Interface::IActor> lastAc_;
+
+    std::vector<NysseItem*> nysses_;
+    std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
+
+    int turn_;
+    int numberofplayers_;
     int width_ = 500; //pxls
     int height_ = 500;
     int tick_ = 500; //ms    
