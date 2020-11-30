@@ -14,11 +14,15 @@
 #include <algorithm>
 #include <typeinfo>
 #include <QObject>
-
+#include <QtGlobal>
 
 const int NYSSE_TYPE = 1000;
 const int PASSENGER_TYPE = 400;
 const int STOP_TYPE = 600;
+
+/**
+ * @brief The City class Pelin kaupunki, suorittaa pelin tapahtumat.
+ */
 
 class City : public QObject, public Interface::ICity
 {
@@ -62,7 +66,7 @@ public slots:
 private:
 
     QTime time_;
-    MainWindow *mainW_;  // Pääikkuna
+    MainWindow *mainW_;
 
     bool gameIsOver_ = true;  // Onko peli loppunut
     int amountOfPlayers_ = 1;  // Pelaajien määrä

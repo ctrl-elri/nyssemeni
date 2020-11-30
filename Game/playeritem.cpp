@@ -20,21 +20,12 @@ QRectF PlayerItem::boundingRect() const
 
 void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {    
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+
     QRectF bounds = boundingRect();
     QImage playerPic(":/player_pic.png");
     painter->drawImage(bounds, playerPic);
-//    QColor color(Qt::white);
-//    QBrush brush(color);
-//    painter->setBrush(brush);
-//    painter->drawEllipse(0, 15, 15, 35);
-
-//    QPainterPath path;
-//    path.moveTo(bounds.left() + (bounds.width() / 2), bounds.top());
-//    path.lineTo(bounds.bottomLeft());
-//    path.lineTo(bounds.bottomRight());
-//    path.lineTo(bounds.left() + (bounds.width() / 2), bounds.top());
-
-//    painter->fillPath(path, QBrush(QColor ("blue")));
 
 }
 

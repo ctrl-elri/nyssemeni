@@ -20,6 +20,9 @@ QRectF NysseItem::boundingRect() const
 
 void NysseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+
     QRectF bounds = boundingRect();
 
     if (colorChanged_){

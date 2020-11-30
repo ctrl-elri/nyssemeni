@@ -20,6 +20,8 @@ void City::setMainWindow(MainWindow* window)
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
+    Q_UNUSED(bigbackground);
+
     mainW_->setPicture(basicbackground);
 
 }
@@ -93,6 +95,7 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
+    Q_UNUSED(actor);
 }
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
