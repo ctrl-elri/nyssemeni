@@ -23,6 +23,7 @@ void PlayerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     Q_UNUSED(option);
     Q_UNUSED(widget);
 
+    // Asetettaa pelaajan grafiikat.
     QRectF bounds = boundingRect();
     QImage playerPic(":/player_pic.png");
     painter->drawImage(bounds, playerPic);
