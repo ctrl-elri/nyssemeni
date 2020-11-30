@@ -57,7 +57,7 @@ Interface::Location PlayerItem::getLocation()
 Beam* PlayerItem::setBeam(QPointF targetPosition)
 {
     Beam* beam = new Beam();
-    beam->setPos(x()+50, y()+50);
+    beam->setPos(x()+30, y()+30);
 
     // Asetetaan ammuksen liikkelle linja, jota se seuraa.
     QLineF ln(QPointF(x()+15, y()+15), targetPosition);
