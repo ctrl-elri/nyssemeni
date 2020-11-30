@@ -13,6 +13,7 @@
 #include "gameengine.hh"
 #include "nysseitem.hh"
 #include "gamestatistics.h"
+#include "winnerdialog.h"
 
 
 #include <vector>
@@ -99,6 +100,8 @@ public:
      */
     void shootTarget(std::vector<std::shared_ptr<Interface::IActor> > actorsInRange);
 
+    void gameIsWon();
+
 
 signals:
     void exitFromMainwindow();
@@ -130,13 +133,7 @@ private:
      * @param nysse Nysse, josta Passengeri poistetaan.
      * @return poistettujen Passengereiden lukumäärä.
      */
-    int removePassengersfromNysse(std::shared_ptr<Interface::IActor> nysse);
-
-    /**
-     * @brief addPlayerPoints lisää pelaajalle pisteitä.
-     * @param points pelaajalle lisättävät pisteet.
-     */
-    void addPlayerPoints(int points);
+    float removePassengersfromNysse(std::shared_ptr<Interface::IActor> nysse);
 
     /**
      * @brief isAnyActorNear Tarkistaa, onko playerItemin lähellä ammuttavia kohteita.
@@ -169,6 +166,10 @@ private:
 
     int turn_;
     int numberofplayers_;
+
+    float nyssePoint_ = 0.5;
+    float passengerPoint_ = 1;
+
     int width_ = 500; //pxls
     int height_ = 500;
     int tick_ = 500; //ms    

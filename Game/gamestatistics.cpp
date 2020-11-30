@@ -13,19 +13,30 @@ void GameStatistics::initGameStatics(int players)
     }
 }
 
-void GameStatistics::addPoints()
+void GameStatistics::addPoints(int playerNumber, float points)
 {
+    float currentPoints = playerPoints_.at(playerNumber);
 
+    float newPoints = currentPoints + points;
+    qDebug() << newPoints << "Uudet pisteet";
+    playerPoints_.at(playerNumber) = newPoints;
+
+    qDebug() << playerPoints_.at(playerNumber) << "Uudet pisteet tallennettuna";
 }
 
-void GameStatistics::checkPoints()
+bool GameStatistics::checkIfWon(int playerNumber)
 {
-
+    if ( playerPoints_.at(playerNumber) >= max_points_ ) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
-int GameStatistics::checkPlayerPoints(int playerNumber)
+float GameStatistics::checkPlayerPoints(int playerNumber)
 {
-    qDebug() << playerPoints_.at(playerNumber);
+    qDebug() << playerNumber << "Kenen pisteet tarkistetaan";
     return playerPoints_.at(playerNumber);
 
 }

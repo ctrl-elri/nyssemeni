@@ -16,6 +16,7 @@ SOURCES += \
     nysseitem.cpp \
     playeritem.cpp \
     main.cc\
+    winnerdialog.cpp
 
 
 win32:CONFIG(release, debug|release): LIBS += \
@@ -50,11 +51,13 @@ HEADERS += \
     gamestatistics.h \
     mainwindow.hh \
     nysseitem.hh \
-    playeritem.hh \
+    playeritem.hh \ \
+    winnerdialog.h
 
 FORMS += \
     dialog.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    winnerdialog.ui
     gameengine.hh \
 
 RESOURCES += \
