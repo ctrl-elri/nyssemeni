@@ -273,6 +273,7 @@ float MainWindow::removePassengersfromNysse(std::shared_ptr<Interface::IActor> n
 {
     // Jos ammutussa Nyssessä on matkustajia, ne poistetaan.
     // Poistetut matkustajat kerryttävät pelaajan pistesaldoa.
+    // Yhdestä matkustajasta saa aina yhden pisteen.
 
     float removedPassengers = 0;
     CourseSide::Nysse* bus = dynamic_cast<CourseSide::Nysse*>(nysse.get());
@@ -298,6 +299,7 @@ void MainWindow::setScoreTable()
 
 void MainWindow::setPlayerNames(QString name1, QString name2, QString name3, QString name4)
 {
+    // Asetataan pelaajien nimet playerNames-vektoriin.
     playerNames_.push_back(name1);
     playerNames_.push_back(name2);
     playerNames_.push_back(name3);
@@ -370,7 +372,6 @@ void MainWindow::on_shootButton_clicked()
         else {
             turn_ = turn_ + 1;
         }
-        qDebug() << turn_;
 
         ui->currentPlayer->setText(("Player's turn: ") + playerNames_.at(turn_));
         currentPlayer_ = players_.at(turn_);

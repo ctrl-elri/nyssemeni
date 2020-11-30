@@ -24,12 +24,14 @@ WinnerDialog::~WinnerDialog()
 
 void WinnerDialog::on_newgameButton_clicked()
 {
+    // Luodaan uusi peli.
     accept();
     emit newGame();
 }
 
 void WinnerDialog::on_exitButton_clicked()
 {
+    // Lopetataan peli kokonaan.
     emit exitFromWinnerDialog();
     reject();
 }

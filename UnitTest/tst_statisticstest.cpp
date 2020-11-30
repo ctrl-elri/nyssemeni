@@ -2,6 +2,8 @@
 
 #include "gamestatistics.h"
 
+// Yksikkötestaa GameStatistics-luokan funktioita.
+
 class statisticsTest : public QObject
 {
     Q_OBJECT
@@ -29,8 +31,10 @@ statisticsTest::~statisticsTest()
 
 void statisticsTest::testInitGameStatictis()
 {
-    // Tarkistaa, että luoko GameStatistics initGameStatictis
+    // Tarkistaa, että luoko GameStatistics-luokan funktio initGameStatictis
     // vektorin, jossa jokaisen vektorin arvo on nolla.
+    // Pelin aloitustilanteessa jokaisella pelaajalla pitäisi olla pistemääränä
+    // eli pistemäärävektorissa nolla.
 
     GameStatistics statistic;
     statistic.initGameStatictics(4);

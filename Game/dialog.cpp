@@ -47,6 +47,7 @@ void Dialog::on_exitbutton_clicked()
 
 void Dialog::on_players_valueChanged(int arg1)
 {
+    // Pelaajien lukumäärä.
     players_ = arg1;
 }
 
