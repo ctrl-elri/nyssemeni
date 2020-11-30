@@ -1,6 +1,6 @@
 #include <QtTest>
 
-// add necessary includes here
+#include "gamestatistics.h"
 
 class statisticsTest : public QObject
 {
@@ -11,9 +11,8 @@ public:
     ~statisticsTest();
 
 private slots:
-    void test_case1();
 
-    void testPoints();
+    void testInitGameStatictis();
 
 };
 
@@ -27,13 +26,19 @@ statisticsTest::~statisticsTest()
 
 }
 
-void statisticsTest::test_case1()
-{
 
-}
-
-void statisticsTest::testPoints()
+void statisticsTest::testInitGameStatictis()
 {
+    // Tarkistaa, että luoko GameStatistics initGameStatictis
+    // vektorin, jossa jokaisen vektorin arvo on nolla.
+
+    GameStatistics statistic;
+    statistic.initGameStatictics(4);
+
+    QCOMPARE(statistic.checkPlayerPoints(0), 0);
+    QCOMPARE(statistic.checkPlayerPoints(1), 0);
+    QCOMPARE(statistic.checkPlayerPoints(2), 0);
+    QCOMPARE(statistic.checkPlayerPoints(3), 0);
 
 }
 

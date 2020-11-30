@@ -15,6 +15,7 @@ Dialog::Dialog(QWidget *parent) :
     ui->player3Name->setText("Player3");
     ui->player4Name->setText("Player4");
 
+    // Määritetään pelaajien nimien maksimipituus.
     ui->player1Name->setMaxLength(10);
     ui->player2Name->setMaxLength(10);
     ui->player3Name->setMaxLength(10);

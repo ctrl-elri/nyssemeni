@@ -6,7 +6,7 @@ GameStatistics::GameStatistics()
 
 }
 
-void GameStatistics::initGameStatics(int players)
+void GameStatistics::initGameStatictics(int players)
 {
     for (; players > 0; players = players-1) {
         playerPoints_.push_back(0);
@@ -18,10 +18,8 @@ void GameStatistics::addPoints(int playerNumber, float points)
     float currentPoints = playerPoints_.at(playerNumber);
 
     float newPoints = currentPoints + points;
-    qDebug() << newPoints << "Uudet pisteet";
     playerPoints_.at(playerNumber) = newPoints;
 
-    qDebug() << playerPoints_.at(playerNumber) << "Uudet pisteet tallennettuna";
 }
 
 bool GameStatistics::checkIfWon(int playerNumber)
@@ -36,7 +34,6 @@ bool GameStatistics::checkIfWon(int playerNumber)
 
 float GameStatistics::checkPlayerPoints(int playerNumber)
 {
-    qDebug() << playerNumber << "Kenen pisteet tarkistetaan";
     return playerPoints_.at(playerNumber);
 
 }

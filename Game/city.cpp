@@ -33,7 +33,7 @@ void City::setClock(QTime clock)
    }
 
    else {
-       // Virhe, jos aika on virheellinen
+       qDebug() << "Aika on virheellinen";
    }
 }
 
@@ -48,7 +48,7 @@ void City::startGame()
 {
     gameIsOver_ = false;
 
-    // Adds players to the game
+    // Lisätään käyttäjän päättämän määrän verran pelaajia peliin.
     int players = amountOfPlayers_;
     while (players != 0) {
         addPlayer();
@@ -153,6 +153,7 @@ void City::setPlayers(int players)
 
 void City::exitGame()
 {
+    // Suljetaan peli.
     exit(0);
 }
 
@@ -164,6 +165,7 @@ void City::addPlayer()
 
 void City::setDialog(Dialog* dialog)
 {
+    // Avataan aloitusdialogi ja yhdistetään sen signaalit ja slotit.
     connect(dialog, SIGNAL(numberOfPlayers(int)), this, SLOT(setPlayers(int)));
     connect(dialog, SIGNAL(playerNames(QString, QString, QString, QString)),
             mainW_, SLOT(setPlayerNames(QString, QString, QString, QString)));

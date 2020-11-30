@@ -8,7 +8,7 @@ class GameStatistics
 public:
     GameStatistics();
 
-    void initGameStatics(int players);
+    void initGameStatictics(int players);
     void addPoints(int playerNumber, float points);
     bool checkIfWon(int playerNumber);
     float checkPlayerPoints(int playerNumber);

@@ -6,4 +6,15 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES +=  tst_statisticstest.cpp
+SOURCES += tst_statisticstest.cpp \
+           ../Game/gamestatistics.cpp
+
+HEADERS += \
+           ../Game/gamestatistics.h
+
+TARGET = tst_statisticstest.cpp
+
+INCLUDEPATH += \
+            ../Game/
+
+

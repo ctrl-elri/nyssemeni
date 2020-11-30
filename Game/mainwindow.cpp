@@ -237,7 +237,7 @@ void MainWindow::shootTarget(std::vector<std::shared_ptr<Interface::IActor> > ac
             NysseItem* moveNysse = dynamic_cast<NysseItem*>(actors_.at(nA));
             if (moveNysse != 0){
                 moveNysse->changeColor();  // Ammutun Nyssen väri vaihtuu punaiseksi.
-                double points = nyssePoint_;
+                float points = nyssePoint_;
 
                 // Pelaaja saa ilmoituksen onnistuneesta osumasta.
                 ui->hitLabel->move(width_ + 8*PADDING, 350);
@@ -246,8 +246,9 @@ void MainWindow::shootTarget(std::vector<std::shared_ptr<Interface::IActor> > ac
                 ui->hitLabel->setText("Target hit!");
                 ui->hitLabel->adjustSize();
 
-                double playersPoints = removePassengersfromNysse(nA);
-                qDebug() << playersPoints << "Pelaajapisteet";
+                float playersPoints = removePassengersfromNysse(nA);
+
+                // Pelaajan saadut pisteet yhdellä kierroksella lisätään pelaajan kokonaispisteisiin.
                 points = points + playersPoints;
 
                 statistics_->addPoints(turn_, points);
@@ -289,7 +290,7 @@ float MainWindow::removePassengersfromNysse(std::shared_ptr<Interface::IActor> n
 void MainWindow::setScoreTable()
 {
     statistics_ = new GameStatistics;
-    statistics_->initGameStatics(players_.size());
+    statistics_->initGameStatictics(players_.size());
     updateScoreTable();
 }
 
@@ -380,7 +381,7 @@ void MainWindow::on_newgameButton_clicked()
 {
     this->close();
 
-    // Starting new game
+    // Aloitetaan uusi peli
     gameEngine* engine = new gameEngine;
     engine->initGame();
 
