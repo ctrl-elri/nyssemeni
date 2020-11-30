@@ -32,9 +32,13 @@ public slots:
     void move();
 
 private:
+
+    // Koordinaatit
     int x_;
     int y_;
-    int timesMoved_ = 0;
+
+    int timesMoved_ = 0;  // Ammus voi liikkua maksimissaan kolme kertaa.
+
     QTimer *moveTimer_;
 
 };
